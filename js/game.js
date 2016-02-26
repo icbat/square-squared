@@ -12,8 +12,12 @@ function preload() {
 }
 function create() {
   console.log('create');
-  game.add.sprite(0, 0, 'runner');
   game.stage.backgroundColor = "#eeeeee";
+
+  var runner = game.add.sprite(0, 0, 'runner');
+  var animation = runner.animations.add('run');
+  runner.animations.play('run', 10, true);
 }
+
 function update() {
 }
