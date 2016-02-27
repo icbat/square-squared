@@ -9,16 +9,13 @@ var runner;
 
 function preload() {
   console.log('preload');
-  game.load.spritesheet('runner', 'assets/graphics/runner.png', TILE_SIZE, TILE_SIZE * 2);
 }
 function create() {
   console.log('create');
-  game.stage.backgroundColor = "#eeeeee";
+  game.stage.backgroundColor = "#666";
 
-  runner = game.add.sprite(game.world.centerX, game.world.centerY, 'runner');
-  runner.anchor.setTo(0.5, 0.5);
-  var animation = runner.animations.add('run');
-  runner.animations.play('run', 10, true);
+  runner = new Phaser.Rectangle(game.world.centerX - TILE_SIZE /2, game.world.centerY - TILE_SIZE/2, TILE_SIZE, TILE_SIZE);
+  game.debug.geom(runner,'#2ecc71');
 }
 
 function update() {
