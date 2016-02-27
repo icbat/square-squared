@@ -7,13 +7,19 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
 
 var TILE_SIZE = 64;
 var runner;
+var colors = {
+  green: '#2ecc71',
+  lightGrey: '#ddd',
+  middleGrey: '#888',
+  darkGrey: '#333'
+};
 
 function preload() {
   console.log('preload');
 }
 function create() {
   console.log('create');
-  game.stage.backgroundColor = "#666";
+  game.stage.backgroundColor = colors.lightGrey;
 
   runner = new Phaser.Rectangle(game.world.centerX - TILE_SIZE /2, game.world.centerY - TILE_SIZE/2, TILE_SIZE, TILE_SIZE);
 
@@ -25,7 +31,7 @@ function update() {
 }
 
 function render() {
-  game.debug.geom(runner,'#2ecc71');
+  game.debug.geom(runner, colors.green);
 }
 
 function onDown(pointer, mouseEvent) {
