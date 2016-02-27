@@ -16,10 +16,9 @@ var colors = {
 };
 
 function preload() {
-  console.log('preload');
 }
+
 function create() {
-  console.log('create');
   game.stage.backgroundColor = colors.lightGrey;
 
   runner = new Phaser.Rectangle(game.world.centerX - TILE_SIZE / 2, game.world.height - TILE_SIZE * 2, TILE_SIZE, TILE_SIZE);
@@ -39,17 +38,13 @@ function render() {
 
 function onDown(pointer, mouseEvent) {
   if(mouseEvent.identifier === 0) {
-    console.log('down');
     runner.y -= maxJumpHeight;
-    console.log(runner.y);
   }
 }
 
 function onUp(pointer, mouseEvent) {
   // Prevents 'mouse leaving the game world' from firing this, too
   if(mouseEvent.identifier === 0 && pointer.identifier === 0) {
-    console.log('up', pointer);
     runner.y += maxJumpHeight;
-    console.log(runner.y);
   }
 }
