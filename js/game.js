@@ -35,6 +35,9 @@ states.running.prototype = {
     if (game.objects.obstacle.x < -20) {
       game.objects.obstacle.x = game.world.width + 20;
     }
+    if(game.objects.obstacle.intersects(game.objects.runner)) {
+      game.state.start('waiting');
+    }
   },
 
   render: function () {
