@@ -25,13 +25,17 @@ function create() {
 
   runner = new Phaser.Rectangle(game.world.centerX - TILE_SIZE / 2, groundHeight - TILE_SIZE, TILE_SIZE, TILE_SIZE);
   ground = new Phaser.Rectangle(0, groundHeight, game.world.width, TILE_SIZE);
-  obstacle = new Phaser.Rectangle(game.world.width, groundHeight - TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  obstacle = new Phaser.Rectangle(game.world.width - TILE_SIZE - 20, groundHeight - TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
   game.input.onDown.add(onDown, this);
   game.input.onUp.add(onUp, this);
 }
 
 function update() {
+  obstacle.x -= 2;
+  if (obstacle.x < -20) {
+    obstacle.x = game.world.width + 20;
+  }
 }
 
 function render() {
