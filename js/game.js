@@ -24,7 +24,7 @@ states.running.prototype = {
 
     game.objects.runner = new Phaser.Rectangle(game.world.centerX - game.constants.tileSize / 2, groundHeight - game.constants.tileSize, game.constants.tileSize, game.constants.tileSize);
     game.objects.ground = new Phaser.Rectangle(0, groundHeight, game.world.width, game.constants.tileSize);
-    game.objects.obstacle = new Phaser.Rectangle(game.world.width - game.constants.tileSize - 20, groundHeight - game.constants.tileSize, game.constants.tileSize, game.constants.tileSize);
+    game.objects.obstacle = new Phaser.Rectangle(game.world.width + 20, groundHeight - game.constants.tileSize, game.constants.tileSize, game.constants.tileSize);
 
     game.input.onDown.add(this.onDown, this);
     game.input.onUp.add(this.onUp, this);
@@ -40,7 +40,6 @@ states.running.prototype = {
   render: function () {
     game.debug.geom(game.objects.runner, game.colorPalette.accent);
     game.debug.geom(game.objects.ground, game.colorPalette.dark);
-
     game.debug.geom(game.objects.obstacle, game.colorPalette.middle);
   },
 
@@ -58,5 +57,30 @@ states.running.prototype = {
   }
 };
 
+states.waiting = function(game) {};
+states.waiting.prototype = {
+  preload: function () {},
+
+  create: function () {
+    var groundHeight = game.world.height - game.constants.tileSize;
+    game.stage.backgroundColor = game.colorPalette.light;
+
+    game.objects.runner = new Phaser.Rectangle(game.world.centerX - game.constants.tileSize / 2, groundHeight - game.constants.tileSize, game.constants.tileSize, game.constants.tileSize);
+    game.objects.ground = new Phaser.Rectangle(0, groundHeight, game.world.width, game.constants.tileSize);
+
+    game.input.onTap.add(this.startRunning, this);
+  },
+
+  render: function () {
+    game.debug.geom(game.objects.runner, game.colorPalette.accent);
+    game.debug.geom(game.objects.ground, game.colorPalette.dark);
+  },
+
+  startRunning: function() {
+    game.state.start('running');
+  }
+};
+
 game.state.add('running', states.running);
-game.state.start('running');
+game.state.add('waiting', states.waiting);
+game.state.start('waiting');
