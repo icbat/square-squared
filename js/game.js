@@ -14,8 +14,7 @@ game.colorPalette = {
 
 states = {};
 
-states.running = function(game) {};
-states.running.prototype = {
+states.running = {
   preload: function () {},
 
   create: function () {
@@ -60,8 +59,7 @@ states.running.prototype = {
   }
 };
 
-states.waiting = function(game) {};
-states.waiting.prototype = {
+states.waiting = {
   preload: function () {},
 
   create: function () {
