@@ -5,55 +5,55 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
   render: render
 });
 
-var TILE_SIZE = 64;
-var maxJumpHeight = 200;
-var groundHeight;
-var runner, ground, obstacle;
-var colors = {
-  green: '#22CC77',
-  lightGrey: '#ddd',
-  middleGrey: '#888',
-  darkGrey: '#333'
+game.constants = {
+  tileSize: 64,
+  maxJumpHeight: 200
+};
+game.objects = {};
+game.colorPalette = {
+  accent: '#22CC77',
+  light: '#ddd',
+  middle: '#888',
+  dark: '#333'
 };
 
-function preload() {
-  groundHeight = game.world.height - TILE_SIZE;
-}
+function preload() {}
 
 function create() {
-  game.stage.backgroundColor = colors.lightGrey;
+  var groundHeight = game.world.height - game.constants.tileSize;
+  game.stage.backgroundColor = game.colorPalette.light;
 
-  runner = new Phaser.Rectangle(game.world.centerX - TILE_SIZE / 2, groundHeight - TILE_SIZE, TILE_SIZE, TILE_SIZE);
-  ground = new Phaser.Rectangle(0, groundHeight, game.world.width, TILE_SIZE);
-  obstacle = new Phaser.Rectangle(game.world.width - TILE_SIZE - 20, groundHeight - TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  game.objects.runner = new Phaser.Rectangle(game.world.centerX - game.constants.tileSize / 2, groundHeight - game.constants.tileSize, game.constants.tileSize, game.constants.tileSize);
+  game.objects.ground = new Phaser.Rectangle(0, groundHeight, game.world.width, game.constants.tileSize);
+  game.objects.obstacle = new Phaser.Rectangle(game.world.width - game.constants.tileSize - 20, groundHeight - game.constants.tileSize, game.constants.tileSize, game.constants.tileSize);
 
   game.input.onDown.add(onDown, this);
   game.input.onUp.add(onUp, this);
 }
 
 function update() {
-  obstacle.x -= 2;
-  if (obstacle.x < -20) {
-    obstacle.x = game.world.width + 20;
+  game.objects.obstacle.x -= 2;
+  if (game.objects.obstacle.x < -20) {
+    game.objects.obstacle.x = game.world.width + 20;
   }
 }
 
 function render() {
-  game.debug.geom(runner, colors.green);
-  game.debug.geom(ground, colors.darkGrey);
+  game.debug.geom(game.objects.runner, game.colorPalette.accent);
+  game.debug.geom(game.objects.ground, game.colorPalette.dark);
 
-  game.debug.geom(obstacle, colors.middleGrey);
+  game.debug.geom(game.objects.obstacle, game.colorPalette.middle);
 }
 
 function onDown(pointer, mouseEvent) {
   if(mouseEvent.identifier === 0) {
-    runner.y -= maxJumpHeight;
+    game.objects.runner.y -= game.constants.maxJumpHeight;
   }
 }
 
 function onUp(pointer, mouseEvent) {
   // Prevents 'mouse leaving the game world' from firing this, too
   if(mouseEvent.identifier === 0 && pointer.identifier === 0) {
-    runner.y += maxJumpHeight;
+    game.objects.runner.y += game.constants.maxJumpHeight;
   }
 }
