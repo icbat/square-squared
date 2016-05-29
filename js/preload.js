@@ -1,4 +1,4 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO);
+var game = new Phaser.Game("100", "100", Phaser.AUTO);
 
 constants = {
   tileSize: 64,
