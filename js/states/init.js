@@ -8,6 +8,7 @@ state_init = function(game) {
       constants.centerX = game.world.centerX - constants.tileSize / 2;
 
       objects.runner = new Phaser.Rectangle(constants.centerX, constants.groundHeight - constants.tileSize, constants.tileSize, constants.tileSize);
+      objects.runner.vspeed = 0;
       objects.ground = new Phaser.Rectangle(0, constants.groundHeight, game.world.width, constants.tileSize);
       objects.obstacle = new Phaser.Rectangle(game.world.width + 20, constants.groundHeight - constants.tileSize, constants.tileSize, constants.tileSize);
     },

@@ -2,8 +2,10 @@ var game = new Phaser.Game("100", "100", Phaser.AUTO);
 
 constants = {
   tileSize: 64,
-  maxJumpHeight: 200,
-  maxGravityAcceleration: -3
+  gravityStepUp: -0.5,
+  gravityStepDown: -0.08,
+  hspeed: -2.5,
+  jumpStrength: -12
 };
 objects = {};
 colorPalette = {

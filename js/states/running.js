@@ -8,8 +8,8 @@ state_running = function(game) {
     update: function () {
       this.applyGravity(objects.runner);
 
-      objects.obstacle.x -= 2;
-      if (objects.obstacle.x < -20) {
+      objects.obstacle.x += constants.hspeed;
+      if (objects.obstacle.x < -constants.tileSize) {
         objects.obstacle.x = game.world.width + 20;
       }
       if(objects.obstacle.intersects(objects.runner)) {
@@ -18,13 +18,15 @@ state_running = function(game) {
     },
 
     applyGravity: function(object) {
-      if (object.y < constants.runnerOnGround) {
-        object.vspeed = Math.min(object.vspeed - 1, constants.maxGravityAcceleration);
-      } else {
-        object.vspeed = 0;
-      }
+      object.y += object.vspeed;
+      var gravityStep = object.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
+      object.vspeed -= gravityStep;
 
-      object.y = Math.min(object.y - object.vspeed, constants.runnerOnGround);
+      // On hitting ground
+      if (object.y >= constants.runnerOnGround) {
+        object.vspeed = 0;
+        object.y = constants.runnerOnGround;
+      }
     },
 
     render: function () {
@@ -40,14 +42,12 @@ state_running = function(game) {
     onDown: function (pointer, mouseEvent) {
       if(mouseEvent.identifier === 0) {
         if (this.canJump(objects.runner)) {
-          objects.runner.y -= constants.maxJumpHeight;
+          objects.runner.vspeed = constants.jumpStrength;
         }
       }
     },
 
-
     onUp: function (pointer, mouseEvent) {
-
       // Prevents 'mouse leaving the game world' from firing this, too
       if(mouseEvent.identifier === 0 && pointer.identifier === 0) {
       }
