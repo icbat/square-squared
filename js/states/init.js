@@ -4,6 +4,7 @@ state_init = function(game) {
       game.stage.backgroundColor = colorPalette.light;
 
       constants.groundHeight = game.world.height - constants.tileSize;
+      constants.runnerOnGround = constants.groundHeight - constants.tileSize;
       constants.centerX = game.world.centerX - constants.tileSize / 2;
 
       objects.runner = new Phaser.Rectangle(constants.centerX, constants.groundHeight - constants.tileSize, constants.tileSize, constants.tileSize);
