@@ -14,7 +14,7 @@ state_init = function(game) {
     },
 
     create: function() {
-      game.state.start('running');
+      game.state.start('waiting');
     }
   };
 };
