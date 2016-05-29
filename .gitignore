@@ -3,5 +3,6 @@ node_modules/
 bower_components/
 js/vendor/
 
-# Ignore distributables
+# Ignore packaged distributable
 dist/
+build/
