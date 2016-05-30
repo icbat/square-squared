@@ -4,6 +4,11 @@ state_running = function(game) {
       game.input.onDown.add(this.onDown, this);
       game.input.onUp.add(this.onUp, this);
       game.score = 0;
+
+      var textStyle = {fill: colorPalette.text, boundsAlignH: "center", boundsAlignV: "middle"};
+      objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, constants.runnerOnGround + (constants.tileSize /2), "0", textStyle);
+      objects.scoreDisplay.anchor.set(0.5);
+      objects.scoreDisplay.setShadow(1, 1, colorPalette.dark);
     },
 
     update: function (game) {
