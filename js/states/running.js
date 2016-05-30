@@ -3,6 +3,7 @@ state_running = function(game) {
     create: function () {
       game.input.onDown.add(this.onDown, this);
       game.input.onUp.add(this.onUp, this);
+      this.score = 0;
     },
 
     update: function () {
@@ -12,8 +13,15 @@ state_running = function(game) {
       if (objects.obstacle.x < -constants.tileSize) {
         objects.obstacle.x = game.world.width + 20;
       }
+
       if(objects.obstacle.intersects(objects.runner)) {
+        // Game over
         game.state.start('waiting');
+      }
+
+      if (Math.round(objects.obstacle.x + objects.obstacle.width) == objects.runner.x - 1) {
+        ++this.score;
+        console.log("Point scored", this.score);
       }
     },
 
