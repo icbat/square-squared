@@ -13,25 +13,27 @@ var state_running = function(game) {
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, constants.runnerOnGround + (constants.tileSize / 2), "0", textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.dark);
+
+            objects.obstacleHard.setTo(game.world.width + 20, constants.groundHeight - constants.tileSize, constants.tileSize, constants.tileSize);
         },
 
         update: function(game) {
             this.applyGravity(objects.runner);
 
             // Move obstacle left
-            objects.obstacle.x += constants.hspeed;
+            objects.obstacleHard.x += constants.hspeed;
 
-            if (objects.obstacle.x < -constants.tileSize) {
-                this.resetObstaclePosition(objects.obstacle);
+            if (objects.obstacleHard.x < -constants.tileSize) {
+                this.resetObstaclePosition(objects.obstacleHard);
             }
 
-            if (objects.obstacle.intersects(objects.runner)) {
+            if (objects.obstacleHard.intersects(objects.runner)) {
                 // Game over
                 game.state.start('waiting');
             }
 
-            if (this.runnerHasPassedObstacle(objects.obstacle)) {
-                this.scorePoint(objects.obstacle);
+            if (this.runnerHasPassedObstacle(objects.obstacleHard)) {
+                this.scorePoint(objects.obstacleHard);
             }
         },
 
@@ -65,13 +67,13 @@ var state_running = function(game) {
         render: function() {
             game.debug.geom(objects.runner, colorPalette.runner);
             game.debug.geom(objects.ground, colorPalette.dark);
-            game.debug.geom(objects.obstacle, colorPalette.obstacleHard);
+            game.debug.geom(objects.obstacleHard, colorPalette.obstacleHard);
 
             // This line is magic to me, what does it do?
             graphics = game.add.graphics(0, 0);
 
             graphics.beginFill(colorPalette.obstacleMedium);
-            graphics.drawPolygon(objects.mediumObstacle.points);
+            graphics.drawPolygon(objects.obstacleMedium.points);
             graphics.endFill();
         },
 
