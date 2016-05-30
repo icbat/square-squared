@@ -15,6 +15,6 @@ colorPalette = {
   dark: '#333',
   text: '#39d',
   obstacleHard: '#c32',
-  obstacleMedium: '#e72',
-  obstacleEasy: '#fc0'
+  obstacleMedium: 0xee7722,
+  obstacleEasy: 0xffcc00
 };
