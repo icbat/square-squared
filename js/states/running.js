@@ -9,6 +9,36 @@ var movePolygonBy = function(polygon, amountX) {
     polygon.setTo(points);
 };
 
+var movePolygonTo = function(polygon, destinationX) {
+  var points = polygon.toNumberArray();
+  var index;
+  var minX = findFurthestLeftPoint(polygon);
+
+  // Scale X's to get their relative sizes to preserve shape when moving
+  for (index = 0; index < points.length; ++index) {
+      if (index % 2 == 0) {
+          points[index] += destinationX - minX;
+      }
+  }
+
+  polygon.setTo(points);
+};
+
+var findFurthestLeftPoint = function(polygon) {
+  var points = polygon.toNumberArray();
+  // Find smallest X
+  var minX = 99999;
+  for (index = 0; index < points.length; ++index) {
+      if (index % 2 == 0) {
+          minX = Math.min(points[index], minX);
+      }
+  }
+  if (minX == 99999) {
+    throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+  }
+  return minX;
+};
+
 var state_running = function(game) {
     return {
         create: function(game) {
@@ -36,8 +66,7 @@ var state_running = function(game) {
             var obstacle = objects.obstacleMedium;
             movePolygonBy(obstacle, constants.hspeed);
 
-            if (obstacle.x < -constants.tileSize) {
-              // TODO does nothing with Polyhgons, rework
+            if (findFurthestLeftPoint(obstacle) < -constants.tileSize) {
                 this.resetObstaclePosition(obstacle);
             }
 
@@ -54,7 +83,8 @@ var state_running = function(game) {
         },
 
         resetObstaclePosition: function(obstacle) {
-            obstacle.x = game.world.width + 20;
+            // obstacle.x = game.world.width + 20;
+            movePolygonTo(obstacle, game.world.width + 20);
             obstacle.hasScored = false;
         },
 
