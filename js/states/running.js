@@ -46,6 +46,13 @@ state_running = function(game) {
       game.debug.geom(objects.runner, colorPalette.runner);
       game.debug.geom(objects.ground, colorPalette.dark);
       game.debug.geom(objects.obstacle, colorPalette.obstacleHard);
+
+      // This line is magic to me, what does it do?
+      graphics = game.add.graphics(0, 0);
+
+      graphics.beginFill(colorPalette.obstacleMedium);
+      graphics.drawPolygon(objects.mediumObstacle.points);
+      graphics.endFill();
     },
 
     canJump: function(runner) {
