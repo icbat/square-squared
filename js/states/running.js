@@ -3,10 +3,10 @@ state_running = function(game) {
     create: function () {
       game.input.onDown.add(this.onDown, this);
       game.input.onUp.add(this.onUp, this);
-      this.score = 0;
+      game.score = 0;
     },
 
-    update: function () {
+    update: function (game) {
       this.applyGravity(objects.runner);
 
       objects.obstacle.x += constants.hspeed;
@@ -20,8 +20,8 @@ state_running = function(game) {
       }
 
       if (Math.round(objects.obstacle.x + objects.obstacle.width) == objects.runner.x - 1) {
-        ++this.score;
-        console.log("Point scored", this.score);
+        ++game.score;
+        objects.scoreDisplay.text = (game.score);
       }
     },
 
