@@ -38,9 +38,9 @@ state_running = function(game) {
     },
 
     render: function () {
-      game.debug.geom(objects.runner, colorPalette.accent);
+      game.debug.geom(objects.runner, colorPalette.runner);
       game.debug.geom(objects.ground, colorPalette.dark);
-      game.debug.geom(objects.obstacle, colorPalette.middle);
+      game.debug.geom(objects.obstacle, colorPalette.obstacleHard);
     },
 
     canJump: function(runner) {

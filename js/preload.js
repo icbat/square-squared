@@ -9,8 +9,12 @@ constants = {
 };
 objects = {};
 colorPalette = {
-  accent: '#22CC77',
+  runner: '#2C7',
   light: '#ddd',
   middle: '#888',
-  dark: '#333'
+  dark: '#333',
+  text: '#39d',
+  obstacleHard: '#c32',
+  obstacleMedium: '#e72',
+  obstacleEasy: '#fc0'
 };
