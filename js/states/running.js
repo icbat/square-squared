@@ -1,6 +1,17 @@
+var movePolygonBy = function(polygon, amountX) {
+    var points = polygon.toNumberArray();
+    var index;
+    for (index = 0; index < points.length; ++index) {
+        if (index % 2 == 0) {
+            points[index] += amountX;
+        }
+    }
+    polygon.setTo(points);
+};
+
 var state_running = function(game) {
     return {
-        create: function() {
+        create: function(game) {
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
             game.score = 0;
@@ -14,26 +25,31 @@ var state_running = function(game) {
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.dark);
 
-            objects.obstacleHard.setTo(game.world.width + 20, constants.groundHeight - constants.tileSize, constants.tileSize, constants.tileSize);
+            this.resetObstaclePosition(objects.obstacleMedium);
+            this.graphics = game.add.graphics(0, 0);
         },
 
         update: function(game) {
             this.applyGravity(objects.runner);
 
             // Move obstacle left
-            objects.obstacleHard.x += constants.hspeed;
+            var obstacle = objects.obstacleMedium;
+            movePolygonBy(obstacle, constants.hspeed);
 
-            if (objects.obstacleHard.x < -constants.tileSize) {
-                this.resetObstaclePosition(objects.obstacleHard);
+            if (obstacle.x < -constants.tileSize) {
+              // TODO does nothing with Polyhgons, rework
+                this.resetObstaclePosition(obstacle);
             }
 
-            if (objects.obstacleHard.intersects(objects.runner)) {
-                // Game over
-                game.state.start('waiting');
-            }
+            // TODO doesn't work with polygons, rethink
+            // if (obstacle.intersects(objects.runner)) {
+            // Game over
+            // game.state.start('waiting');
+            // }
 
-            if (this.runnerHasPassedObstacle(objects.obstacleHard)) {
-                this.scorePoint(objects.obstacleHard);
+            // TODO needs work with polygons
+            if (this.runnerHasPassedObstacle(obstacle)) {
+                this.scorePoint(obstacle);
             }
         },
 
@@ -67,14 +83,13 @@ var state_running = function(game) {
         render: function() {
             game.debug.geom(objects.runner, colorPalette.runner);
             game.debug.geom(objects.ground, colorPalette.dark);
-            game.debug.geom(objects.obstacleHard, colorPalette.obstacleHard);
+            game.debug.geom(objects.obstacleMedium, colorPalette.runner);
+            // game.debug.geom(objects.obstacleHard, colorPalette.obstacleHard);
 
-            // This line is magic to me, what does it do?
-            graphics = game.add.graphics(0, 0);
-
-            graphics.beginFill(colorPalette.obstacleMedium);
-            graphics.drawPolygon(objects.obstacleMedium.points);
-            graphics.endFill();
+            this.graphics.clear();
+            this.graphics.beginFill(colorPalette.obstacleMedium);
+            this.graphics.drawShape(objects.obstacleMedium);
+            this.graphics.endFill();
         },
 
         canJump: function(runner) {
