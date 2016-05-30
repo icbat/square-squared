@@ -12,11 +12,11 @@ var movePolygonBy = function(polygon, amountX) {
 var movePolygonTo = function(polygon, destinationX) {
   var points = polygon.toNumberArray();
   var index;
-  var minX = findFurthestLeftPoint(polygon);
+  var minX = findLeftmostPoint(polygon);
 
-  // Scale X's to get their relative sizes to preserve shape when moving
   for (index = 0; index < points.length; ++index) {
       if (index % 2 == 0) {
+          // minX is necessary to adjust for the size of the polygon
           points[index] += destinationX - minX;
       }
   }
@@ -24,9 +24,8 @@ var movePolygonTo = function(polygon, destinationX) {
   polygon.setTo(points);
 };
 
-var findFurthestLeftPoint = function(polygon) {
+var findLeftmostPoint = function(polygon) {
   var points = polygon.toNumberArray();
-  // Find smallest X
   var minX = 99999;
   for (index = 0; index < points.length; ++index) {
       if (index % 2 == 0) {
@@ -37,6 +36,20 @@ var findFurthestLeftPoint = function(polygon) {
     throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
   }
   return minX;
+};
+
+var findRightmostPoint = function(polygon) {
+  var points = polygon.toNumberArray();
+  var maxX = -99999;
+  for (index = 0; index < points.length; ++index) {
+      if (index % 2 == 0) {
+          maxX = Math.max(points[index], maxX);
+      }
+  }
+  if (maxX == -99999) {
+    throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+  }
+  return maxX;
 };
 
 var state_running = function(game) {
@@ -66,7 +79,7 @@ var state_running = function(game) {
             var obstacle = objects.obstacleMedium;
             movePolygonBy(obstacle, constants.hspeed);
 
-            if (findFurthestLeftPoint(obstacle) < -constants.tileSize) {
+            if (findLeftmostPoint(obstacle) < -constants.tileSize) {
                 this.resetObstaclePosition(obstacle);
             }
 
@@ -76,7 +89,6 @@ var state_running = function(game) {
             // game.state.start('waiting');
             // }
 
-            // TODO needs work with polygons
             if (this.runnerHasPassedObstacle(obstacle)) {
                 this.scorePoint(obstacle);
             }
@@ -89,7 +101,7 @@ var state_running = function(game) {
         },
 
         runnerHasPassedObstacle: function(obstacle) {
-            return !obstacle.hasScored && Math.round(obstacle.x + obstacle.width) < objects.runner.x - 1
+            return !obstacle.hasScored && Math.round(findRightmostPoint(obstacle)) < objects.runner.x - 1
         },
 
         scorePoint(obstacle) {
