@@ -17,6 +17,7 @@ state_running = function(game) {
       objects.obstacle.x += constants.hspeed;
       if (objects.obstacle.x < -constants.tileSize) {
         objects.obstacle.x = game.world.width + 20;
+        objects.obstacle.hasScored = false;
       }
 
       if(objects.obstacle.intersects(objects.runner)) {
@@ -24,9 +25,10 @@ state_running = function(game) {
         game.state.start('waiting');
       }
 
-      if (Math.round(objects.obstacle.x + objects.obstacle.width) == objects.runner.x - 1) {
+      if (!objects.obstacle.hasScored && Math.round(objects.obstacle.x + objects.obstacle.width) < objects.runner.x - 1) {
         ++game.score;
         objects.scoreDisplay.text = (game.score);
+        objects.obstacle.hasScored = true;
       }
     },
 
