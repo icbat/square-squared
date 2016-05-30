@@ -14,10 +14,11 @@ state_running = function(game) {
     update: function (game) {
       this.applyGravity(objects.runner);
 
+      // Move obstacle left
       objects.obstacle.x += constants.hspeed;
+
       if (objects.obstacle.x < -constants.tileSize) {
-        objects.obstacle.x = game.world.width + 20;
-        objects.obstacle.hasScored = false;
+        this.resetObstaclePosition(objects.obstacle);
       }
 
       if(objects.obstacle.intersects(objects.runner)) {
@@ -25,11 +26,24 @@ state_running = function(game) {
         game.state.start('waiting');
       }
 
-      if (!objects.obstacle.hasScored && Math.round(objects.obstacle.x + objects.obstacle.width) < objects.runner.x - 1) {
-        ++game.score;
-        objects.scoreDisplay.text = (game.score);
-        objects.obstacle.hasScored = true;
+      if (this.runnerHasPassedObstacle(objects.obstacle)) {
+        this.scorePoint(objects.obstacle);
       }
+    },
+
+    resetObstaclePosition: function(obstacle) {
+      obstacle.x = game.world.width + 20;
+      obstacle.hasScored = false;
+    },
+
+    runnerHasPassedObstacle: function(obstacle) {
+      return !obstacle.hasScored && Math.round(obstacle.x + obstacle.width) < objects.runner.x - 1
+    },
+
+    scorePoint(obstacle) {
+      ++game.score;
+      objects.scoreDisplay.text = (game.score);
+      obstacle.hasScored = true;
     },
 
     applyGravity: function(object) {
