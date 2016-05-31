@@ -145,10 +145,6 @@ var state_running = function(game) {
                 var obstacle = objects.obstacles[obstacleIndex];
                 movePolygonBy(obstacle, constants.hspeed);
 
-                if (findRightmostPoint(obstacle) < 0) {
-                    this.moveObstacleToBack(obstacle);
-                }
-
                 if (intersects(obstacle, objects.runner)) {
                     // Game over
                     game.state.start('waiting');
@@ -156,6 +152,10 @@ var state_running = function(game) {
 
                 if (this.runnerHasPassedObstacle(obstacle)) {
                     this.scorePoint(obstacle);
+                }
+
+                if (findRightmostPoint(obstacle) < 0) {
+                  this.moveObstacleToBack(obstacle);
                 }
             }
         },
