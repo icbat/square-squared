@@ -130,8 +130,7 @@ var state_running = function(game) {
             var offset = 0;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
-                this.moveObstacleToBack(obstacle, offset);
-                offset += constants.minimumSpaceBetweenObstacles;
+                this.moveObstacleToBack(obstacle);
             }
             this.graphics = game.add.graphics(0, 0);
         },
@@ -159,10 +158,13 @@ var state_running = function(game) {
             }
         },
 
-        moveObstacleToBack: function(obstacle, offset) {
-            var offsetX = offset || 0;
-            // obstacle.x = game.world.width + 20;
-            movePolygonTo(obstacle, game.world.width + 20 + offsetX);
+        moveObstacleToBack: function(obstacle) {
+            var obstacleIndex;
+            var rightMostX = 0;
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                rightMostX = Math.max(findRightmostPoint(objects.obstacles[obstacleIndex]), rightMostX);
+            }
+            movePolygonTo(obstacle, Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + 20));
             obstacle.hasScored = false;
         },
 
