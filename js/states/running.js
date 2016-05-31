@@ -131,7 +131,7 @@ var state_running = function(game) {
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
                 this.resetObstaclePosition(obstacle, offset);
-                offset += constants.tileSize * 4;
+                offset += constants.minimumSpaceBetweenObstacles;
             }
             this.graphics = game.add.graphics(0, 0);
         },
