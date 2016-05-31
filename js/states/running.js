@@ -2,7 +2,7 @@ var movePolygonBy = function(polygon, amountX) {
     var points = polygon.toNumberArray();
     var index;
     for (index = 0; index < points.length; ++index) {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
             points[index] += amountX;
         }
     }
@@ -15,7 +15,7 @@ var movePolygonTo = function(polygon, destinationX) {
     var minX = findLeftmostPoint(polygon);
 
     for (index = 0; index < points.length; ++index) {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
             // minX is necessary to adjust for the size of the polygon
             points[index] += destinationX - minX;
         }
@@ -28,7 +28,7 @@ var findLeftmostPoint = function(polygon) {
     var points = polygon.toNumberArray();
     var minX = 99999;
     for (index = 0; index < points.length; ++index) {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
             minX = Math.min(points[index], minX);
         }
     }
@@ -43,7 +43,7 @@ var findRightmostPoint = function(polygon) {
     var maxX = -99999;
     var index;
     for (index = 0; index < points.length; ++index) {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
             maxX = Math.max(points[index], maxX);
         }
     }
@@ -86,7 +86,7 @@ var decomposeRectangle = function(rectangle) {
     lines.push(new Phaser.Line(bottomRight.x, bottomRight.y, topRight.x, topRight.y));
     lines.push(new Phaser.Line(bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y));
     return lines;
-}
+};
 
 var decompose = function(polygon) {
     var rawPoints = polygon.toNumberArray();
@@ -154,7 +154,7 @@ var state_running = function(game) {
                 }
 
                 if (findRightmostPoint(obstacle) < 0) {
-                  this.moveObstacleToBack(obstacle);
+                    this.moveObstacleToBack(obstacle);
                 }
             }
         },
@@ -167,10 +167,10 @@ var state_running = function(game) {
         },
 
         runnerHasPassedObstacle: function(obstacle) {
-            return !obstacle.hasScored && Math.round(findRightmostPoint(obstacle)) < objects.runner.x - 1
+            return !obstacle.hasScored && Math.round(findRightmostPoint(obstacle)) < objects.runner.x - 1;
         },
 
-        scorePoint(obstacle) {
+        scorePoint: function(obstacle) {
             ++game.score;
             objects.scoreDisplay.text = (game.score);
             obstacle.hasScored = true;
