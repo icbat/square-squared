@@ -10,46 +10,106 @@ var movePolygonBy = function(polygon, amountX) {
 };
 
 var movePolygonTo = function(polygon, destinationX) {
-  var points = polygon.toNumberArray();
-  var index;
-  var minX = findLeftmostPoint(polygon);
+    var points = polygon.toNumberArray();
+    var index;
+    var minX = findLeftmostPoint(polygon);
 
-  for (index = 0; index < points.length; ++index) {
-      if (index % 2 == 0) {
-          // minX is necessary to adjust for the size of the polygon
-          points[index] += destinationX - minX;
-      }
-  }
+    for (index = 0; index < points.length; ++index) {
+        if (index % 2 == 0) {
+            // minX is necessary to adjust for the size of the polygon
+            points[index] += destinationX - minX;
+        }
+    }
 
-  polygon.setTo(points);
+    polygon.setTo(points);
 };
 
 var findLeftmostPoint = function(polygon) {
-  var points = polygon.toNumberArray();
-  var minX = 99999;
-  for (index = 0; index < points.length; ++index) {
-      if (index % 2 == 0) {
-          minX = Math.min(points[index], minX);
-      }
-  }
-  if (minX == 99999) {
-    throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
-  }
-  return minX;
+    var points = polygon.toNumberArray();
+    var minX = 99999;
+    for (index = 0; index < points.length; ++index) {
+        if (index % 2 == 0) {
+            minX = Math.min(points[index], minX);
+        }
+    }
+    if (minX == 99999) {
+        throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+    }
+    return minX;
 };
 
 var findRightmostPoint = function(polygon) {
-  var points = polygon.toNumberArray();
-  var maxX = -99999;
-  for (index = 0; index < points.length; ++index) {
-      if (index % 2 == 0) {
-          maxX = Math.max(points[index], maxX);
-      }
-  }
-  if (maxX == -99999) {
-    throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
-  }
-  return maxX;
+    var points = polygon.toNumberArray();
+    var maxX = -99999;
+    var index;
+    for (index = 0; index < points.length; ++index) {
+        if (index % 2 == 0) {
+            maxX = Math.max(points[index], maxX);
+        }
+    }
+    if (maxX == -99999) {
+        throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+    }
+    return maxX;
+};
+
+var intersects = function(polygon, rectangle) {
+    var linesA = decompose(polygon);
+    var linesB = decomposeRectangle(rectangle);
+    var indexA;
+    var indexB;
+    for (indexA = 0; indexA < linesA.length; ++indexA) {
+        for (indexB = 0; indexB < linesB.length; ++indexB) {
+            if (linesA[indexA].intersects(linesB[indexB])) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+var decomposeRectangle = function(rectangle) {
+    var lines = [];
+    var topRight = {
+        x: rectangle.x + rectangle.width,
+        y: rectangle.y
+    };
+    var bottomRight = {
+        x: rectangle.x + rectangle.width,
+        y: rectangle.y + rectangle.height
+    };
+    var bottomLeft = {
+        x: rectangle.x,
+        y: rectangle.y + rectangle.height
+    };
+
+    lines.push(new Phaser.Line(bottomRight.x, bottomRight.y, topRight.x, topRight.y));
+    lines.push(new Phaser.Line(bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y));
+    return lines;
+}
+
+var decompose = function(polygon) {
+    var rawPoints = polygon.toNumberArray();
+    var index;
+    var lines = [];
+    var points = [];
+    for (index = 0; index < rawPoints.length; ++index) {
+        points.push({
+            x: rawPoints[index++],
+            y: rawPoints[index]
+        });
+    }
+    var innerIndex;
+    for (index = 0; index < points.length - 1; ++index) {
+        for (innerIndex = index + 1; innerIndex < points.length; ++innerIndex) {
+            var start = points[index];
+            var end = points[innerIndex];
+
+            lines.push(new Phaser.Line(start.x, start.y, end.x, end.y));
+        }
+    }
+
+    return lines;
 };
 
 var state_running = function(game) {
@@ -83,11 +143,10 @@ var state_running = function(game) {
                 this.resetObstaclePosition(obstacle);
             }
 
-            // TODO doesn't work with polygons, rethink
-            // if (obstacle.intersects(objects.runner)) {
-            // Game over
-            // game.state.start('waiting');
-            // }
+            if (intersects(obstacle, objects.runner)) {
+                // Game over
+                game.state.start('waiting');
+            }
 
             if (this.runnerHasPassedObstacle(obstacle)) {
                 this.scorePoint(obstacle);
