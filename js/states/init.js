@@ -11,11 +11,18 @@ var state_init = function(game) {
             objects.runner.vspeed = 0;
             objects.ground = new Phaser.Rectangle(0, constants.groundHeight, game.world.width, constants.tileSize);
 
+            // Acute triangle
+            var obstacleEasy = new Phaser.Polygon(
+              new Phaser.Point(0, constants.groundHeight),
+              new Phaser.Point(constants.tileSize, constants.groundHeight),
+              new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2/3)));
+            obstacleEasy.color = colorPalette.obstacleEasy;
+
             // Isosceles triangle
             var obstacleMedium = new Phaser.Polygon(
-              new Phaser.Point(game.world.width - constants.tileSize, constants.groundHeight),
-              new Phaser.Point(game.world.width, constants.groundHeight),
-              new Phaser.Point(game.world.width - (constants.tileSize / 2), constants.groundHeight - constants.tileSize));
+              new Phaser.Point(0, constants.groundHeight),
+              new Phaser.Point(constants.tileSize, constants.groundHeight),
+              new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize));
             obstacleMedium.color = colorPalette.obstacleMedium;
 
             // Square the size of the runner
@@ -26,7 +33,7 @@ var state_init = function(game) {
               new Phaser.Point(constants.tileSize, constants.groundHeight));
             obstacleHard.color = colorPalette.obstacleHard;
 
-            objects.obstacles = [obstacleMedium, obstacleHard];
+            objects.obstacles = [obstacleEasy, obstacleMedium, obstacleHard];
         },
 
         create: function() {
