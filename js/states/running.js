@@ -127,8 +127,12 @@ var state_running = function(game) {
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, constants.runnerOnGround + (constants.tileSize / 2), "0", textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.dark);
-
-            this.resetObstaclePosition(objects.obstacleMedium);
+            var offset = 0;
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                var obstacle = objects.obstacles[obstacleIndex];
+                this.resetObstaclePosition(obstacle, offset);
+                offset += constants.tileSize * 4;
+            }
             this.graphics = game.add.graphics(0, 0);
         },
 
@@ -136,26 +140,30 @@ var state_running = function(game) {
             this.applyGravity(objects.runner);
 
             // Move obstacle left
-            var obstacle = objects.obstacleMedium;
-            movePolygonBy(obstacle, constants.hspeed);
+            var obstacleIndex;
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                var obstacle = objects.obstacles[obstacleIndex];
+                movePolygonBy(obstacle, constants.hspeed);
 
-            if (findLeftmostPoint(obstacle) < -constants.tileSize) {
-                this.resetObstaclePosition(obstacle);
-            }
+                if (findLeftmostPoint(obstacle) < -constants.tileSize) {
+                    this.resetObstaclePosition(obstacle);
+                }
 
-            if (intersects(obstacle, objects.runner)) {
-                // Game over
-                game.state.start('waiting');
-            }
+                if (intersects(obstacle, objects.runner)) {
+                    // Game over
+                    game.state.start('waiting');
+                }
 
-            if (this.runnerHasPassedObstacle(obstacle)) {
-                this.scorePoint(obstacle);
+                if (this.runnerHasPassedObstacle(obstacle)) {
+                    this.scorePoint(obstacle);
+                }
             }
         },
 
-        resetObstaclePosition: function(obstacle) {
+        resetObstaclePosition: function(obstacle, offset) {
+            var offsetX = offset || 0;
             // obstacle.x = game.world.width + 20;
-            movePolygonTo(obstacle, game.world.width + 20);
+            movePolygonTo(obstacle, game.world.width + 20 + offsetX);
             obstacle.hasScored = false;
         },
 
@@ -188,9 +196,13 @@ var state_running = function(game) {
             // game.debug.geom(objects.obstacleHard, colorPalette.obstacleHard);
 
             this.graphics.clear();
-            this.graphics.beginFill(colorPalette.obstacleMedium);
-            this.graphics.drawShape(objects.obstacleMedium);
-            this.graphics.endFill();
+            var obstacleIndex;
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                var obstacle = objects.obstacles[obstacleIndex];
+                this.graphics.beginFill(obstacle.color);
+                this.graphics.drawShape(obstacle);
+                this.graphics.endFill();
+            }
         },
 
         canJump: function(runner) {
