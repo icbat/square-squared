@@ -145,7 +145,7 @@ var state_running = function(game) {
                 var obstacle = objects.obstacles[obstacleIndex];
                 movePolygonBy(obstacle, constants.hspeed);
 
-                if (findLeftmostPoint(obstacle) < -constants.tileSize) {
+                if (findRightmostPoint(obstacle) < 0) {
                     this.moveObstacleToBack(obstacle);
                 }
 
