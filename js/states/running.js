@@ -139,7 +139,6 @@ var state_running = function(game) {
         update: function(game) {
             this.applyGravity(objects.runner);
 
-            // Move obstacle left
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
