@@ -130,7 +130,7 @@ var state_running = function(game) {
             var offset = 0;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
-                this.resetObstaclePosition(obstacle, offset);
+                this.moveObstacleToBack(obstacle, offset);
                 offset += constants.minimumSpaceBetweenObstacles;
             }
             this.graphics = game.add.graphics(0, 0);
@@ -146,7 +146,7 @@ var state_running = function(game) {
                 movePolygonBy(obstacle, constants.hspeed);
 
                 if (findLeftmostPoint(obstacle) < -constants.tileSize) {
-                    this.resetObstaclePosition(obstacle);
+                    this.moveObstacleToBack(obstacle);
                 }
 
                 if (intersects(obstacle, objects.runner)) {
@@ -160,7 +160,7 @@ var state_running = function(game) {
             }
         },
 
-        resetObstaclePosition: function(obstacle, offset) {
+        moveObstacleToBack: function(obstacle, offset) {
             var offsetX = offset || 0;
             // obstacle.x = game.world.width + 20;
             movePolygonTo(obstacle, game.world.width + 20 + offsetX);
