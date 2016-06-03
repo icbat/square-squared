@@ -10,7 +10,7 @@ var constants = {
 };
 var objects = {};
 var colorPalette = {
-    runner: '#2C7',
+    runner: 0x22cc77,
     light: '#ddd',
     middle: '#888',
     ground: 0x333333,

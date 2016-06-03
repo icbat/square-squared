@@ -81,9 +81,9 @@ var extendPolygon = function(polygonToExtend, color) {
     };
 
     polygonToExtend.draw = function(graphics) {
-      graphics.beginFill(this.color);
-      graphics.drawShape(this);
-      graphics.endFill();
+        graphics.beginFill(this.color);
+        graphics.drawShape(this);
+        graphics.endFill();
     };
 
     polygonToExtend.intersects = function(other) {

@@ -14,7 +14,7 @@ var state_waiting = function(game) {
         },
 
         render: function() {
-            game.debug.geom(objects.runner, objects.runner.color);
+            objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
         },
 

@@ -1,38 +1,3 @@
-var intersects = function(polygon, rectangle) {
-    var linesA = polygon.decompose();
-    var linesB = decomposeRectangle(rectangle);
-    var indexA;
-    var indexB;
-    for (indexA = 0; indexA < linesA.length; ++indexA) {
-        for (indexB = 0; indexB < linesB.length; ++indexB) {
-            if (linesA[indexA].intersects(linesB[indexB])) {
-                return true;
-            }
-        }
-    }
-    return false;
-};
-
-var decomposeRectangle = function(rectangle) {
-    var lines = [];
-    var topRight = {
-        x: rectangle.x + rectangle.width,
-        y: rectangle.y
-    };
-    var bottomRight = {
-        x: rectangle.x + rectangle.width,
-        y: rectangle.y + rectangle.height
-    };
-    var bottomLeft = {
-        x: rectangle.x,
-        y: rectangle.y + rectangle.height
-    };
-
-    lines.push(new Phaser.Line(bottomRight.x, bottomRight.y, topRight.x, topRight.y));
-    lines.push(new Phaser.Line(bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y));
-    return lines;
-};
-
 var state_running = function(game) {
     return {
         create: function(game) {
@@ -65,7 +30,7 @@ var state_running = function(game) {
                 var obstacle = objects.obstacles[obstacleIndex];
                 obstacle.movePolygonBy(constants.hspeed);
 
-                if (intersects(obstacle, objects.runner)) {
+                if (objects.runner.intersects(obstacle)) {
                     // Game over
                     game.state.start('waiting');
                 }
@@ -102,13 +67,13 @@ var state_running = function(game) {
 
         render: function() {
             this.graphics.clear();
-            game.debug.geom(objects.runner, objects.runner.color);
 
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
                 obstacle.draw(this.graphics);
             }
+            objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
         },
 

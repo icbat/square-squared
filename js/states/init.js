@@ -5,9 +5,15 @@ var state_init = function(game) {
 
             constants.groundHeight = game.world.height - constants.tileSize;
             constants.runnerOnGround = constants.groundHeight - constants.tileSize;
-            constants.centerX = game.world.centerX - constants.tileSize / 2;
 
-            objects.runner = runner(constants.centerX, constants.groundHeight);
+            var runnerPolygon = new Phaser.Polygon(
+                new Phaser.Point(0, constants.groundHeight),
+                new Phaser.Point(0, constants.runnerOnGround),
+                new Phaser.Point(constants.tileSize, constants.runnerOnGround),
+                new Phaser.Point(constants.tileSize, constants.groundHeight)
+            );
+            objects.runner = runner(runnerPolygon, constants.groundHeight);
+            objects.runner.movePolygonTo(game.world.centerX - constants.tileSize / 2);
 
             var ground = new Phaser.Polygon(
                 // 0, constants.groundHeight, game.world.width, constants.tileSize
