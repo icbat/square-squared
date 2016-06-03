@@ -1,8 +1,13 @@
 # Ignore downloaded dependencies
 node_modules/
 bower_components/
-js/vendor/
+www/js/vendor/
 
 # Ignore packaged distributable
 dist/
 build/
+
+# Cordova stuff I don't understand
+plugins/
+platforms/
+hooks/

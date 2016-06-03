@@ -12,7 +12,7 @@ var bower_components = [
 gulp.task('copy-bower', function() {
   return gulp
     .src(bower_components)
-    .pipe(gulp.dest('./js/vendor/'));
+    .pipe(gulp.dest('./www/js/vendor/'));
 });
 
 gulp.task('build', ['stage-root', 'stage-assets', 'stage-js'], function() {
