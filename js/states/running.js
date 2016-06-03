@@ -47,7 +47,7 @@ var state_running = function(game) {
             };
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, constants.runnerOnGround + (constants.tileSize / 2), "0", textStyle);
             objects.scoreDisplay.anchor.set(0.5);
-            objects.scoreDisplay.setShadow(1, 1, colorPalette.dark);
+            objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             var offset = 0;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];

@@ -9,7 +9,7 @@ var state_waiting = function(game) {
             };
             var text = game.add.text(game.world.centerX, game.world.centerY, "Touch anywhere to jump", textStyle);
             text.anchor.set(0.5);
-            text.setShadow(1, 1, colorPalette.dark);
+            text.setShadow(1, 1, colorPalette.textShadow);
         },
 
         render: function() {
