@@ -101,15 +101,15 @@ var state_running = function(game) {
         },
 
         render: function() {
-            game.debug.geom(objects.runner, objects.runner.color);
-            game.debug.geom(objects.ground, objects.ground.color);
-
             this.graphics.clear();
+            game.debug.geom(objects.runner, objects.runner.color);
+
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
                 obstacle.draw(this.graphics);
             }
+            objects.ground.draw(this.graphics);
         },
 
         onDown: function(pointer, mouseEvent) {

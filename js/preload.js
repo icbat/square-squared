@@ -13,7 +13,7 @@ var colorPalette = {
     runner: '#2C7',
     light: '#ddd',
     middle: '#888',
-    dark: '#333',
+    ground: 0x333333,
     textShadow: '#333',
     text: '#39d',
     obstacleHard: 0xcc3322,

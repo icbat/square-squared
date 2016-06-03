@@ -9,21 +9,30 @@ var state_init = function(game) {
 
             objects.runner = runner(constants.centerX, constants.groundHeight);
 
-            objects.ground = new Phaser.Rectangle(0, constants.groundHeight, game.world.width, constants.tileSize);
-            objects.ground.color = colorPalette.dark;
+            var ground = new Phaser.Polygon(
+                // 0, constants.groundHeight, game.world.width, constants.tileSize
+                new Phaser.Point(0, game.world.height),
+                new Phaser.Point(0, game.world.height - constants.tileSize),
+                new Phaser.Point(game.world.width, game.world.height - constants.tileSize),
+                new Phaser.Point(game.world.width, game.world.height)
+            );
+            extendPolygon(ground, colorPalette.ground);
+            objects.ground = ground;
 
             // Acute triangle
             var obstacleEasy = new Phaser.Polygon(
                 new Phaser.Point(0, constants.groundHeight),
                 new Phaser.Point(constants.tileSize, constants.groundHeight),
-                new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3)));
+                new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3))
+            );
             extendPolygon(obstacleEasy, colorPalette.obstacleEasy);
 
             // Isosceles triangle
             var obstacleMedium = new Phaser.Polygon(
                 new Phaser.Point(0, constants.groundHeight),
                 new Phaser.Point(constants.tileSize, constants.groundHeight),
-                new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize));
+                new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize)
+            );
             extendPolygon(obstacleMedium, colorPalette.obstacleMedium);
 
             // Square the size of the runner
@@ -31,7 +40,8 @@ var state_init = function(game) {
                 new Phaser.Point(0, constants.groundHeight),
                 new Phaser.Point(0, constants.groundHeight - constants.tileSize),
                 new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize),
-                new Phaser.Point(constants.tileSize, constants.groundHeight));
+                new Phaser.Point(constants.tileSize, constants.groundHeight)
+            );
             extendPolygon(obstacleHard, colorPalette.obstacleHard);
 
             objects.obstacles = [obstacleEasy, obstacleMedium, obstacleHard];

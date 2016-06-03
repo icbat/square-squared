@@ -10,11 +10,12 @@ var state_waiting = function(game) {
             var text = game.add.text(game.world.centerX, game.world.centerY, "Touch anywhere to jump", textStyle);
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
+            this.graphics = game.add.graphics(0, 0);
         },
 
         render: function() {
             game.debug.geom(objects.runner, objects.runner.color);
-            game.debug.geom(objects.ground, objects.ground.color);
+            objects.ground.draw(this.graphics);
         },
 
         startRunning: function() {
