@@ -13,8 +13,8 @@ var state_waiting = function(game) {
         },
 
         render: function() {
-            game.debug.geom(objects.runner, colorPalette.runner);
-            game.debug.geom(objects.ground, colorPalette.dark);
+            game.debug.geom(objects.runner, objects.runner.color);
+            game.debug.geom(objects.ground, objects.ground.color);
         },
 
         startRunning: function() {

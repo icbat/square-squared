@@ -137,7 +137,7 @@ var state_running = function(game) {
         },
 
         update: function(game) {
-            this.applyGravity(objects.runner);
+            objects.runner.applyGravity();
 
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
@@ -179,23 +179,9 @@ var state_running = function(game) {
             obstacle.hasScored = true;
         },
 
-        applyGravity: function(object) {
-            object.y += object.vspeed;
-            var gravityStep = object.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
-            object.vspeed -= gravityStep;
-
-            // On hitting ground
-            if (object.y >= constants.runnerOnGround) {
-                object.vspeed = 0;
-                object.y = constants.runnerOnGround;
-            }
-        },
-
         render: function() {
-            game.debug.geom(objects.runner, colorPalette.runner);
-            game.debug.geom(objects.ground, colorPalette.dark);
-            game.debug.geom(objects.obstacleMedium, colorPalette.runner);
-            // game.debug.geom(objects.obstacleHard, colorPalette.obstacleHard);
+            game.debug.geom(objects.runner, objects.runner.color);
+            game.debug.geom(objects.ground, objects.ground.color);
 
             this.graphics.clear();
             var obstacleIndex;
@@ -207,14 +193,10 @@ var state_running = function(game) {
             }
         },
 
-        canJump: function(runner) {
-            return runner.y === constants.runnerOnGround;
-        },
-
         onDown: function(pointer, mouseEvent) {
             if (mouseEvent.identifier === 0) {
-                if (this.canJump(objects.runner)) {
-                    objects.runner.vspeed = constants.jumpStrength;
+                if (objects.runner.canJump()) {
+                    objects.runner.jump();
                 }
             }
         },
