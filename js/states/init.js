@@ -7,27 +7,7 @@ var state_init = function(game) {
             constants.runnerOnGround = constants.groundHeight - constants.tileSize;
             constants.centerX = game.world.centerX - constants.tileSize / 2;
 
-            var runner = new Phaser.Rectangle(constants.centerX, constants.groundHeight - constants.tileSize, constants.tileSize, constants.tileSize);
-            runner.canJump = function() {
-                return this.y === constants.runnerOnGround;
-            };
-            runner.vspeed = 0;
-            runner.color = colorPalette.runner;
-            runner.applyGravity = function() {
-                this.y += this.vspeed;
-                var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
-                this.vspeed -= gravityStep;
-
-                // On hitting ground
-                if (this.y >= constants.runnerOnGround) {
-                    this.vspeed = 0;
-                    this.y = constants.runnerOnGround;
-                }
-            };
-            runner.jump = function() {
-                this.vspeed = constants.jumpStrength;
-            };
-            objects.runner = runner;
+            objects.runner = runner(constants.centerX, constants.groundHeight);
 
             objects.ground = new Phaser.Rectangle(0, constants.groundHeight, game.world.width, constants.tileSize);
             objects.ground.color = colorPalette.dark;
