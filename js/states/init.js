@@ -17,14 +17,14 @@ var state_init = function(game) {
                 new Phaser.Point(0, constants.groundHeight),
                 new Phaser.Point(constants.tileSize, constants.groundHeight),
                 new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3)));
-            obstacleEasy.color = colorPalette.obstacleEasy;
+            extendPolygon(obstacleEasy, colorPalette.obstacleEasy);
 
             // Isosceles triangle
             var obstacleMedium = new Phaser.Polygon(
                 new Phaser.Point(0, constants.groundHeight),
                 new Phaser.Point(constants.tileSize, constants.groundHeight),
                 new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize));
-            obstacleMedium.color = colorPalette.obstacleMedium;
+            extendPolygon(obstacleMedium, colorPalette.obstacleMedium);
 
             // Square the size of the runner
             var obstacleHard = new Phaser.Polygon(
@@ -32,7 +32,7 @@ var state_init = function(game) {
                 new Phaser.Point(0, constants.groundHeight - constants.tileSize),
                 new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize),
                 new Phaser.Point(constants.tileSize, constants.groundHeight));
-            obstacleHard.color = colorPalette.obstacleHard;
+            extendPolygon(obstacleHard, colorPalette.obstacleHard);
 
             objects.obstacles = [obstacleEasy, obstacleMedium, obstacleHard];
         },

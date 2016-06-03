@@ -1,60 +1,5 @@
-var movePolygonBy = function(polygon, amountX) {
-    var points = polygon.toNumberArray();
-    var index;
-    for (index = 0; index < points.length; ++index) {
-        if (index % 2 === 0) {
-            points[index] += amountX;
-        }
-    }
-    polygon.setTo(points);
-};
-
-var movePolygonTo = function(polygon, destinationX) {
-    var points = polygon.toNumberArray();
-    var index;
-    var minX = findLeftmostPoint(polygon);
-
-    for (index = 0; index < points.length; ++index) {
-        if (index % 2 === 0) {
-            // minX is necessary to adjust for the size of the polygon
-            points[index] += destinationX - minX;
-        }
-    }
-
-    polygon.setTo(points);
-};
-
-var findLeftmostPoint = function(polygon) {
-    var points = polygon.toNumberArray();
-    var minX = 99999;
-    for (index = 0; index < points.length; ++index) {
-        if (index % 2 === 0) {
-            minX = Math.min(points[index], minX);
-        }
-    }
-    if (minX == 99999) {
-        throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
-    }
-    return minX;
-};
-
-var findRightmostPoint = function(polygon) {
-    var points = polygon.toNumberArray();
-    var maxX = -99999;
-    var index;
-    for (index = 0; index < points.length; ++index) {
-        if (index % 2 === 0) {
-            maxX = Math.max(points[index], maxX);
-        }
-    }
-    if (maxX == -99999) {
-        throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
-    }
-    return maxX;
-};
-
 var intersects = function(polygon, rectangle) {
-    var linesA = decompose(polygon);
+    var linesA = polygon.decompose();
     var linesB = decomposeRectangle(rectangle);
     var indexA;
     var indexB;
@@ -88,30 +33,6 @@ var decomposeRectangle = function(rectangle) {
     return lines;
 };
 
-var decompose = function(polygon) {
-    var rawPoints = polygon.toNumberArray();
-    var index;
-    var lines = [];
-    var points = [];
-    for (index = 0; index < rawPoints.length; ++index) {
-        points.push({
-            x: rawPoints[index++],
-            y: rawPoints[index]
-        });
-    }
-    var innerIndex;
-    for (index = 0; index < points.length - 1; ++index) {
-        for (innerIndex = index + 1; innerIndex < points.length; ++innerIndex) {
-            var start = points[index];
-            var end = points[innerIndex];
-
-            lines.push(new Phaser.Line(start.x, start.y, end.x, end.y));
-        }
-    }
-
-    return lines;
-};
-
 var state_running = function(game) {
     return {
         create: function(game) {
@@ -130,7 +51,7 @@ var state_running = function(game) {
             var offset = 0;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
-                movePolygonTo(obstacle, -100);
+                obstacle.movePolygonTo(-100);
                 obstacle.hasScored = true;
             }
             this.graphics = game.add.graphics(0, 0);
@@ -142,7 +63,7 @@ var state_running = function(game) {
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
-                movePolygonBy(obstacle, constants.hspeed);
+                obstacle.movePolygonBy(constants.hspeed);
 
                 if (intersects(obstacle, objects.runner)) {
                     // Game over
@@ -153,7 +74,7 @@ var state_running = function(game) {
                     this.scorePoint(obstacle);
                 }
 
-                if (findRightmostPoint(obstacle) < 0) {
+                if (obstacle.findRightmostPoint() < 0) {
                     this.moveObstacleToBack(obstacle);
                 }
             }
@@ -163,14 +84,14 @@ var state_running = function(game) {
             var obstacleIndex;
             var rightMostX = 0;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
-                rightMostX = Math.max(findRightmostPoint(objects.obstacles[obstacleIndex]), rightMostX);
+                rightMostX = Math.max(objects.obstacles[obstacleIndex].findRightmostPoint(), rightMostX);
             }
-            movePolygonTo(obstacle, Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2)));
+            obstacle.movePolygonTo(Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2)));
             obstacle.hasScored = false;
         },
 
         runnerHasPassedObstacle: function(obstacle) {
-            return !obstacle.hasScored && Math.round(findRightmostPoint(obstacle)) < objects.runner.x - 1;
+            return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < objects.runner.x - 1;
         },
 
         scorePoint: function(obstacle) {
