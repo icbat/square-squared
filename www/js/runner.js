@@ -1,12 +1,7 @@
-var runner = function(polygon, groundHeight) {
-    var runner = extendPolygon(polygon, colorPalette.runner);
+var runner = function(polygon, color) {
+    var runner = extendPolygon(polygon, color);
 
-    runner.onGroundY = groundHeight;
     runner.vspeed = 0;
-
-    runner.canJump = function() {
-        return this.findLowerLeftPoint().y === this.onGroundY;
-    };
 
     runner.applyGravity = function() {
         this.moveByY(this.vspeed);
@@ -14,21 +9,18 @@ var runner = function(polygon, groundHeight) {
         this.vspeed -= gravityStep;
 
         // On hitting ground
-        if (this.findLowerLeftPoint().y >= this.onGroundY) {
+        if (this.findLowerLeftPoint().y >= constants.groundHeight) {
             this.vspeed = 0;
-            this.moveToY(this.onGroundY - constants.tileSize);
+            this.moveToY(constants.groundHeight - constants.tileSize);
         }
+    };
+
+    runner.canJump = function() {
+        return this.findLowerLeftPoint().y === constants.groundHeight;
     };
 
     runner.jump = function() {
         this.vspeed = constants.jumpStrength;
-    };
-
-    runner.findUpperLeftPoint = function() {
-        return {
-            x: this.findLeftmostPoint(),
-            y: this.findHighestPoint()
-        };
     };
 
     runner.findLowerLeftPoint = function() {

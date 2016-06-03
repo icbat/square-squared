@@ -10,7 +10,7 @@ var state_running = function(game) {
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, constants.runnerOnGround + (constants.tileSize / 2), "0", textStyle);
+            objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, objects.runner.findHighestPoint() + (constants.tileSize / 2), "0", textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             var offset = 0;
@@ -35,7 +35,7 @@ var state_running = function(game) {
                     game.state.start('waiting');
                 }
 
-                if (this.runnerHasPassedObstacle(obstacle)) {
+                if (this.runnerHasPassedObstacle(obstacle, objects.runner)) {
                     this.scorePoint(obstacle);
                 }
 
@@ -55,8 +55,8 @@ var state_running = function(game) {
             obstacle.hasScored = false;
         },
 
-        runnerHasPassedObstacle: function(obstacle) {
-            return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < objects.runner.findUpperLeftPoint().x - 1;
+        runnerHasPassedObstacle: function(obstacle, runner) {
+            return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < runner.findLeftmostPoint() - 1;
         },
 
         scorePoint: function(obstacle) {
