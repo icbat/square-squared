@@ -16,7 +16,7 @@ var state_running = function(game) {
             var offset = 0;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
-                obstacle.movePolygonTo(-100);
+                obstacle.moveToX(-100);
                 obstacle.hasScored = true;
             }
             this.graphics = game.add.graphics(0, 0);
@@ -51,7 +51,7 @@ var state_running = function(game) {
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 rightMostX = Math.max(objects.obstacles[obstacleIndex].findRightmostPoint(), rightMostX);
             }
-            obstacle.movePolygonTo(Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2)));
+            obstacle.moveToX(Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2)));
             obstacle.hasScored = false;
         },
 

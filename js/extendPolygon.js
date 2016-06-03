@@ -12,7 +12,7 @@ var extendPolygon = function(polygonToExtend, color) {
         this.setTo(points);
     };
 
-    polygonToExtend.movePolygonTo = function(destinationX) {
+    polygonToExtend.moveToX = function(destinationX) {
         var points = this.toNumberArray();
         var index;
         var minX = this.findLeftmostPoint();
@@ -24,6 +24,32 @@ var extendPolygon = function(polygonToExtend, color) {
             }
         }
 
+        this.setTo(points);
+    };
+
+    polygonToExtend.moveToY = function(destinationY) {
+        var points = this.toNumberArray();
+        var index;
+        var minY = this.findHighestPoint();
+
+        for (index = 0; index < points.length; ++index) {
+            if (index % 2 === 1) {
+                // minY is necessary to adjust for the size of the this
+                points[index] += destinationY - minY;
+            }
+        }
+
+        this.setTo(points);
+    };
+
+    polygonToExtend.moveByY = function(amountY) {
+        var points = this.toNumberArray();
+        var index;
+        for (index = 0; index < points.length; ++index) {
+            if (index % 2 === 1) {
+                points[index] += amountY;
+            }
+        }
         this.setTo(points);
     };
 
@@ -54,6 +80,36 @@ var extendPolygon = function(polygonToExtend, color) {
             throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
         }
         return maxX;
+    };
+
+
+    polygonToExtend.findHighestPoint = function() {
+        var points = this.toNumberArray();
+        var minY = 99999;
+        for (index = 0; index < points.length; ++index) {
+            if (index % 2 === 1) {
+                minY = Math.min(points[index], minY);
+            }
+        }
+        if (minY == 99999) {
+            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+        }
+        return minY;
+    };
+
+    polygonToExtend.findLowestPoint = function() {
+        var points = this.toNumberArray();
+        var maxY = -99999;
+        var index;
+        for (index = 0; index < points.length; ++index) {
+            if (index % 2 === 1) {
+                maxY = Math.max(points[index], maxY);
+            }
+        }
+        if (maxY == -99999) {
+            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+        }
+        return maxY;
     };
 
     polygonToExtend.decompose = function() {

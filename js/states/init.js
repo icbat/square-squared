@@ -13,7 +13,7 @@ var state_init = function(game) {
                 new Phaser.Point(constants.tileSize, constants.groundHeight)
             );
             objects.runner = runner(runnerPolygon, constants.groundHeight);
-            objects.runner.movePolygonTo(game.world.centerX - constants.tileSize / 2);
+            objects.runner.moveToX(game.world.centerX - constants.tileSize / 2);
 
             var ground = new Phaser.Polygon(
                 // 0, constants.groundHeight, game.world.width, constants.tileSize
