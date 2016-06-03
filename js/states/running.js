@@ -108,9 +108,7 @@ var state_running = function(game) {
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
-                this.graphics.beginFill(obstacle.color);
-                this.graphics.drawShape(obstacle);
-                this.graphics.endFill();
+                obstacle.draw(this.graphics);
             }
         },
 

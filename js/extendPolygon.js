@@ -79,5 +79,12 @@ var extendPolygon = function(polygonToExtend, color) {
 
         return lines;
     };
+
+    polygonToExtend.draw = function(graphics) {
+      graphics.beginFill(this.color);
+      graphics.drawShape(this);
+      graphics.endFill();
+    };
+
     return polygonToExtend;
 };
