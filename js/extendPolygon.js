@@ -86,5 +86,20 @@ var extendPolygon = function(polygonToExtend, color) {
       graphics.endFill();
     };
 
+    polygonToExtend.intersects = function(other) {
+        var myLines = this.decompose();
+        var myIndex;
+        var theirLines = other.decompose();
+        var theirIndex;
+        for (myIndex = 0; myIndex < myLines.length; ++myIndex) {
+            for (theirIndex = 0; theirIndex < theirLines.length; ++theirIndex) {
+                if (myLines[myIndex].intersects(theirLines[theirIndex])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
     return polygonToExtend;
 };

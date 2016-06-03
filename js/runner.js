@@ -6,23 +6,38 @@ var runner = function(startingX, groundHeight) {
     runner.color = colorPalette.runner;
 
     runner.canJump = function() {
-        return this.y === this.onGroundY;
+        return this.findUpperLeftPoint().y === this.onGroundY;
     };
 
     runner.applyGravity = function() {
-        this.y += this.vspeed;
+        this.moveByY(this.vspeed);
         var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
         this.vspeed -= gravityStep;
 
         // On hitting ground
-        if (this.y >= this.onGroundY) {
+        if (this.findUpperLeftPoint().y >= this.onGroundY) {
             this.vspeed = 0;
-            this.y = this.onGroundY;
+            this.moveToY(this.onGroundY);
         }
     };
 
     runner.jump = function() {
         this.vspeed = constants.jumpStrength;
+    };
+
+    runner.findUpperLeftPoint = function() {
+      return {
+        x: this.x,
+        y: this.y
+      };
+    };
+
+    runner.moveToY = function(destinationY) {
+      this.y = destinationY;
+    };
+
+    runner.moveByY = function(impulse) {
+      this.y += impulse;
     };
 
     return runner;

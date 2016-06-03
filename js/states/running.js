@@ -91,7 +91,7 @@ var state_running = function(game) {
         },
 
         runnerHasPassedObstacle: function(obstacle) {
-            return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < objects.runner.x - 1;
+            return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < objects.runner.findUpperLeftPoint().x - 1;
         },
 
         scorePoint: function(obstacle) {
