@@ -14,10 +14,11 @@ var state_running = function(game) {
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             var offset = 0;
-            objects.obstacles.forEach(function(obstacle) {
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                var obstacle = objects.obstacles[obstacleIndex];
                 obstacle.moveToX(-100);
                 obstacle.hasScored = true;
-            });
+            }
             this.graphics = game.add.graphics(0, 0);
         },
 
@@ -25,7 +26,8 @@ var state_running = function(game) {
             objects.runner.applyGravity();
 
             var obstacleIndex;
-            objects.obstacles.forEach(function(obstacle) {
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                var obstacle = objects.obstacles[obstacleIndex];
                 obstacle.movePolygonBy(constants.hspeed);
 
                 if (objects.runner.intersects(obstacle)) {
@@ -40,16 +42,15 @@ var state_running = function(game) {
                 if (obstacle.findRightmostPoint() < 0) {
                     this.moveObstacleToBack(obstacle);
                 }
-            });
+            }
         },
 
         moveObstacleToBack: function(obstacle) {
             var obstacleIndex;
             var rightMostX = 0;
-            objects.obstacles.forEach(function(obstacle) {
-                rightMostX = Math.max(obstacle.findRightmostPoint(), rightMostX);
-            });
-
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                rightMostX = Math.max(objects.obstacles[obstacleIndex].findRightmostPoint(), rightMostX);
+            }
             obstacle.moveToX(Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2)));
             obstacle.hasScored = false;
         },
@@ -68,9 +69,10 @@ var state_running = function(game) {
             this.graphics.clear();
 
             var obstacleIndex;
-            objects.obstacles.forEach(function(obstacle) {
+            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
+                var obstacle = objects.obstacles[obstacleIndex];
                 obstacle.draw(this.graphics);
-            });
+            }
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
         },
