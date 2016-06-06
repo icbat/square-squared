@@ -11,3 +11,7 @@ build/
 plugins/
 platforms/
 hooks/
+
+# Ignore assets so they're not in source control
+# They have their own licensing issues
+assets/
