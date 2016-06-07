@@ -1,19 +1,20 @@
-var extendPolygon = function(polygonToExtend, color) {
-    polygonToExtend.color = color;
+function ExtendedPolygon(polygonToExtend, color) {
+    this.color = color;
+    this.polygon = polygonToExtend;
 
-    polygonToExtend.movePolygonBy = function(amountX) {
-        var points = this.toNumberArray();
+    this.movePolygonBy = function(amountX) {
+        var points = this.polygon.toNumberArray();
         var index;
         for (index = 0; index < points.length; ++index) {
             if (index % 2 === 0) {
                 points[index] += amountX;
             }
         }
-        this.setTo(points);
+        this.polygon.setTo(points);
     };
 
-    polygonToExtend.moveToX = function(destinationX) {
-        var points = this.toNumberArray();
+    this.moveToX = function(destinationX) {
+        var points = this.polygon.toNumberArray();
         var index;
         var minX = this.findLeftmostPoint();
 
@@ -24,11 +25,11 @@ var extendPolygon = function(polygonToExtend, color) {
             }
         }
 
-        this.setTo(points);
+        this.polygon.setTo(points);
     };
 
-    polygonToExtend.moveToY = function(destinationY) {
-        var points = this.toNumberArray();
+    this.moveToY = function(destinationY) {
+        var points = this.polygon.toNumberArray();
         var index;
         var minY = this.findHighestPoint();
 
@@ -39,22 +40,22 @@ var extendPolygon = function(polygonToExtend, color) {
             }
         }
 
-        this.setTo(points);
+        this.polygon.setTo(points);
     };
 
-    polygonToExtend.moveByY = function(amountY) {
-        var points = this.toNumberArray();
+    this.moveByY = function(amountY) {
+        var points = this.polygon.toNumberArray();
         var index;
         for (index = 0; index < points.length; ++index) {
             if (index % 2 === 1) {
                 points[index] += amountY;
             }
         }
-        this.setTo(points);
+        this.polygon.setTo(points);
     };
 
-    polygonToExtend.findLeftmostPoint = function() {
-        var points = this.toNumberArray();
+    this.findLeftmostPoint = function() {
+        var points = this.polygon.toNumberArray();
         var minX = 99999;
         for (index = 0; index < points.length; ++index) {
             if (index % 2 === 0) {
@@ -67,8 +68,8 @@ var extendPolygon = function(polygonToExtend, color) {
         return minX;
     };
 
-    polygonToExtend.findRightmostPoint = function() {
-        var points = this.toNumberArray();
+    this.findRightmostPoint = function() {
+        var points = this.polygon.toNumberArray();
         var maxX = -99999;
         var index;
         for (index = 0; index < points.length; ++index) {
@@ -83,8 +84,8 @@ var extendPolygon = function(polygonToExtend, color) {
     };
 
 
-    polygonToExtend.findHighestPoint = function() {
-        var points = this.toNumberArray();
+    this.findHighestPoint = function() {
+        var points = this.polygon.toNumberArray();
         var minY = 99999;
         for (index = 0; index < points.length; ++index) {
             if (index % 2 === 1) {
@@ -97,8 +98,8 @@ var extendPolygon = function(polygonToExtend, color) {
         return minY;
     };
 
-    polygonToExtend.findLowestPoint = function() {
-        var points = this.toNumberArray();
+    this.findLowestPoint = function() {
+        var points = this.polygon.toNumberArray();
         var maxY = -99999;
         var index;
         for (index = 0; index < points.length; ++index) {
@@ -112,8 +113,8 @@ var extendPolygon = function(polygonToExtend, color) {
         return maxY;
     };
 
-    polygonToExtend.decompose = function() {
-        var rawPoints = this.toNumberArray();
+    this.decompose = function() {
+        var rawPoints = this.polygon.toNumberArray();
         var index;
         var lines = [];
         var points = [];
@@ -136,13 +137,13 @@ var extendPolygon = function(polygonToExtend, color) {
         return lines;
     };
 
-    polygonToExtend.draw = function(graphics) {
+    this.draw = function(graphics) {
         graphics.beginFill(this.color);
-        graphics.drawShape(this);
+        graphics.drawShape(this.polygon);
         graphics.endFill();
     };
 
-    polygonToExtend.intersects = function(other) {
+    this.intersects = function(other) {
         var myLines = this.decompose();
         var myIndex;
         var theirLines = other.decompose();
@@ -156,6 +157,4 @@ var extendPolygon = function(polygonToExtend, color) {
         }
         return false;
     };
-
-    return polygonToExtend;
-};
+}

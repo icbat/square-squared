@@ -1,5 +1,5 @@
 var runner = function(polygon, color) {
-    var runner = extendPolygon(polygon, color);
+    var runner = new ExtendedPolygon(polygon, color);
 
     runner.vspeed = 0;
 
