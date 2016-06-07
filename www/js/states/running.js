@@ -38,18 +38,16 @@ var state_running = function(game) {
 
             }
             if (objects.obstacles[0].findRightmostPoint() < 0) {
-                console.log("Removing", objects.obstacles);
                 objects.obstacles.shift();
             }
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
-              this.addObstacleToBack();
-              console.log("adding", objects.obstacles);
+                this.addObstacleToBack();
             }
         },
         addObstacleToBack: function() {
             var obstacle = objects.getRandomObstacle();
             objects.obstacles.push(obstacle);
-            var newX = Math.max(game.world.width + (constants.minimumSpaceBetweenObstacles / 2));
+            var newX = Math.max(game.world.width + (constants.minimumSpaceBetweenObstacles / 1.5));
             newX += Math.random() * constants.tileSize;
             if (Math.random() < 0.3) {
                 newX += constants.minimumSpaceBetweenObstacles / 2;
@@ -81,9 +79,7 @@ var state_running = function(game) {
         },
 
         onDown: function(pointer, mouseEvent) {
-            if (mouseEvent.identifier === 0) {
-
-            }
+            if (mouseEvent.identifier === 0) {}
         },
 
         onUp: function(pointer, mouseEvent) {
