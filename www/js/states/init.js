@@ -23,36 +23,47 @@ var state_init = function(game) {
             objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
 
             // Acute triangle
-            var obstacleEasy = new Phaser.Polygon(
-                new Phaser.Point(0, constants.groundHeight),
-                new Phaser.Point(constants.tileSize, constants.groundHeight),
-                new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3))
-            );
+            var obstacleEasy = {
+                polygon: function() {
+                    return new Phaser.Polygon(
+                        new Phaser.Point(0, constants.groundHeight),
+                        new Phaser.Point(constants.tileSize, constants.groundHeight),
+                        new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3))
+                    );
+                },
+                color: colorPalette.obstacleEasy
+            };
 
             // Isosceles triangle
-            var obstacleMedium = new Phaser.Polygon(
-                new Phaser.Point(0, constants.groundHeight),
-                new Phaser.Point(constants.tileSize, constants.groundHeight),
-                new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize)
-            );
+            var obstacleMedium = {
+                polygon: function() {
+                    return new Phaser.Polygon(
+                        new Phaser.Point(0, constants.groundHeight),
+                        new Phaser.Point(constants.tileSize, constants.groundHeight),
+                        new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize)
+                    );
+                },
+                color: colorPalette.obstacleMedium
+            };
 
             // Square the size of the runner
-            var obstacleHard = new Phaser.Polygon(
-                new Phaser.Point(0, constants.groundHeight),
-                new Phaser.Point(0, constants.groundHeight - constants.tileSize),
-                new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize),
-                new Phaser.Point(constants.tileSize, constants.groundHeight)
-            );
+            var obstacleHard = {
+                polygon: function() {
+                    return new Phaser.Polygon(
+                        new Phaser.Point(0, constants.groundHeight),
+                        new Phaser.Point(0, constants.groundHeight - constants.tileSize),
+                        new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize),
+                        new Phaser.Point(constants.tileSize, constants.groundHeight)
+                    );
+                },
+                color: colorPalette.obstacleHard
+            };
 
-            objects.obstacles = [
-                new ExtendedPolygon(obstacleEasy, colorPalette.obstacleEasy),
-                new ExtendedPolygon(obstacleMedium, colorPalette.obstacleMedium),
-                new ExtendedPolygon(obstacleHard, colorPalette.obstacleHard)
-            ];
             objects.polygonPrototypes = [obstacleEasy, obstacleMedium, obstacleHard];
             objects.getRandomObstacle = function() {
-                var index = Math.floor(Math.random() * (this.obstacles.length + 1));
-                return this.obstacles[index];
+                var index = Math.floor(Math.random() * (this.polygonPrototypes.length));
+                var prototype = this.polygonPrototypes[index];
+                return new ExtendedPolygon(prototype.polygon(), prototype.color);
             };
         },
 

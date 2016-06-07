@@ -13,12 +13,8 @@ var state_running = function(game) {
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, objects.runner.findHighestPoint() + (constants.tileSize / 2), "0", textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
-            var offset = 0;
-            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
-                var obstacle = objects.obstacles[obstacleIndex];
-                obstacle.moveToX(-100);
-                obstacle.hasScored = true;
-            }
+            objects.obstacles = [];
+            this.addObstacleToBack();
             this.graphics = game.add.graphics(0, 0);
         },
 
@@ -39,22 +35,24 @@ var state_running = function(game) {
                     this.scorePoint(obstacle);
                 }
 
-                if (obstacle.findRightmostPoint() < 0) {
-                    this.moveObstacleToBack(obstacle);
-                }
+
+            }
+            if (objects.obstacles[0].findRightmostPoint() < 0) {
+                console.log("Removing", objects.obstacles);
+                objects.obstacles.shift();
+            }
+            if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
+              this.addObstacleToBack();
+              console.log("adding", objects.obstacles);
             }
         },
-
-        moveObstacleToBack: function(obstacle) {
-            var obstacleIndex;
-            var rightMostX = 0;
-            for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
-                rightMostX = Math.max(objects.obstacles[obstacleIndex].findRightmostPoint(), rightMostX);
-            }
-            var newX = Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2));
+        addObstacleToBack: function() {
+            var obstacle = objects.getRandomObstacle();
+            objects.obstacles.push(obstacle);
+            var newX = Math.max(game.world.width + (constants.minimumSpaceBetweenObstacles / 2));
             newX += Math.random() * constants.tileSize;
             if (Math.random() < 0.3) {
-              newX += constants.minimumSpaceBetweenObstacles / 2;
+                newX += constants.minimumSpaceBetweenObstacles / 2;
             }
             obstacle.moveToX(newX);
             obstacle.hasScored = false;
