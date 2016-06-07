@@ -51,7 +51,9 @@ var state_running = function(game) {
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 rightMostX = Math.max(objects.obstacles[obstacleIndex].findRightmostPoint(), rightMostX);
             }
-            obstacle.moveToX(Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2)));
+            var newX = Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2));
+            newX += Math.random() * constants.tileSize;
+            obstacle.moveToX(newX);
             obstacle.hasScored = false;
         },
 
