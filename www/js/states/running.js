@@ -53,6 +53,9 @@ var state_running = function(game) {
             }
             var newX = Math.max(rightMostX + constants.minimumSpaceBetweenObstacles, game.world.width + (constants.minimumSpaceBetweenObstacles / 2));
             newX += Math.random() * constants.tileSize;
+            if (Math.random() < 0.3) {
+              newX += constants.minimumSpaceBetweenObstacles / 2;
+            }
             obstacle.moveToX(newX);
             obstacle.hasScored = false;
         },
