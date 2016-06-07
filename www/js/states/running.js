@@ -86,9 +86,9 @@ var state_running = function(game) {
         onUp: function(pointer, mouseEvent) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
             if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
-              if (objects.runner.canJump()) {
-                  objects.runner.jump();
-              }
+                if (objects.runner.canJump()) {
+                    objects.runner.jump();
+                }
             }
         }
     };
