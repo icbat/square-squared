@@ -8,6 +8,7 @@
         Evan "icbat" Cobb
     </author>
     <content src="index.html"/>
+    <preference name="Fullscreen" value="true" />
     <platform name="android">
       <!--
             ldpi    : 36x36 px
