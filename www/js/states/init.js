@@ -49,6 +49,10 @@ var state_init = function(game) {
             extendPolygon(obstacleHard, colorPalette.obstacleHard);
 
             objects.obstacles = [obstacleEasy, obstacleMedium, obstacleHard];
+            objects.getRandomObstacle = function() {
+                var index = Math.floor(Math.random() * (this.obstacles.length + 1));
+                return this.obstacles[index];
+            };
         },
 
         create: function() {
