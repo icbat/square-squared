@@ -19,8 +19,10 @@ var runner = function(polygon, color) {
         return this.findLowerLeftPoint().y === constants.groundHeight;
     };
 
-    runner.jump = function(chargeLevel) {
-        chargeLevel = chargeLevel || 0;
+    runner.jump = function(dragY) {
+        dragY = dragY || 0;
+        var chargeLevel = 1;
+        updateDebugTextForJump(chargeLevel, dragY);
         this.vspeed = constants.jumpStrength * chargeLevel;
     };
 

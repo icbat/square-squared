@@ -95,10 +95,9 @@ var state_running = function(game) {
             if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
 
                 if (objects.runner.canJump()) {
-                    var chargeLevel = 1;
-                    updateDebugTextForJump(chargeLevel, this.firstTouchY - pointer.worldY);
+                    var dragY = this.firstTouchY - pointer.worldY;
                     this.firstTouchY = -1;
-                    objects.runner.jump(chargeLevel);
+                    objects.runner.jump(dragY);
                 }
             }
         }
