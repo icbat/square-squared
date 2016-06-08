@@ -2,6 +2,12 @@ var debugText = [];
 
 var enableDebugging = function(debugIsVisible) {
     // Remove potentially stale references
+    var i;
+    var text;
+    for (i = 0; i < debugText.length; ++i) {
+      text = debugText[i];
+      text.destroy();
+    }
     debugText = [];
 
     // Make them all
@@ -11,13 +17,12 @@ var enableDebugging = function(debugIsVisible) {
         boundsAlignH: "left",
         boundsAlignV: "top"
     };
-    
-    debugText.push(game.add.text(0, 0, "Height " + game.world.height, debugStyle));
+
+    debugText.push(game.add.text(0, 0, "world " + game.world.height + "h x " + game.world.width + "w", debugStyle));
 
     // Set visibility
-    var i;
     for (i = 0; i < debugText.length; ++i) {
-        var text = debugText[i];
+        text = debugText[i];
         text.visible = debugIsVisible;
     }
 };
