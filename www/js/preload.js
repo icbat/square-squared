@@ -1,6 +1,7 @@
 var game = new Phaser.Game("100", "100", Phaser.AUTO);
 
 var constants = {
+    debugMode: false,
     tileSize: 64,
     minimumSpaceBetweenObstacles: 64 * 4,
     gravityStepUp: -0.5,

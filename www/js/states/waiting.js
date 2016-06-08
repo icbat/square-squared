@@ -18,8 +18,13 @@ var state_waiting = function(game) {
             objects.ground.draw(this.graphics);
         },
 
-        startRunning: function() {
-            game.state.start('running');
+        startRunning: function(pointer, isDoubleTap) {
+            if (pointer.worldX < constants.tileSize && pointer.worldY < constants.tileSize) {
+                constants.debugMode = !constants.debugMode;
+                console.log("Debug mode", constants.debugMode);
+            } else {
+                game.state.start('running');
+            }
         }
     };
 };
