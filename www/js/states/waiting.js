@@ -11,19 +11,6 @@ var state_waiting = function(game) {
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
-
-
-            var debugStyle = {
-                fill: colorPalette.dark,
-                fontSize: 16,
-                boundsAlignH: "left",
-                boundsAlignV: "top"
-            };
-            debugText = [];
-            debugText.push(game.add.text(0, 0, "Height " + game.world.height, debugStyle));
-
-
-            debugging(constants.debugMode);
         },
 
         render: function() {
@@ -35,7 +22,7 @@ var state_waiting = function(game) {
             if (pointer.worldX < constants.tileSize && pointer.worldY < constants.tileSize) {
                 constants.debugMode = !constants.debugMode;
                 console.log("Debug mode", constants.debugMode);
-                debugging(constants.debugMode);
+                enableDebugging(constants.debugMode);
             } else {
                 game.state.start('running');
             }

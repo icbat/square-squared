@@ -1,13 +1,3 @@
-var debugText = [];
-var debugging = function(debugIsVisible) {
-  console.log("Should show", debugText.length, debugIsVisible);
-    var i;
-    for (i = 0; i < debugText.length; ++i) {
-        var text = debugText[i];
-        text.visible = debugIsVisible;
-    }
-};
-
 var state_init = function(game) {
     return {
         preload: function() {
@@ -76,18 +66,6 @@ var state_init = function(game) {
                 return new ExtendedPolygon(prototype.polygon(), prototype.color);
             };
 
-
-            var debugStyle = {
-                fill: colorPalette.text,
-                backgroundColor: colorPalette.dark,
-                boundsAlignH: "left",
-                boundsAlignV: "top"
-            };
-
-            debugText.push(game.add.text(0, 0, "Height " + game.world.height, debugStyle));
-
-
-            debugging(constants.debugMode);
         },
 
         create: function() {
