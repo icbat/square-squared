@@ -16,6 +16,7 @@ var state_running = function(game) {
             objects.obstacles = [];
             this.addObstacleToBack();
             this.graphics = game.add.graphics(0, 0);
+            enableDebugging(constants.debugMode);
         },
 
         update: function(game) {

@@ -11,6 +11,7 @@ var state_waiting = function(game) {
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
+            enableDebugging(constants.debugMode);
         },
 
         render: function() {
