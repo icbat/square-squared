@@ -12,6 +12,7 @@ var state_waiting = function(game) {
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
             enableDebugging(constants.debugMode);
+            updateDebugTextForRunner(objects.runner, constants.debugMode);
         },
 
         render: function() {

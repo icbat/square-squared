@@ -44,6 +44,7 @@ var state_running = function(game) {
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
                 this.addObstacleToBack();
             }
+            updateDebugTextForRunner(objects.runner, constants.debugMode);
         },
         addObstacleToBack: function() {
             var obstacle = objects.getRandomObstacle();
