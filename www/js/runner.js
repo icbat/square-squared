@@ -21,7 +21,13 @@ var runner = function(polygon, color) {
 
     runner.jump = function(dragY) {
         dragY = dragY || 0;
-        var chargeLevel = 1;
+        var chargeLevel;
+        if (dragY < 10) {
+            chargeLevel = 0;
+        } else {
+            chargeLevel = Math.floor(dragY / game.world.height * 100  / 33) + 1;
+            console.log(chargeLevel);
+        }
         updateDebugTextForJump(chargeLevel, dragY);
         this.vspeed = constants.jumpStrength * chargeLevel;
     };
