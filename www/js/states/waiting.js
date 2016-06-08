@@ -13,9 +13,6 @@ var state_waiting = function(game) {
             this.graphics = game.add.graphics(0, 0);
             enableDebugging(constants.debugMode);
             updateDebugTextForRunner(objects.runner, constants.debugMode);
-        },
-
-        render: function() {
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
         },
