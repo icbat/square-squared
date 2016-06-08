@@ -1,7 +1,8 @@
 var debugListeners = [];
 var debugText = [];
-var runnerText;
 var onTouchText;
+var runnerText;
+var jumpText;
 
 var enableDebugging = function(debugIsVisible) {
     // Remove potentially stale references
@@ -39,8 +40,12 @@ var enableDebugging = function(debugIsVisible) {
         }
     });
     debugText.push(game.add.text(0, 16, "world " + game.world.height + "h x " + game.world.width + "w", debugStyle));
-    runnerText = game.add.text(0, 32, "player height: " + (constants.groundHeight - objects.runner.findLowestPoint()), debugStyle);
+    runnerText = game.add.text(0, 32, "", debugStyle);
+    updateDebugTextForRunner(objects.runner, constants.debugMode);
     debugText.push(runnerText);
+    jumpText = game.add.text(0, 48, "", debugStyle);
+    updateDebugTextForJump(0, 0);
+    debugText.push(jumpText);
 
     // Set visibility
     for (i = 0; i < debugText.length; ++i) {
@@ -53,4 +58,10 @@ var updateDebugTextForRunner = function(runner, shouldUpdate) {
     if (shouldUpdate) {
         runnerText.text = "player height: " + (constants.groundHeight - runner.findLowestPoint());
     }
+};
+
+var updateDebugTextForJump = function(chargeLevel, drag) {
+  chargeLevel = chargeLevel || 0;
+  drag = drag || 0;
+  jumpText.text = "last jump: charge level " + chargeLevel + ", drag was " + drag + " (" + drag / game.world.height * 100 + "%)";
 };
