@@ -16,7 +16,7 @@ var runner = function(polygon, color) {
     };
 
     runner.canJump = function() {
-        return this.findLowerLeftPoint().y === constants.groundHeight;
+        return this.findLowerLeftPoint().y > constants.groundHeight - 1;
     };
 
     runner.jump = function(dragY) {
