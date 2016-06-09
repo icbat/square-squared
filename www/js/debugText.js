@@ -60,8 +60,8 @@ var updateDebugTextForRunner = function(runner, shouldUpdate) {
     }
 };
 
-var updateDebugTextForJump = function(chargeLevel, drag, vspeed) {
-  chargeLevel = chargeLevel || 0;
-  drag = drag || 0;
-  jumpText.text = "last jump: charge level " + chargeLevel + ", drag was " + drag + " (" + drag / game.world.height * 100 + "%) + vspeed" + vspeed;
+var updateDebugTextForJump = function(chargeLevel, chargeEffect, drag, percentOfScreenDragged, vspeed) {
+    chargeLevel = chargeLevel || 0;
+    drag = drag || 0;
+    jumpText.text = "last jump: charge level " + chargeLevel + " (" + chargeEffect + "), drag was " + drag + " (" + percentOfScreenDragged + "%) + vspeed" + vspeed;
 };

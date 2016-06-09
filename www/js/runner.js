@@ -21,16 +21,27 @@ var runner = function(polygon, color) {
 
     runner.jump = function(dragY) {
         dragY = dragY || 0;
-        var chargeLevel;
-        if (dragY < 10) {
-            chargeLevel = 0;
-            updateDebugTextForJump(chargeLevel, dragY, this.vspeed);
+        if (dragY > 10) {
+          var percentOfScreenDragged = Math.floor(dragY / game.world.height * 100);
+          var chargeLevel;
+          var chargeEffect;
+          if (percentOfScreenDragged < 20) {
+              chargeLevel = 1;
+              chargeEffect = 0.5;
+          } else if (percentOfScreenDragged < 50) {
+              chargeLevel = 2;
+              chargeEffect = 0.75;
+          } else {
+              chargeLevel = 3;
+              chargeEffect = 1;
+          }
+            this.vspeed = constants.jumpStrength * chargeEffect;
+            updateDebugTextForJump(chargeLevel, chargeEffect, dragY, percentOfScreenDragged, this.vspeed);
         } else {
-            chargeLevel = Math.floor(dragY / game.world.height * 100  / 33) + 1;
-            console.log(chargeLevel);
+          // Do nothing, swipe was not strong enough to count
             updateDebugTextForJump(0, dragY, this.vspeed);
         }
-        this.vspeed = constants.jumpStrength * chargeLevel;
+
     };
 
     runner.findLowerLeftPoint = function() {
