@@ -24,11 +24,12 @@ var runner = function(polygon, color) {
         var chargeLevel;
         if (dragY < 10) {
             chargeLevel = 0;
+            updateDebugTextForJump(chargeLevel, dragY, this.vspeed);
         } else {
             chargeLevel = Math.floor(dragY / game.world.height * 100  / 33) + 1;
             console.log(chargeLevel);
+            updateDebugTextForJump(0, dragY, this.vspeed);
         }
-        updateDebugTextForJump(chargeLevel, dragY);
         this.vspeed = constants.jumpStrength * chargeLevel;
     };
 
