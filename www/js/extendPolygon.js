@@ -65,7 +65,7 @@ function ExtendedPolygon(polygonToExtend, color) {
             }
         }
         if (minX == 99999) {
-            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug." + points;
         }
         return minX;
     };
@@ -80,7 +80,7 @@ function ExtendedPolygon(polygonToExtend, color) {
             }
         }
         if (maxX == -99999) {
-            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug." + points;
         }
         return maxX;
     };
@@ -95,7 +95,7 @@ function ExtendedPolygon(polygonToExtend, color) {
             }
         }
         if (minY == 99999) {
-            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug." + points;
         }
         return minY;
     };
@@ -110,7 +110,7 @@ function ExtendedPolygon(polygonToExtend, color) {
             }
         }
         if (maxY == -99999) {
-            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug.";
+            throw "Polygon was too far off the screen, unsure how you got here, but congratulations; file a bug." + points;
         }
         return maxY;
     };

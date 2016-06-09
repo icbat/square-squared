@@ -37,7 +37,6 @@ var state_running = function(game) {
                     this.scorePoint(obstacle);
                 }
 
-
             }
             if (objects.obstacles[0].findRightmostPoint() < 0) {
                 objects.obstacles.shift();
