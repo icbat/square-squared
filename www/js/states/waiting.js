@@ -7,7 +7,7 @@ var state_waiting = function(game) {
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            var text = game.add.text(game.world.centerX, game.world.centerY, "Swipe up to jump\nLonger swipe = higher jumps", textStyle);
+            var text = game.add.text(game.world.centerX, game.world.centerY, "(Placeholder instructions for Beta)\nSwipe up to jump\nLonger swipe = higher jumps", textStyle);
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
