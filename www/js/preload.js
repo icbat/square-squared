@@ -7,7 +7,7 @@ var constants = {
     gravityStepUp: -0.5,
     gravityStepDown: -0.08,
     hspeed: -2.5,
-    jumpStrength: -12
+    jumpStrength: -15
 };
 var objects = {};
 var colorPalette = {
