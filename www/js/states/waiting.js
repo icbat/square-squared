@@ -11,17 +11,18 @@ var state_waiting = function(game) {
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
-            enableDebugging(constants.debugMode);
-            updateDebugTextForRunner(objects.runner, constants.debugMode);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
         },
 
-        startRunning: function(pointer, isDoubleTap) {
+        render: function() {
+            drawDebugText(constants.debugMode);
+        },
+
+        startRunning: function(pointer) {
             if (pointer.worldX < constants.tileSize && pointer.worldY < constants.tileSize) {
                 constants.debugMode = !constants.debugMode;
-                console.log("Debug mode", constants.debugMode);
-                enableDebugging(constants.debugMode);
+                game.debug.reset();
             } else {
                 game.state.start('running');
             }

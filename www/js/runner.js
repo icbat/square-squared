@@ -21,6 +21,7 @@ var runner = function(polygon, color) {
 
     runner.jump = function(dragY) {
         dragY = dragY || 0;
+        // Small threshold to prevent Tap from doing anything. Should this be here?
         if (dragY > 10) {
           var percentOfScreenDragged = Math.floor(dragY / game.world.height * 100);
           var chargeLevel;
@@ -36,10 +37,13 @@ var runner = function(polygon, color) {
               chargeEffect = 1;
           }
             this.vspeed = constants.jumpStrength * chargeEffect;
-            updateDebugTextForJump(chargeLevel, chargeEffect, dragY, percentOfScreenDragged, this.vspeed);
-        } else {
-          // Do nothing, swipe was not strong enough to count
-            updateDebugTextForJump(0, dragY, this.vspeed);
+            lastJump = {
+              dragY: dragY,
+              percentOfScreenDragged: percentOfScreenDragged,
+              chargeLevel: chargeLevel,
+              chargeCoefficient: chargeEffect,
+              jumpStrength: this.vspeed,
+            };
         }
 
     };

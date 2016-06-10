@@ -17,7 +17,6 @@ var state_running = function(game) {
             this.addObstacleToBack();
             this.graphics = game.add.graphics(0, 0);
             this.firstTouchY = -1;
-            enableDebugging(constants.debugMode);
         },
 
         update: function(game) {
@@ -44,7 +43,6 @@ var state_running = function(game) {
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
                 this.addObstacleToBack();
             }
-            updateDebugTextForRunner(objects.runner, constants.debugMode);
 
         },
         addObstacleToBack: function() {
@@ -79,6 +77,7 @@ var state_running = function(game) {
             }
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
+            drawDebugText(constants.debugMode);
         },
 
         onDown: function(pointer, mouseEvent) {

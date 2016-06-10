@@ -11,6 +11,7 @@ var constants = {
 };
 var objects = {};
 var colorPalette = {
+    debugColor: 'rgb(0,0,0)',
     runner: 0x22cc77,
     light: '#ddd',
     middle: '#888',
