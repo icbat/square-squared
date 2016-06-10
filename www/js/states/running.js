@@ -17,6 +17,7 @@ var state_running = function(game) {
             this.addObstacleToBack();
             this.graphics = game.add.graphics(0, 0);
             this.firstTouchY = -1;
+            this.lastTouchY = -1;
         },
 
         update: function(game) {
@@ -42,6 +43,9 @@ var state_running = function(game) {
             }
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
                 this.addObstacleToBack();
+            }
+            if (this.firstTouchY !== -1) {
+                this.lastTouchY = game.input.activePointer.worldY;
             }
 
         },
@@ -94,10 +98,10 @@ var state_running = function(game) {
         onUp: function(pointer, mouseEvent) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
             if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
-
                 if (objects.runner.canJump()) {
                     var dragY = this.firstTouchY - pointer.worldY;
                     this.firstTouchY = -1;
+                    this.lastTouchY = -1;
                     objects.runner.jump(dragY);
                 }
             }
