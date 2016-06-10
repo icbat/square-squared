@@ -11,7 +11,7 @@ var runner = function(polygon, color) {
         // On hitting ground
         if (this.findLowerLeftPoint().y >= constants.groundHeight) {
             this.vspeed = 0;
-            this.moveToY(constants.groundHeight - constants.tileSize);
+            this.moveToY(constants.groundHeight - constants.runnerSize);
         }
     };
 

@@ -10,7 +10,7 @@ var state_running = function(game) {
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            objects.scoreDisplay = game.add.text(game.world.centerX - constants.tileSize, objects.runner.findHighestPoint() + (constants.tileSize / 2), "0", textStyle);
+            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, objects.runner.findHighestPoint() + (constants.runnerSize / 2), "0", textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             objects.obstacles = [];
@@ -54,10 +54,10 @@ var state_running = function(game) {
             objects.obstacles.push(obstacle);
             var newX = Math.max(game.world.width + obstacle.minimumSpaceBehind);
 
-            newX += Math.random() * constants.tileSize;
+            newX += Math.random() * constants.runnerSize;
             if (Math.random() < 0.3) {
                 // Randomly add a big-ish gap
-                newX += constants.tileSize * 2;
+                newX += constants.runnerSize * 2;
             }
 
             obstacle.moveToX(newX);

@@ -20,7 +20,7 @@ var state_waiting = function(game) {
         },
 
         startRunning: function(pointer) {
-            if (pointer.worldX < constants.tileSize && pointer.worldY < constants.tileSize) {
+            if (pointer.worldX < constants.runnerSize && pointer.worldY < constants.runnerSize) {
                 constants.debugMode = !constants.debugMode;
                 game.debug.reset();
             } else {

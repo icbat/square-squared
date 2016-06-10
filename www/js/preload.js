@@ -2,7 +2,7 @@ var game = new Phaser.Game("100", "100", Phaser.AUTO);
 
 var constants = {
     debugMode: false,
-    tileSize: 64,
+    runnerSize: 64,
     gravityStepUp: -0.5,
     gravityStepDown: -0.08,
     hspeed: -2.5,

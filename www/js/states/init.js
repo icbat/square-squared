@@ -3,21 +3,21 @@ var state_init = function(game) {
         preload: function() {
             game.stage.backgroundColor = colorPalette.light;
 
-            constants.groundHeight = game.world.height - constants.tileSize;
+            constants.groundHeight = game.world.height - constants.runnerSize;
 
             var runnerPolygon = new Phaser.Polygon(
                 new Phaser.Point(0, constants.groundHeight),
-                new Phaser.Point(0, constants.groundHeight - constants.tileSize),
-                new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize),
-                new Phaser.Point(constants.tileSize, constants.groundHeight)
+                new Phaser.Point(0, constants.groundHeight - constants.runnerSize),
+                new Phaser.Point(constants.runnerSize, constants.groundHeight - constants.runnerSize),
+                new Phaser.Point(constants.runnerSize, constants.groundHeight)
             );
             objects.runner = runner(runnerPolygon, colorPalette.runner, constants.groundHeight);
-            objects.runner.moveToX(game.world.centerX - constants.tileSize / 2);
+            objects.runner.moveToX(game.world.centerX - constants.runnerSize / 2);
 
             var ground = new Phaser.Polygon(
                 new Phaser.Point(0, game.world.height),
-                new Phaser.Point(0, game.world.height - constants.tileSize),
-                new Phaser.Point(game.world.width, game.world.height - constants.tileSize),
+                new Phaser.Point(0, game.world.height - constants.runnerSize),
+                new Phaser.Point(game.world.width, game.world.height - constants.runnerSize),
                 new Phaser.Point(game.world.width, game.world.height)
             );
             objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
@@ -26,8 +26,8 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize / 4, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize / 8, constants.groundHeight - constants.tileSize / 4)
+                        new Phaser.Point(constants.runnerSize / 4, constants.groundHeight),
+                        new Phaser.Point(constants.runnerSize / 8, constants.groundHeight - constants.runnerSize / 4)
                     );
                 },
                 minimumSpaceBehind: 125,
@@ -38,9 +38,9 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(0, constants.groundHeight - constants.tileSize / 4),
-                        new Phaser.Point(constants.tileSize / 5, constants.groundHeight - constants.tileSize / 4),
-                        new Phaser.Point(constants.tileSize / 5, constants.groundHeight)
+                        new Phaser.Point(0, constants.groundHeight - constants.runnerSize / 4),
+                        new Phaser.Point(constants.runnerSize / 5, constants.groundHeight - constants.runnerSize / 4),
+                        new Phaser.Point(constants.runnerSize / 5, constants.groundHeight)
                     );
                 },
                 minimumSpaceBehind: 130,
@@ -52,8 +52,8 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3))
+                        new Phaser.Point(constants.runnerSize, constants.groundHeight),
+                        new Phaser.Point(constants.runnerSize, constants.groundHeight - constants.runnerSize * (2 / 3))
                     );
                 },
                 minimumSpaceBehind: 150,
@@ -64,8 +64,8 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize)
+                        new Phaser.Point(constants.runnerSize, constants.groundHeight),
+                        new Phaser.Point(constants.runnerSize / 2, constants.groundHeight - constants.runnerSize)
                     );
                 },
                 minimumSpaceBehind: 150,
@@ -76,9 +76,9 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(0, constants.groundHeight - constants.tileSize),
-                        new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize),
-                        new Phaser.Point(constants.tileSize, constants.groundHeight)
+                        new Phaser.Point(0, constants.groundHeight - constants.runnerSize),
+                        new Phaser.Point(constants.runnerSize, constants.groundHeight - constants.runnerSize),
+                        new Phaser.Point(constants.runnerSize, constants.groundHeight)
                     );
                 },
                 minimumSpaceBehind: 200,
@@ -89,9 +89,9 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(0, constants.groundHeight - constants.tileSize * 2.5),
-                        new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize * 2.5),
-                        new Phaser.Point(constants.tileSize / 2, constants.groundHeight)
+                        new Phaser.Point(0, constants.groundHeight - constants.runnerSize * 2.5),
+                        new Phaser.Point(constants.runnerSize / 2, constants.groundHeight - constants.runnerSize * 2.5),
+                        new Phaser.Point(constants.runnerSize / 2, constants.groundHeight)
                     );
                 },
                 minimumSpaceBehind: 255,
