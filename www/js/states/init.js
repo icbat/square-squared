@@ -22,6 +22,13 @@ var state_init = function(game) {
             );
             objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
 
+            objects.chargeBar = new ExtendedPolygon(new Phaser.Polygon(
+              new Phaser.Point(0, 0),
+              new Phaser.Point(0, constants.runnerSize / 2 ),
+              new Phaser.Point(game.world.width, constants.runnerSize / 2),
+              new Phaser.Point(game.world.width, 0)
+            ), colorPalette.outline);
+
             var lowIsoscelesTriangle = {
                 polygon: function() {
                     return new Phaser.Polygon(

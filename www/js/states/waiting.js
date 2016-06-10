@@ -11,12 +11,14 @@ var state_waiting = function(game) {
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
+            objects.chargeBar.draw(this.graphics);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
         },
 
         render: function() {
             drawDebugText(constants.debugMode);
+            game.debug.geom(objects.chargeBarOutline, "#f00");
         },
 
         startRunning: function(pointer) {

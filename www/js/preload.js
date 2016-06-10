@@ -12,6 +12,7 @@ var objects = {};
 var colorPalette = {
     debugColor: 'rgb(0,0,0)',
     runner: 0x22cc77,
+    outline: 0x000000,
     light: '#ddd',
     middle: '#888',
     ground: 0x333333,
