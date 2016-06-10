@@ -27,7 +27,7 @@ var state_init = function(game) {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
                         new Phaser.Point(constants.tileSize / 4, constants.groundHeight),
-                        new Phaser.Point(constants.tileSize/ 8, constants.groundHeight - constants.tileSize / 4)
+                        new Phaser.Point(constants.tileSize / 8, constants.groundHeight - constants.tileSize / 4)
                     );
                 },
                 minimumSpaceBehind: 125,
@@ -37,10 +37,10 @@ var state_init = function(game) {
             var lowRectangle = {
                 polygon: function() {
                     return new Phaser.Polygon(
-                      new Phaser.Point(0, constants.groundHeight),
-                      new Phaser.Point(0, constants.groundHeight - constants.tileSize / 4),
-                      new Phaser.Point(constants.tileSize / 5, constants.groundHeight - constants.tileSize / 4),
-                      new Phaser.Point(constants.tileSize / 5, constants.groundHeight)
+                        new Phaser.Point(0, constants.groundHeight),
+                        new Phaser.Point(0, constants.groundHeight - constants.tileSize / 4),
+                        new Phaser.Point(constants.tileSize / 5, constants.groundHeight - constants.tileSize / 4),
+                        new Phaser.Point(constants.tileSize / 5, constants.groundHeight)
                     );
                 },
                 minimumSpaceBehind: 130,
@@ -90,7 +90,7 @@ var state_init = function(game) {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
                         new Phaser.Point(0, constants.groundHeight - constants.tileSize * 2.5),
-                        new Phaser.Point(constants.tileSize / 2 , constants.groundHeight - constants.tileSize * 2.5),
+                        new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize * 2.5),
                         new Phaser.Point(constants.tileSize / 2, constants.groundHeight)
                     );
                 },
