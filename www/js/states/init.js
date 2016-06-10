@@ -99,7 +99,7 @@ var state_init = function(game) {
             };
 
             objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumAcuteTriangle, mediumIsoscelesTriangle, bigSquareLikeRunner, bigWallRectangle];
-            objects.getRandomObstacle = function() {
+            objects.makeRandomObstacle = function() {
                 var index = Math.floor(Math.random() * (this.polygonPrototypes.length));
                 var prototype = this.polygonPrototypes[index];
                 return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind);

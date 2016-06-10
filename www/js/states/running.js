@@ -50,7 +50,7 @@ var state_running = function(game) {
 
         },
         addObstacleToBack: function() {
-            var obstacle = objects.getRandomObstacle();
+            var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
             var newX = Math.max(game.world.width + obstacle.minimumSpaceBehind);
 
