@@ -85,7 +85,20 @@ var state_init = function(game) {
                 color: colorPalette.obstacleBig
             };
 
-            objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumAcuteTriangle, mediumIsoscelesTriangle, bigSquareLikeRunner];
+            var bigWallRectangle = {
+                polygon: function() {
+                    return new Phaser.Polygon(
+                        new Phaser.Point(0, constants.groundHeight),
+                        new Phaser.Point(0, constants.groundHeight - constants.tileSize * 2.5),
+                        new Phaser.Point(constants.tileSize / 2 , constants.groundHeight - constants.tileSize * 2.5),
+                        new Phaser.Point(constants.tileSize / 2, constants.groundHeight)
+                    );
+                },
+                minimumSpaceBehind: 255,
+                color: colorPalette.obstacleBig
+            };
+
+            objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumAcuteTriangle, mediumIsoscelesTriangle, bigSquareLikeRunner, bigWallRectangle];
             objects.getRandomObstacle = function() {
                 var index = Math.floor(Math.random() * (this.polygonPrototypes.length));
                 var prototype = this.polygonPrototypes[index];
