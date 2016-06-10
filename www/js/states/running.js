@@ -49,11 +49,13 @@ var state_running = function(game) {
             var obstacle = objects.getRandomObstacle();
             objects.obstacles.push(obstacle);
             var newX = Math.max(game.world.width + obstacle.minimumSpaceBehind);
+
             newX += Math.random() * constants.tileSize;
             if (Math.random() < 0.3) {
                 // Randomly add a big-ish gap
                 newX += constants.tileSize * 2;
             }
+
             obstacle.moveToX(newX);
             obstacle.hasScored = false;
         },
