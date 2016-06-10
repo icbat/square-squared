@@ -17,7 +17,7 @@ var colorPalette = {
     ground: 0x333333,
     textShadow: '#333',
     text: '#39d',
-    obstacleHard: 0xcc3322,
+    obstacleBig: 0xcc3322,
     obstacleMedium: 0xee7722,
-    obstacleEasy: 0x8844aa
+    obstacleLow: 0x8844aa
 };
