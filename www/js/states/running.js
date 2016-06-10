@@ -3,7 +3,7 @@ var state_running = function(game) {
         create: function(game) {
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
-            game.score = 0;
+            this.score = 0;
 
             var textStyle = {
                 fill: colorPalette.text,
@@ -65,8 +65,8 @@ var state_running = function(game) {
         },
 
         scorePoint: function(obstacle) {
-            ++game.score;
-            objects.scoreDisplay.text = (game.score);
+            ++this.score;
+            objects.scoreDisplay.text = (this.score);
             obstacle.hasScored = true;
         },
 
