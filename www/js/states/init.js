@@ -27,7 +27,7 @@ var state_init = function(game) {
               new Phaser.Point(0, constants.runnerSize / 2 ),
               new Phaser.Point(game.world.width, constants.runnerSize / 2),
               new Phaser.Point(game.world.width, 0)
-            ), colorPalette.outline);
+            ), colorPalette.ground);
 
             var lowIsoscelesTriangle = {
                 polygon: function() {
