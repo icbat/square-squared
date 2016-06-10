@@ -28,6 +28,10 @@ var state_init = function(game) {
               new Phaser.Point(game.world.width, constants.runnerSize / 2),
               new Phaser.Point(game.world.width, 0)
             ), colorPalette.ground);
+            objects.chargeBar.moveToX(-game.world.width);
+            objects.chargeBar.update = function(percentY){
+                objects.chargeBar.moveToX(fromPercent(percentY, game.world.width) -game.world.width);
+            };
 
             var lowIsoscelesTriangle = {
                 polygon: function() {

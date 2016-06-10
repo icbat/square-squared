@@ -46,6 +46,9 @@ var state_running = function(game) {
             }
             if (this.firstTouchY !== -1) {
                 this.dragY = this.firstTouchY - game.input.activePointer.worldY;
+                objects.chargeBar.update(percentOf(this.dragY, game.world.height));
+            } else {
+                objects.chargeBar.update(0);
             }
 
         },
