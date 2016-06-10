@@ -49,6 +49,7 @@ var state_running = function(game) {
             }
 
         },
+
         addObstacleToBack: function() {
             var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
