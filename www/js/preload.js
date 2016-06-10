@@ -6,7 +6,12 @@ var constants = {
     gravityStepUp: -0.5,
     gravityStepDown: -0.08,
     hspeed: -2.5,
-    jumpStrength: -15
+    jumpStrength: -15,
+    chargeLevelReq_one: 1,
+    chargeLevelReq_two: 20,
+    chargeLevelReq_three: 50,
+    chargeEffects: [0, 0.5, 0.75, 1]
+
 };
 var objects = {};
 var colorPalette = {
@@ -23,9 +28,23 @@ var colorPalette = {
 };
 
 var percentOf = function(amount, total) {
-  return Math.floor(amount / total * 100);
+    return Math.floor(amount / total * 100);
 };
 
 var fromPercent = function(percent, total) {
-  return Math.floor(percent / 100 * total);
+    return Math.floor(percent / 100 * total);
+};
+
+var chargeLevel = function(percent) {
+    var chargeLevel;
+    if (percent < constants.chargeLevelReq_one) {
+        chargeLevel = 0;
+    } else if (percent < constants.chargeLevelReq_two) {
+        chargeLevel = 1;
+    } else if (percent < constants.chargeLevelReq_three) {
+        chargeLevel = 2;
+    } else {
+        chargeLevel = 3;
+    }
+    return chargeLevel;
 };
