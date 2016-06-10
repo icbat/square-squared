@@ -8,7 +8,8 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-zip": "^3.2.0"
+    "gulp-zip": "^3.2.0",
+    "karma": "^0.13.22"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
