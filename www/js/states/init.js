@@ -22,8 +22,7 @@ var state_init = function(game) {
             );
             objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
 
-            // Acute triangle
-            var obstacleEasy = {
+            var mediumAcuteTriangle = {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
@@ -35,8 +34,7 @@ var state_init = function(game) {
                 color: colorPalette.obstacleEasy
             };
 
-            // Isosceles triangle
-            var obstacleMedium = {
+            var mediumIsoscelesTriangle = {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
@@ -48,8 +46,7 @@ var state_init = function(game) {
                 color: colorPalette.obstacleMedium
             };
 
-            // Square the size of the runner
-            var obstacleHard = {
+            var hardSquareLikeRunner = {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
@@ -62,7 +59,7 @@ var state_init = function(game) {
                 color: colorPalette.obstacleHard
             };
 
-            objects.polygonPrototypes = [obstacleEasy, obstacleMedium, obstacleHard];
+            objects.polygonPrototypes = [mediumAcuteTriangle, mediumIsoscelesTriangle, hardSquareLikeRunner];
             objects.getRandomObstacle = function() {
                 var index = Math.floor(Math.random() * (this.polygonPrototypes.length));
                 var prototype = this.polygonPrototypes[index];
