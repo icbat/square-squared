@@ -30,6 +30,8 @@ var state_init = function(game) {
             ), colorPalette.ground);
             objects.chargeBar.moveToX(-game.world.width);
             objects.chargeBar.update = function(percentY){
+                var level = chargeLevel(percentY);
+                this.color = constants.chargeColors[level];
                 objects.chargeBar.moveToX(fromPercent(percentY, game.world.width) -game.world.width);
             };
 

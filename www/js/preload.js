@@ -1,18 +1,5 @@
 var game = new Phaser.Game("100", "100", Phaser.AUTO);
 
-var constants = {
-    debugMode: false,
-    runnerSize: 64,
-    gravityStepUp: -0.5,
-    gravityStepDown: -0.08,
-    hspeed: -2.5,
-    jumpStrength: -15,
-    chargeLevelReq_one: 1,
-    chargeLevelReq_two: 20,
-    chargeLevelReq_three: 50,
-    chargeEffects: [0, 0.5, 0.75, 1]
-
-};
 var objects = {};
 var colorPalette = {
     debugColor: 'rgb(0,0,0)',
@@ -25,6 +12,21 @@ var colorPalette = {
     obstacleBig: 0xcc3322,
     obstacleMedium: 0xee7722,
     obstacleLow: 0x8844aa
+};
+
+var constants = {
+    debugMode: false,
+    runnerSize: 64,
+    gravityStepUp: -0.5,
+    gravityStepDown: -0.08,
+    hspeed: -2.5,
+    jumpStrength: -15,
+    chargeLevelReq_one: 1,
+    chargeLevelReq_two: 20,
+    chargeLevelReq_three: 50,
+    chargeEffects: [0, 0.5, 0.75, 1],
+    chargeColors: [colorPalette.ground, colorPalette.obstacleLow, colorPalette.obstacleMedium, colorPalette.obstacleBig]
+
 };
 
 var percentOf = function(amount, total) {
