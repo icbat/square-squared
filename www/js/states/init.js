@@ -31,6 +31,7 @@ var state_init = function(game) {
                         new Phaser.Point(constants.tileSize, constants.groundHeight - constants.tileSize * (2 / 3))
                     );
                 },
+                minimumSpaceBehind: 150,
                 color: colorPalette.obstacleEasy
             };
 
@@ -43,6 +44,7 @@ var state_init = function(game) {
                         new Phaser.Point(constants.tileSize / 2, constants.groundHeight - constants.tileSize)
                     );
                 },
+                minimumSpaceBehind: 150,
                 color: colorPalette.obstacleMedium
             };
 
@@ -56,6 +58,7 @@ var state_init = function(game) {
                         new Phaser.Point(constants.tileSize, constants.groundHeight)
                     );
                 },
+                minimumSpaceBehind: 200,
                 color: colorPalette.obstacleHard
             };
 
@@ -63,7 +66,7 @@ var state_init = function(game) {
             objects.getRandomObstacle = function() {
                 var index = Math.floor(Math.random() * (this.polygonPrototypes.length));
                 var prototype = this.polygonPrototypes[index];
-                return new ExtendedPolygon(prototype.polygon(), prototype.color);
+                return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind);
             };
 
         },
