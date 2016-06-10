@@ -23,7 +23,7 @@ var runner = function(polygon, color) {
         dragY = dragY || 0;
         // Small threshold to prevent Tap from doing anything. Should this be here?
         if (dragY > 10) {
-            var percentOfScreenDragged = percentOfScreenHeight(dragY);
+            var percentOfScreenDragged = percentOf(dragY, game.world.height);
             var chargeLevel;
             var chargeEffect;
             if (percentOfScreenDragged < 20) {

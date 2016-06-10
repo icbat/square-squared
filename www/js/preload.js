@@ -23,6 +23,6 @@ var colorPalette = {
     obstacleLow: 0x8844aa
 };
 
-var percentOfScreenHeight = function(amount) {
-  return Math.floor(amount / game.world.height * 100);
+var percentOf = function(amount, total) {
+  return Math.floor(amount / total * 100);
 };
