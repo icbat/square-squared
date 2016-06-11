@@ -39,7 +39,6 @@ function ExtendedPolygon(polygonToExtend, color) {
                 // minY is necessary to adjust for the size of the this
                 points[index] += destinationY - minY;
             }
-            points[index] = Math.floor(points[index]);
         }
 
         this.polygon.setTo(points);
