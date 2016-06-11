@@ -29,6 +29,32 @@ function ExtendedPolygon(polygonToExtend, color) {
         this.polygon.setTo(points);
     };
 
+    this.setLowerLeftTo = function(x, y) {
+        var points = this.polygon.toNumberArray();
+        console.log("before", points);
+        var lowerLeftPoint = {
+            x: this.findLeftmostPoint(),
+            y: this.findLowestPoint()
+        };
+
+        var magnitudeParts = {
+          x: x - lowerLeftPoint.x,
+          y: y - lowerLeftPoint.y
+        };
+
+
+        var index;
+        for (index = 0; index < points.length; ++index) {
+          if (index % 2 === 0) {
+            points[index] += magnitudeParts.x;
+          } else {
+            points[index] += magnitudeParts.y;
+          }
+        }
+        console.log(points);
+        this.polygon.setTo(points);
+    };
+
     this.moveToY = function(destinationY) {
         var points = this.polygon.toNumberArray();
         var index;
