@@ -1,3 +1,4 @@
+var game;
 describe("The runner", function() {
     var testObject;
     var badHeight = 413;
@@ -67,14 +68,83 @@ describe("The runner", function() {
         });
 
         it("should move the runner by their current speed when possible", function() {
-          var initialHeight = constants.groundHeight - 1000;
-          testObject.moveToY(constants.groundHeight - constants.runnerSize - 1000);
-          var initialSpeed = 0.1;
-          testObject.vspeed = initialSpeed;
+            var initialHeight = constants.groundHeight - 1000;
+            testObject.moveToY(initialHeight - constants.runnerSize);
+            var initialSpeed = 0.1;
+            testObject.vspeed = initialSpeed;
 
-          testObject.applyGravity();
+            testObject.applyGravity();
 
-          expect(testObject.findLowestPoint()).toEqual(initialHeight + initialSpeed);
+            expect(testObject.findLowestPoint()).toEqual(initialHeight + initialSpeed);
+        });
+    });
+
+    describe("jump", function() {
+
+        function expectEventualHitsTheGround(runner) {
+            var iteration = 0;
+            do {
+                runner.applyGravity();
+                iteration++;
+                if (iteration > 1000) {
+                    throw "after 1000 updates, runner ended at " + runner.findLowestPoint() + " not " + constants.groundHeight + " moving at speed " + runner.vspeed;
+                }
+            } while (runner.findLowestPoint() != constants.groundHeight);
+        }
+
+        it("shouldn't mess up when the chargeLevel is max", function() {
+            var initialHeight = constants.groundHeight;
+            testObject.moveToY(initialHeight - constants.runnerSize);
+            testObject.vspeed = 0;
+            game = {
+                world: {
+                    height: 600
+                }
+            };
+
+            testObject.jump(300);
+
+            expectEventualHitsTheGround(testObject);
+        });
+
+        it("shouldn't mess up when the chargeLevel is 2", function() {
+            var initialHeight = constants.groundHeight;
+            testObject.moveToY(initialHeight - constants.runnerSize);
+            testObject.vspeed = 0;
+            game = {
+                world: {
+                    height: 600
+                }
+            };
+
+            testObject.jump(299);
+
+            expectEventualHitsTheGround(testObject);
+        });
+
+        it("shouldn't mess up when the chargeLevel is 1", function() {
+            var initialHeight = constants.groundHeight;
+            testObject.moveToY(initialHeight - constants.runnerSize);
+            testObject.vspeed = 0;
+            game = {
+                world: {
+                    height: 600
+                }
+            };
+
+            testObject.jump(100);
+
+            expectEventualHitsTheGround(testObject);
+        });
+
+        it("shouldn't jump at all when the chargeLevel is 0", function() {
+            var initialHeight = constants.groundHeight;
+            testObject.moveToY(initialHeight - constants.runnerSize);
+            testObject.vspeed = 0;
+
+            testObject.jump(1);
+
+            expect(testObject.vspeed).toBe(0);
         });
     });
 
