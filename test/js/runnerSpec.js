@@ -119,7 +119,7 @@ describe("The runner", function() {
     describe("updateForDraw", function() {
         it("should set to charge level color  if not jumping and charge not 0", function() {
             expect(testObject.color).toEqual(colorPalette.runner);
-            expect(testObject.canJump()).toBe(true);
+            expect(testObject.onGround()).toBe(true);
             var chargeLevel;
             for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
                 testObject.updateBeforeDraw(chargeLevel);
@@ -130,7 +130,7 @@ describe("The runner", function() {
 
         it("should reset to runner base color if not jumping and no charge", function() {
             expect(testObject.color).toEqual(colorPalette.runner);
-            expect(testObject.canJump()).toBe(true);
+            expect(testObject.onGround()).toBe(true);
 
             testObject.updateBeforeDraw(0);
 

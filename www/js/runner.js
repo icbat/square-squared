@@ -23,7 +23,7 @@ var runner = function(polygon, color) {
         }
     };
 
-    runner.canJump = function() {
+    runner.onGround = function() {
         return this.findLowerLeftPoint().y > constants.groundHeight - 1;
     };
 
