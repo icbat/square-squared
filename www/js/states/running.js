@@ -45,7 +45,6 @@ var state_running = function(game) {
                 this.addObstacleToBack();
             }
             this.dragY = this.firstTouchY - game.input.activePointer.worldY;
-            objects.chargeBar.update(percentOf(this.dragY, game.world.height));
             var percent = percentOf(this.dragY, game.world.height);
             var charge = chargeLevel(percent);
             objects.runner.updateForDraw(charge);
@@ -92,7 +91,6 @@ var state_running = function(game) {
             }
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
-            objects.chargeBar.draw(this.graphics);
             drawDebugText(constants.debugMode);
         },
 

@@ -21,7 +21,6 @@ var state_waiting = function(game) {
 
         render: function() {
             this.graphics.clear();
-            objects.chargeBar.draw(this.graphics);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
@@ -30,7 +29,6 @@ var state_waiting = function(game) {
         update: function() {
             objects.runner.applyGravity();
             this.dragY = this.firstTouchY - game.input.activePointer.worldY;
-            objects.chargeBar.update(percentOf(this.dragY, game.world.height));
             var percent = percentOf(this.dragY, game.world.height);
             var charge = chargeLevel(percent);
             objects.runner.updateForDraw(charge);
