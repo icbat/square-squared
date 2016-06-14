@@ -1,13 +1,18 @@
 var state_waiting = function(game) {
     return {
         create: function(game) {
-            game.input.onTap.add(this.startRunning, this);
+            this.firstTouchY = -1;
+            this.dragY = -1;
+
+            game.input.onDown.add(this.onDown, this);
+            game.input.onUp.add(this.onUp, this);
+
             var textStyle = {
                 fill: colorPalette.text,
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            var text = game.add.text(game.world.centerX, game.world.centerY, "(Placeholder instructions for Beta)\nSwipe up to jump\nLonger swipe = higher jumps", textStyle);
+            var text = game.add.text(game.world.centerX, game.world.centerY, "(Placeholder)\nSwipe to Charge jump to \nMAX level", textStyle);
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
@@ -17,16 +22,42 @@ var state_waiting = function(game) {
         },
 
         render: function() {
+            objects.chargeBar.draw(this.graphics);
             drawDebugText(constants.debugMode);
-            game.debug.geom(objects.chargeBarOutline, "#f00");
         },
 
-        startRunning: function(pointer) {
-            if (pointer.worldX < constants.runnerSize && pointer.worldY < constants.runnerSize) {
-                constants.debugMode = !constants.debugMode;
-                game.debug.reset();
+        update: function() {
+            if (this.firstTouchY !== -1) {
+                this.dragY = this.firstTouchY - game.input.activePointer.worldY;
+                objects.chargeBar.update(percentOf(this.dragY, game.world.height));
             } else {
-                game.state.start('running');
+                objects.chargeBar.update(0);
+            }
+        },
+
+        onDown: function(pointer, mouseEvent) {
+            if (mouseEvent.identifier === 0) {
+                if (this.firstTouchY === -1) {
+                    if (pointer.worldX < constants.runnerSize && pointer.worldY < constants.runnerSize) {
+                        constants.debugMode = !constants.debugMode;
+                        game.debug.reset();
+                    } else {
+                        this.firstTouchY = pointer.worldY;
+                    }
+                }
+            }
+        },
+
+        onUp: function(pointer, mouseEvent) {
+            // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
+            if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
+                var charge = chargeLevel(percentOf(this.dragY, game.world.height));
+                console.log(charge);
+                if (charge === 3) {
+                    this.firstTouchY = -1;
+                    this.dragY = -1;
+                    game.state.start('running');
+                }
             }
         }
     };
