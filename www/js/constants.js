@@ -19,7 +19,7 @@ var constants = {
     gravityStepDown: -0.08,
     hspeed: -2.5,
     jumpStrength: -15,
-    chargeLevels: [0, 1, 20, 50],
+    chargeLevels: [0, 1, 10, 25],
     chargeEffects: [0, 0.5, 0.75, 1],
     chargeColors: [colorPalette.ground, colorPalette.obstacleLow, colorPalette.obstacleMedium, colorPalette.obstacleBig]
 
