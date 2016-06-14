@@ -92,49 +92,17 @@ describe("The runner", function() {
             } while (runner.findLowestPoint() != constants.groundHeight);
         }
 
-        it("shouldn't mess up when the chargeLevel is max", function() {
+        it("shouldn't mess up at any charge level", function() {
             var initialHeight = constants.groundHeight;
             testObject.moveToY(initialHeight - constants.runnerSize);
             testObject.vspeed = 0;
-            game = {
-                world: {
-                    height: 600
-                }
-            };
+            var i;
+            for (i = 0; i < constants.chargeLevels; ++i) {
+                testObject.jump(i);
 
-            testObject.jump(300);
+                expectEventualHitsTheGround(testObject);
+            }
 
-            expectEventualHitsTheGround(testObject);
-        });
-
-        it("shouldn't mess up when the chargeLevel is 2", function() {
-            var initialHeight = constants.groundHeight;
-            testObject.moveToY(initialHeight - constants.runnerSize);
-            testObject.vspeed = 0;
-            game = {
-                world: {
-                    height: 600
-                }
-            };
-
-            testObject.jump(299);
-
-            expectEventualHitsTheGround(testObject);
-        });
-
-        it("shouldn't mess up when the chargeLevel is 1", function() {
-            var initialHeight = constants.groundHeight;
-            testObject.moveToY(initialHeight - constants.runnerSize);
-            testObject.vspeed = 0;
-            game = {
-                world: {
-                    height: 600
-                }
-            };
-
-            testObject.jump(100);
-
-            expectEventualHitsTheGround(testObject);
         });
 
         it("shouldn't jump at all when the chargeLevel is 0", function() {
@@ -142,7 +110,7 @@ describe("The runner", function() {
             testObject.moveToY(initialHeight - constants.runnerSize);
             testObject.vspeed = 0;
 
-            testObject.jump(1);
+            testObject.jump(0);
 
             expect(testObject.vspeed).toBe(0);
         });

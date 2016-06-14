@@ -27,11 +27,8 @@ var runner = function(polygon, color) {
         return this.findLowerLeftPoint().y > constants.groundHeight - 1;
     };
 
-    runner.jump = function(dragY) {
-        dragY = dragY || 0;
-        var percentOfScreenDragged = percentOf(dragY, game.world.height);
-        var level = chargeLevel(percentOfScreenDragged);
-        var chargeEffect = constants.chargeEffects[level];
+    runner.jump = function(chargeLevel, dragY, percentOfScreenDragged) {
+        var chargeEffect = constants.chargeEffects[chargeLevel];
         this.vspeed = constants.jumpStrength * chargeEffect;
         lastJump = {
             dragY: dragY,

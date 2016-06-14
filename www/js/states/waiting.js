@@ -50,11 +50,11 @@ var state_waiting = function(game) {
         onUp: function(pointer, mouseEvent) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
             if (mouseEvent.identifier === 0) {
-                var charge = chargeLevel(percentOf(this.dragY, game.world.height));
-                console.log(charge);
+                var percent = percentOf(this.dragY, game.world.height);
+                var charge = chargeLevel(percent);
 
                 if (objects.runner.canJump()) {
-                    objects.runner.jump(this.dragY);
+                    objects.runner.jump(charge, this.dragY, percent);
                     if (charge === 3) {
                         game.state.start('running');
                     }
