@@ -32,7 +32,7 @@ var state_init = function(game) {
             objects.chargeBar.update = function(percentY){
                 var level = chargeLevel(percentY);
                 this.color = constants.chargeColors[level];
-                objects.chargeBar.moveToX(fromPercent(33 * level, game.world.width) -game.world.width);
+                objects.chargeBar.moveToX(fromPercent(33.4 * level, game.world.width) -game.world.width);
             };
 
             var lowIsoscelesTriangle = {
