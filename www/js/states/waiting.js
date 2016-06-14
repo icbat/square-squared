@@ -55,11 +55,16 @@ var state_waiting = function(game) {
             if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
                 console.log(charge);
+
+                if (objects.runner.canJump()) {
+                    objects.runner.jump(this.dragY);
+                    if (charge === 3) {
+                        game.state.start('running');
+                    }
+                }
                 this.firstTouchY = -1;
                 this.dragY = -1;
-                if (charge === 3) {
-                    game.state.start('running');
-                }
+
 
             }
         }
