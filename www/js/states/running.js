@@ -44,13 +44,8 @@ var state_running = function(game) {
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
                 this.addObstacleToBack();
             }
-            if (this.firstTouchY !== -1) {
-                this.dragY = this.firstTouchY - game.input.activePointer.worldY;
-                objects.chargeBar.update(percentOf(this.dragY, game.world.height));
-            } else {
-                objects.chargeBar.update(0);
-            }
-
+            this.dragY = this.firstTouchY - game.input.activePointer.worldY;
+            objects.chargeBar.update(percentOf(this.dragY, game.world.height));
         },
 
         addObstacleToBack: function(offset) {

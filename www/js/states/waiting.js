@@ -29,12 +29,8 @@ var state_waiting = function(game) {
 
         update: function() {
             objects.runner.applyGravity();
-            if (this.firstTouchY !== -1) {
-                this.dragY = this.firstTouchY - game.input.activePointer.worldY;
-                objects.chargeBar.update(percentOf(this.dragY, game.world.height));
-            } else {
-                objects.chargeBar.update(0);
-            }
+            this.dragY = this.firstTouchY - game.input.activePointer.worldY;
+            objects.chargeBar.update(percentOf(this.dragY, game.world.height));
         },
 
         onDown: function(pointer, mouseEvent) {
