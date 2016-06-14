@@ -18,6 +18,7 @@ module.exports = function(config) {
       'www/js/vendor/*.js',
       'www/js/constants.js',
       'www/js/*.js',
+      'www/js/states/*.js',
       'test/js/**/*.js'
     ],
 

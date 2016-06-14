@@ -58,16 +58,20 @@ var state_running = function(game) {
             var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
             var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
-            var newX = Math.max(game.world.width + lastObstacle.minimumSpaceBehind);
-            newX += offset;
-            newX += Math.random() * constants.runnerSize;
-            if (Math.random() < 0.3) {
+            obstacle.moveToX(this.findBack(lastObstacle, game.world.width, offset, Math));
+            obstacle.hasScored = false;
+        },
+
+        findBack: function(lastInList, screenEdge, additionalOffset, math) {
+            var newX = screenEdge + lastInList.minimumSpaceBehind;
+            newX += additionalOffset;
+            newX += math.random() * constants.runnerSize;
+            if (math.random() > 0.7) {
                 // Randomly add a big-ish gap
                 newX += constants.runnerSize * 2;
             }
 
-            obstacle.moveToX(newX);
-            obstacle.hasScored = false;
+            return newX;
         },
 
         runnerHasPassedObstacle: function(obstacle, runner) {
