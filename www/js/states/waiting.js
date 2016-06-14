@@ -52,7 +52,7 @@ var state_waiting = function(game) {
 
         onUp: function(pointer, mouseEvent) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
-            if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
+            if (mouseEvent.identifier === 0) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
                 console.log(charge);
 
