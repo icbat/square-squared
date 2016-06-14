@@ -57,7 +57,8 @@ var state_running = function(game) {
             offset = offset || 0;
             var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
-            var newX = Math.max(game.world.width + obstacle.minimumSpaceBehind);
+            var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
+            var newX = Math.max(game.world.width + lastObstacle.minimumSpaceBehind);
             newX += offset;
             newX += Math.random() * constants.runnerSize;
             if (Math.random() < 0.3) {
