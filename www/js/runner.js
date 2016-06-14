@@ -15,6 +15,17 @@ var runner = function(polygon, color) {
         }
     };
 
+    runner.updateForDraw = function(chargeLevel) {
+        if (runner.canJump()) {
+            if (chargeLevel > 0) {
+                this.color = constants.chargeColors[chargeLevel];
+            }
+        } else {
+            this.color = colorPalette.runner;
+        }
+
+    };
+
     runner.canJump = function() {
         return this.findLowerLeftPoint().y > constants.groundHeight - 1;
     };

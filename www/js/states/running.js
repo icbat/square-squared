@@ -46,6 +46,9 @@ var state_running = function(game) {
             }
             this.dragY = this.firstTouchY - game.input.activePointer.worldY;
             objects.chargeBar.update(percentOf(this.dragY, game.world.height));
+            var percent = percentOf(this.dragY, game.world.height);
+            var charge = chargeLevel(percent);
+            objects.runner.updateForDraw(charge);
         },
 
         addObstacleToBack: function(offset) {
