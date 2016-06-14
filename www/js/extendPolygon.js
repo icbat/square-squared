@@ -29,27 +29,48 @@ function ExtendedPolygon(polygonToExtend, color) {
         this.polygon.setTo(points);
     };
 
-    this.setLowerLeftTo = function(x, y) {
         var points = this.polygon.toNumberArray();
+    this.toPoints = function() {
+        var components = this.polygon.toNumberArray();
+        var points = [];
+        var index;
+        for (index = 0; index < components.length; ++index) {
+            points.push({
+                x: components[index++],
+                y: components[index]
+            });
+        }
+        return points;
+    };
+
+    this.fromPoints = function(points) {
+        var index;
+        var components = [];
+        for (index = 0; index < points.length; ++index) {
+            components.push(points[index].x);
+            components.push(points[index].y);
+        }
+        this.polygon.setTo(components);
+    };
+
+    this.setLowerLeftTo = function(x, y) {
+        var points = this.toPoints();
         var lowerLeftPoint = {
             x: this.findLeftmostPoint(),
             y: this.findLowestPoint()
         };
 
         var magnitudeParts = {
-          x: x - lowerLeftPoint.x,
-          y: y - lowerLeftPoint.y
+            x: x - lowerLeftPoint.x,
+            y: y - lowerLeftPoint.y
         };
 
         var index;
         for (index = 0; index < points.length; ++index) {
-          if (index % 2 === 0) {
-            points[index] += magnitudeParts.x;
-          } else {
-            points[index] += magnitudeParts.y;
-          }
+            points[index].x += magnitudeParts.x;
+            points[index].y += magnitudeParts.y;
         }
-        this.polygon.setTo(points);
+        this.fromPoints(points);
     };
 
     this.moveToY = function(destinationY) {
