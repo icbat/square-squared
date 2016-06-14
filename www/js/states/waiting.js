@@ -16,13 +16,14 @@ var state_waiting = function(game) {
             text.anchor.set(0.5);
             text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
-            objects.chargeBar.draw(this.graphics);
-            objects.runner.draw(this.graphics);
-            objects.ground.draw(this.graphics);
+
         },
 
         render: function() {
+            this.graphics.clear();
             objects.chargeBar.draw(this.graphics);
+            objects.runner.draw(this.graphics);
+            objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
         },
 
@@ -53,11 +54,12 @@ var state_waiting = function(game) {
             if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
                 console.log(charge);
+                this.firstTouchY = -1;
+                this.dragY = -1;
                 if (charge === 3) {
-                    this.firstTouchY = -1;
-                    this.dragY = -1;
                     game.state.start('running');
                 }
+
             }
         }
     };
