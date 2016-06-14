@@ -105,9 +105,9 @@ var state_running = function(game) {
             if (mouseEvent.identifier === 0 && pointer.identifier === 0) {
                 if (objects.runner.canJump()) {
                     objects.runner.jump(this.dragY);
-                    this.firstTouchY = -1;
-                    this.dragY = -1;
                 }
+                this.firstTouchY = -1;
+                this.dragY = -1;
             }
         }
     };
