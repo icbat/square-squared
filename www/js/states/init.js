@@ -23,16 +23,16 @@ var state_init = function(game) {
             objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
 
             objects.chargeBar = new ExtendedPolygon(new Phaser.Polygon(
-              new Phaser.Point(0, 0),
-              new Phaser.Point(0, constants.runnerSize / 2 ),
-              new Phaser.Point(game.world.width, constants.runnerSize / 2),
-              new Phaser.Point(game.world.width, 0)
+                new Phaser.Point(0, 0),
+                new Phaser.Point(0, constants.runnerSize / 2),
+                new Phaser.Point(game.world.width, constants.runnerSize / 2),
+                new Phaser.Point(game.world.width, 0)
             ), colorPalette.ground);
             objects.chargeBar.moveToX(-game.world.width);
-            objects.chargeBar.update = function(percentY){
+            objects.chargeBar.update = function(percentY) {
                 var level = chargeLevel(percentY);
                 this.color = constants.chargeColors[level];
-                objects.chargeBar.moveToX(fromPercent(33.4 * level, game.world.width) -game.world.width);
+                objects.chargeBar.moveToX(fromPercent(33.4 * level, game.world.width) - game.world.width);
             };
 
             var lowIsoscelesTriangle = {
