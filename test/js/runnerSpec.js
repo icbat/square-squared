@@ -149,21 +149,6 @@ describe("The runner", function() {
     });
 
     describe("updateForDraw", function() {
-        it("should reset to runner base colorif a jump occurs", function() {
-            expect(testObject.color).toEqual(colorPalette.runner);
-            expect(testObject.canJump()).toBe(true);
-
-            testObject.jump(299);
-            testObject.applyGravity();
-            var chargeLevel;
-            for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                testObject.updateForDraw(chargeLevel);
-
-                expect(testObject.color).toEqual(colorPalette.runner);
-                expect(testObject.canJump()).toBe(false);
-            }
-        });
-
         it("should set to charge level color  if not jumping and charge not 0", function() {
             expect(testObject.color).toEqual(colorPalette.runner);
             expect(testObject.canJump()).toBe(true);
