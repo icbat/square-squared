@@ -122,7 +122,7 @@ describe("The runner", function() {
             expect(testObject.canJump()).toBe(true);
             var chargeLevel;
             for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                testObject.updateForDraw(chargeLevel);
+                testObject.updateBeforeDraw(chargeLevel);
 
                 expect(testObject.color).toEqual(constants.chargeColors[chargeLevel]);
             }
@@ -132,7 +132,7 @@ describe("The runner", function() {
             expect(testObject.color).toEqual(colorPalette.runner);
             expect(testObject.canJump()).toBe(true);
 
-            testObject.updateForDraw(0);
+            testObject.updateBeforeDraw(0);
 
             expect(testObject.color).toEqual(colorPalette.runner);
         });

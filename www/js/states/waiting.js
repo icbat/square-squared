@@ -31,7 +31,7 @@ var state_waiting = function(game) {
             this.dragY = this.firstTouchY - game.input.activePointer.worldY;
             var percent = percentOf(this.dragY, game.world.height);
             var charge = chargeLevel(percent);
-            objects.runner.updateForDraw(charge);
+            objects.runner.updateBeforeDraw(charge);
         },
 
         onDown: function(pointer, mouseEvent) {

@@ -15,7 +15,7 @@ var runner = function(polygon, color) {
         }
     };
 
-    runner.updateForDraw = function(chargeLevel) {
+    runner.updateBeforeDraw = function(chargeLevel) {
         if (chargeLevel > 0) {
             this.color = constants.chargeColors[chargeLevel];
         } else {
