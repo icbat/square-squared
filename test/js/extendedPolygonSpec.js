@@ -1,7 +1,6 @@
 var expectEveryYCoordToBeWhole = function(extended, shouldBeTrue) {
     var points = extended.polygon.toNumberArray();
     var i;
-    console.log("Inspecting", points);
     for (i = 1; i < points.length; i += 2) {
         if (shouldBeTrue) {
             expect(points[i] % 1).toEqual(0);

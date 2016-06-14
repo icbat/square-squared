@@ -31,7 +31,6 @@ function ExtendedPolygon(polygonToExtend, color) {
 
     this.setLowerLeftTo = function(x, y) {
         var points = this.polygon.toNumberArray();
-        console.log("before", points);
         var lowerLeftPoint = {
             x: this.findLeftmostPoint(),
             y: this.findLowestPoint()
@@ -42,7 +41,6 @@ function ExtendedPolygon(polygonToExtend, color) {
           y: y - lowerLeftPoint.y
         };
 
-
         var index;
         for (index = 0; index < points.length; ++index) {
           if (index % 2 === 0) {
@@ -51,7 +49,6 @@ function ExtendedPolygon(polygonToExtend, color) {
             points[index] += magnitudeParts.y;
           }
         }
-        console.log(points);
         this.polygon.setTo(points);
     };
 
