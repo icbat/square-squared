@@ -14,7 +14,7 @@ var state_running = function(game) {
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             objects.obstacles = [];
-            this.addObstacleToBack();
+            this.addObstacleToBack(100);
             this.graphics = game.add.graphics(0, 0);
             this.firstTouchY = -1;
             this.dragY = -1;
@@ -53,11 +53,12 @@ var state_running = function(game) {
 
         },
 
-        addObstacleToBack: function() {
+        addObstacleToBack: function(offset) {
+            offset = offset || 0;
             var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
             var newX = Math.max(game.world.width + obstacle.minimumSpaceBehind);
-
+            newX += offset;
             newX += Math.random() * constants.runnerSize;
             if (Math.random() < 0.3) {
                 // Randomly add a big-ish gap
