@@ -122,4 +122,57 @@ describe("An extended polgyon", function() {
         });
     });
 
+    describe("setHeight", function() {
+
+        describe("with squares", function() {
+            var sideLength = constants.runnerSize;
+            beforeEach(function() {
+                var initialLowerLeft = {
+                    x: 0,
+                    y: constants.groundHeight
+
+                };
+                polygon = new Phaser.Polygon(
+                    new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y),
+                    new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y - sideLength),
+                    new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y - sideLength),
+                    new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y)
+                );
+                testObject = new ExtendedPolygon(polygon);
+            });
+
+            it("should work going down", function() {
+                expect(testObject.findHeight()).toEqual(sideLength);
+
+                var expected = sideLength - 7;
+                testObject.setHeight(expected);
+
+                expect(testObject.findHeight()).toEqual(expected);
+            });
+
+            it("should work going up", function() {
+                expect(testObject.findHeight()).toEqual(sideLength);
+
+                var expected = sideLength + 17;
+                testObject.setHeight(expected);
+
+                expect(testObject.findHeight()).toEqual(expected);
+            });
+
+            it("doesn't move the bottom pieces", function() {
+                expect(testObject.findLowestPoint()).not.toEqual(0);
+                var originalY = testObject.findLowestPoint();
+                console.log(testObject.findHeight(), testObject.toPoints());
+
+                var expected = sideLength + 17;
+                testObject.setHeight(expected);
+
+                expect(testObject.findLowestPoint()).toEqual(originalY);
+                console.log(testObject.findHeight(), testObject.toPoints());
+            });
+        });
+
+
+    });
+
 });

@@ -29,7 +29,24 @@ function ExtendedPolygon(polygonToExtend, color) {
         this.polygon.setTo(points);
     };
 
-        var points = this.polygon.toNumberArray();
+    this.setHeight = function(newHeight) {
+        var points = this.toPoints();
+        var lowestY = this.findLowestPoint();
+        var highestY = this.findHighestPoint();
+        var oldHeight = lowestY - highestY;
+        var index;
+        for (index = 0; index < points.length; ++index) {
+            var point = points[index];
+            point.y = (point.y) * (newHeight / oldHeight);
+        }
+        this.fromPoints(points);
+        this.moveToY(lowestY - newHeight);
+    };
+
+    this.findHeight = function() {
+        return this.findLowestPoint() - this.findHighestPoint();
+    };
+
     this.toPoints = function() {
         var components = this.polygon.toNumberArray();
         var points = [];
@@ -44,8 +61,8 @@ function ExtendedPolygon(polygonToExtend, color) {
     };
 
     this.fromPoints = function(points) {
-        var index;
         var components = [];
+        var index;
         for (index = 0; index < points.length; ++index) {
             components.push(points[index].x);
             components.push(points[index].y);
