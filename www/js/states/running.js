@@ -1,7 +1,7 @@
 var state_running = function(game) {
     return {
         create: function(game) {
-            this.score = 0;
+            game.score = 0;
             this.graphics = game.add.graphics(0, 0);
             this.firstTouchY = -1;
             this.dragY = -1;
@@ -52,18 +52,17 @@ var state_running = function(game) {
             objects.runner.updateBeforeDraw(charge);
         },
 
-        addObstacleToBack: function(offset) {
-            offset = offset || 0;
+        addObstacleToBack: function() {
             var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
             var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
-            obstacle.moveToX(this.findBack(lastObstacle, game.world.width, offset, Math));
+            obstacle.moveToX(this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math));
             obstacle.hasScored = false;
         },
 
-        findBack: function(lastInList, screenEdge, additionalOffset, math) {
+        findBack: function(lastInList, screenEdge, difficultyModifier, math) {
             var newX = screenEdge + lastInList.minimumSpaceBehind;
-            newX += additionalOffset;
+            newX += difficultyModifier;
             newX += math.random() * constants.runnerSize;
             if (math.random() > 0.7) {
                 // Randomly add a big-ish gap
@@ -78,8 +77,8 @@ var state_running = function(game) {
         },
 
         scorePoint: function(obstacle) {
-            ++this.score;
-            objects.scoreDisplay.text = (this.score);
+            ++game.score;
+            objects.scoreDisplay.text = (game.score);
             obstacle.hasScored = true;
         },
 

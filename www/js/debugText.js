@@ -13,6 +13,7 @@ var drawDebugText = function(shouldDraw) {
         game.debug.text("world " + game.world.height + "h x " + game.world.width + "w", 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("player height: " + (constants.groundHeight - objects.runner.findLowestPoint()), 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("player vspeed: " + objects.runner.vspeed, 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("extra spacing based on score: " + calculateDifficultyModifier(game.score), 0, row++ * rowHeight, colorPalette.debugColor);
         row++;
         game.debug.text("Last Jump ", 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("Drag on Y " + lastJump.dragY, 0, row++ * rowHeight, colorPalette.debugColor);

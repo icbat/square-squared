@@ -43,3 +43,7 @@ var chargeLevel = function(percent) {
     }
     return 0;
 };
+
+var calculateDifficultyModifier = function(currentScore) {
+    return Math.pow(7/10, currentScore) * 200;
+};
