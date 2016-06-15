@@ -2,6 +2,7 @@ var runner = function(polygon, color) {
     var runner = new ExtendedPolygon(polygon, color);
 
     runner.vspeed = 0;
+    runner.onJump = new Phaser.Signal();
 
     runner.applyGravity = function() {
         this.moveByY(this.vspeed);
@@ -31,13 +32,7 @@ var runner = function(polygon, color) {
     runner.jump = function(chargeLevel, dragY, percentOfScreenDragged) {
         var chargeEffect = constants.chargeEffects[chargeLevel];
         this.vspeed = constants.jumpStrength * chargeEffect;
-        lastJump = {
-            dragY: dragY,
-            percentOfScreenDragged: percentOfScreenDragged,
-            chargeLevel: chargeLevel,
-            chargeCoefficient: chargeEffect,
-            jumpStrength: this.vspeed,
-        };
+        this.onJump.dispatch(chargeLevel, chargeEffect, this.vspeed);
     };
 
     runner.findLowerLeftPoint = function() {

@@ -114,6 +114,7 @@ var state_init = function(game) {
         },
 
         create: function() {
+            setupDebugging();
             game.state.start('waiting');
         }
     };
