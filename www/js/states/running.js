@@ -27,6 +27,7 @@ var state_running = function(game) {
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
+                obstacle.applyGravity();
                 obstacle.movePolygonBy(constants.hspeed);
 
                 if (objects.runner.intersects(obstacle)) {
@@ -40,7 +41,8 @@ var state_running = function(game) {
 
             }
             if (objects.obstacles[0].findRightmostPoint() < 0) {
-                objects.obstacles.shift();
+                var removed = objects.obstacles.shift();
+                objects.runner.onLand.remove(removed.runnerLandCallback);
             }
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
                 obstacleGenerator.addObstacleToBack();

@@ -34,5 +34,9 @@ var obstacleGenerator = {
 function Obstacle(thingToExtend, minimumSpaceBehind, name) {
     thingToExtend.minimumSpaceBehind = minimumSpaceBehind;
     thingToExtend.name = name;
+    thingToExtend.runnerLandCallback = function() {
+        thingToExtend.vspeed = -2;
+    };
+    objects.runner.onLand.add(thingToExtend.runnerLandCallback);
     return thingToExtend;
 }
