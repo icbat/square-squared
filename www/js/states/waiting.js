@@ -31,31 +31,33 @@ var state_waiting = function(game) {
         render: function() {
             this.graphics.clear();
 
-            this.graphics.beginFill(colorPalette.obstacleBig);
-            this.graphics.drawShape(this.targetBack);
-            this.graphics.endFill();
+            if (this.firstTouchY < 0) {
+                this.graphics.beginFill(colorPalette.obstacleBig);
+                this.graphics.drawShape(this.targetBack);
+                this.graphics.endFill();
 
-            this.graphics.beginFill(colorPalette.background);
-            this.graphics.drawShape(this.targetOuterBlank);
-            this.graphics.endFill();
+                this.graphics.beginFill(colorPalette.background);
+                this.graphics.drawShape(this.targetOuterBlank);
+                this.graphics.endFill();
 
-            this.graphics.beginFill(colorPalette.obstacleBig);
-            this.graphics.drawShape(this.targetMiddleRed);
-            this.graphics.endFill();
+                this.graphics.beginFill(colorPalette.obstacleBig);
+                this.graphics.drawShape(this.targetMiddleRed);
+                this.graphics.endFill();
 
-            this.graphics.beginFill(colorPalette.background);
-            this.graphics.drawShape(this.targetMiddleBlank);
-            this.graphics.endFill();
+                this.graphics.beginFill(colorPalette.background);
+                this.graphics.drawShape(this.targetMiddleBlank);
+                this.graphics.endFill();
 
-            this.graphics.beginFill(colorPalette.obstacleBig);
-            this.graphics.drawShape(this.targetInnerRed);
-            this.graphics.endFill();
+                this.graphics.beginFill(colorPalette.obstacleBig);
+                this.graphics.drawShape(this.targetInnerRed);
+                this.graphics.endFill();
 
-            this.graphics.beginFill(colorPalette.background);
-            this.graphics.drawShape(this.targetInnerBlank);
-            this.graphics.endFill();
-
-            this.startArrow.draw(this.graphics);
+                this.graphics.beginFill(colorPalette.background);
+                this.graphics.drawShape(this.targetInnerBlank);
+                this.graphics.endFill();
+            } else {
+                this.startArrow.draw(this.graphics);
+            }
 
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
