@@ -18,8 +18,17 @@ var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
     };
 };
 
+var onObstacleAddedDebug = function(newX, lastObstacle) {
+    lastGeneratedObstacle = {
+        generatedAt: newX,
+        lastMinimum: lastObstacle ? lastObstacle.minimumSpaceBehind : 0,
+        lastName: lastObstacle ? lastObstacle.name : null
+    };
+};
+
 var setupDebugging = function() {
     objects.runner.onJump.add(onJumpDebug);
+    obstacleGenerator.onObstacleAdded.add(onObstacleAddedDebug);
 };
 
 var drawDebugText = function(shouldDraw) {

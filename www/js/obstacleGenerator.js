@@ -4,11 +4,9 @@ var obstacleGenerator = {
         var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
         objects.obstacles.push(obstacle);
         var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math);
-        lastGeneratedObstacle.generatedAt = newX;
-        lastGeneratedObstacle.lastMinimum = lastObstacle ? lastObstacle.minimumSpaceBehind : 0;
-        lastGeneratedObstacle.lastName = lastObstacle ? lastObstacle.name : null;
         obstacle.moveToX(newX);
         obstacle.hasScored = false;
+        this.onObstacleAdded.dispatch(newX, lastObstacle);
     },
 
     findBack: function(lastInList, screenEdge, difficultyModifier, math) {
@@ -22,5 +20,7 @@ var obstacleGenerator = {
         }
 
         return newX;
-    }
+    },
+
+    onObstacleAdded: new Phaser.Signal()
 };
