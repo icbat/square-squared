@@ -1,6 +1,6 @@
 var obstacleGenerator = {
     addObstacleToBack: function() {
-        var obstacle = objects.makeRandomObstacle();
+        var obstacle = this.makeRandomObstacle();
         var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
         objects.obstacles.push(obstacle);
         var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math);
@@ -22,5 +22,11 @@ var obstacleGenerator = {
         return newX;
     },
 
-    onObstacleAdded: new Phaser.Signal()
+    onObstacleAdded: new Phaser.Signal(),
+
+    makeRandomObstacle: function() {
+        var index = Math.floor(Math.random() * (objects.polygonPrototypes.length));
+        var prototype = objects.polygonPrototypes[index];
+        return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.name);
+    }
 };
