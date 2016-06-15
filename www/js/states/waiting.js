@@ -7,14 +7,6 @@ var state_waiting = function(game) {
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
 
-            var textStyle = {
-                fill: colorPalette.text,
-                boundsAlignH: "center",
-                boundsAlignV: "middle"
-            };
-            var text = game.add.text(game.world.centerX, game.world.centerY, "(Placeholder)\nSwipe to Charge jump to \nMAX level", textStyle);
-            text.anchor.set(0.5);
-            text.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
 
         },
