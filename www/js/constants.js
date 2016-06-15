@@ -3,6 +3,7 @@ var colorPalette = {
     debugColor: 'rgb(0,0,0)',
     runner: 0x22cc77,
     light: '#ddd',
+    background: '0xdddddd',
     middle: '#888',
     ground: 0x333333,
     textShadow: '#333',

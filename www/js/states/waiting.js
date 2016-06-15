@@ -16,10 +16,42 @@ var state_waiting = function(game) {
 
             this.startArrow = new ExtendedPolygon(startArrowPoly, colorPalette.obstacleLow);
             this.startArrow.setLowerLeftTo(constants.runnerSize, constants.groundHeight - constants.runnerSize);
+
+            this.targetBack = new Phaser.Circle(70, 77, constants.runnerSize);
+            this.targetOuterBlank = new Phaser.Circle(70, 77, constants.runnerSize - 10);
+            this.targetMiddleRed = new Phaser.Circle(70, 77, constants.runnerSize - 20);
+            this.targetMiddleBlank = new Phaser.Circle(70, 77, constants.runnerSize - 30);
+            this.targetInnerRed = new Phaser.Circle(70, 77, constants.runnerSize - 40);
+            this.targetInnerBlank = new Phaser.Circle(70, 77, constants.runnerSize - 50);
+
         },
 
         render: function() {
             this.graphics.clear();
+
+            this.graphics.beginFill(colorPalette.obstacleBig);
+            this.graphics.drawShape(this.targetBack);
+            this.graphics.endFill();
+
+            this.graphics.beginFill(colorPalette.background);
+            this.graphics.drawShape(this.targetOuterBlank);
+            this.graphics.endFill();
+
+            this.graphics.beginFill(colorPalette.obstacleBig);
+            this.graphics.drawShape(this.targetMiddleRed);
+            this.graphics.endFill();
+
+            this.graphics.beginFill(colorPalette.background);
+            this.graphics.drawShape(this.targetMiddleBlank);
+            this.graphics.endFill();
+
+            this.graphics.beginFill(colorPalette.obstacleBig);
+            this.graphics.drawShape(this.targetInnerRed);
+            this.graphics.endFill();
+
+            this.graphics.beginFill(colorPalette.background);
+            this.graphics.drawShape(this.targetInnerBlank);
+            this.graphics.endFill();
 
             this.startArrow.draw(this.graphics);
 
