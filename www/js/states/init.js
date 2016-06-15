@@ -31,6 +31,7 @@ var state_init = function(game) {
                     );
                 },
                 minimumSpaceBehind: 125,
+                name: "low triangle",
                 color: colorPalette.obstacleLow
             };
 
@@ -44,6 +45,7 @@ var state_init = function(game) {
                     );
                 },
                 minimumSpaceBehind: 130,
+                name: "low rect",
                 color: colorPalette.obstacleLow
             };
 
@@ -57,6 +59,7 @@ var state_init = function(game) {
                     );
                 },
                 minimumSpaceBehind: 150,
+                name: "med acute right",
                 color: colorPalette.obstacleMedium
             };
 
@@ -69,6 +72,7 @@ var state_init = function(game) {
                     );
                 },
                 minimumSpaceBehind: 150,
+                name: "med isosceles",
                 color: colorPalette.obstacleMedium
             };
 
@@ -82,6 +86,7 @@ var state_init = function(game) {
                     );
                 },
                 minimumSpaceBehind: 220,
+                name: "big square",
                 color: colorPalette.obstacleBig
             };
 
@@ -95,6 +100,7 @@ var state_init = function(game) {
                     );
                 },
                 minimumSpaceBehind: 300,
+                name: "big wall",
                 color: colorPalette.obstacleBig
             };
 
@@ -102,7 +108,7 @@ var state_init = function(game) {
             objects.makeRandomObstacle = function() {
                 var index = Math.floor(Math.random() * (this.polygonPrototypes.length));
                 var prototype = this.polygonPrototypes[index];
-                return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind);
+                return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.name);
             };
 
         },

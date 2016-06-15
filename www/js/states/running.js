@@ -56,7 +56,11 @@ var state_running = function(game) {
             var obstacle = objects.makeRandomObstacle();
             objects.obstacles.push(obstacle);
             var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
-            obstacle.moveToX(this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math));
+            var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math);
+            lastGeneratedObstacle.generatedAt = newX;
+            lastGeneratedObstacle.lastMinimum =  lastObstacle.minimumSpaceBehind;
+            lastGeneratedObstacle.lastName =  lastObstacle.name;
+            obstacle.moveToX(newX);
             obstacle.hasScored = false;
         },
 
