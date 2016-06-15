@@ -1,9 +1,13 @@
 var state_running = function(game) {
     return {
         create: function(game) {
+            this.score = 0;
+            this.graphics = game.add.graphics(0, 0);
+            this.firstTouchY = -1;
+            this.dragY = -1;
+
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
-            this.score = 0;
 
             var textStyle = {
                 fill: colorPalette.text,
@@ -15,9 +19,7 @@ var state_running = function(game) {
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             objects.obstacles = [];
             this.addObstacleToBack(100);
-            this.graphics = game.add.graphics(0, 0);
-            this.firstTouchY = -1;
-            this.dragY = -1;
+
         },
 
         update: function(game) {
