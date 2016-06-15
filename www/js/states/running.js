@@ -18,8 +18,7 @@ var state_running = function(game) {
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             objects.obstacles = [];
-            this.addObstacleToBack(100);
-
+            obstacleGenerator.addObstacleToBack();
         },
 
         update: function(game) {
@@ -44,37 +43,12 @@ var state_running = function(game) {
                 objects.obstacles.shift();
             }
             if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
-                this.addObstacleToBack();
+                obstacleGenerator.addObstacleToBack();
             }
             this.dragY = this.firstTouchY - game.input.activePointer.worldY;
             var percent = percentOf(this.dragY, game.world.height);
             var charge = chargeLevel(percent);
             objects.runner.updateBeforeDraw(charge);
-        },
-
-        addObstacleToBack: function() {
-            var obstacle = objects.makeRandomObstacle();
-            var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
-            objects.obstacles.push(obstacle);
-            var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math);
-            lastGeneratedObstacle.generatedAt = newX;
-            lastGeneratedObstacle.lastMinimum =  lastObstacle ? lastObstacle.minimumSpaceBehind : 0;
-            lastGeneratedObstacle.lastName =  lastObstacle ? lastObstacle.name : null;
-            obstacle.moveToX(newX);
-            obstacle.hasScored = false;
-        },
-
-        findBack: function(lastInList, screenEdge, difficultyModifier, math) {
-            var minBuffer = lastInList ? lastInList.minimumSpaceBehind : 0;
-            var newX = screenEdge + minBuffer;
-            newX += difficultyModifier;
-            newX += math.random() * constants.runnerSize;
-            if (math.random() > 0.7) {
-                // Randomly add a big-ish gap
-                newX += constants.runnerSize * 2;
-            }
-
-            return newX;
         },
 
         runnerHasPassedObstacle: function(obstacle, runner) {

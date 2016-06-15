@@ -13,7 +13,7 @@ describe("Obstacle Generation", function() {
             minimumSpaceBehind: expected
         };
 
-        var actual = state_running().findBack(lastInList, 0, 0, stubRandom(0));
+        var actual = obstacleGenerator.findBack(lastInList, 0, 0, stubRandom(0));
 
         expect(actual).toEqual(expected);
     });
@@ -25,7 +25,7 @@ describe("Obstacle Generation", function() {
             minimumSpaceBehind: 0
         };
 
-        var actual = state_running().findBack(lastInList, 0, 0, stubRandom(random));
+        var actual = obstacleGenerator.findBack(lastInList, 0, 0, stubRandom(random));
 
         expect(actual).toEqual(expected);
     });
@@ -37,7 +37,7 @@ describe("Obstacle Generation", function() {
             minimumSpaceBehind: 0
         };
 
-        var actual = state_running().findBack(lastInList, 0, 0, stubRandom(random));
+        var actual = obstacleGenerator.findBack(lastInList, 0, 0, stubRandom(random));
 
         expect(actual).toEqual(expected);
     });
@@ -50,7 +50,7 @@ describe("Obstacle Generation", function() {
             minimumSpaceBehind: 0
         };
 
-        var actual = state_running().findBack(lastInList, 0, offset, stubRandom(random));
+        var actual = obstacleGenerator.findBack(lastInList, 0, offset, stubRandom(random));
 
         expect(actual).toEqual(expected);
     });
@@ -63,7 +63,7 @@ describe("Obstacle Generation", function() {
             minimumSpaceBehind: 0
         };
 
-        var actual = state_running().findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
+        var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
 
         expect(actual).toEqual(expected);
     });
@@ -76,7 +76,7 @@ describe("Obstacle Generation", function() {
         var expected = edgeOfScreen;
         var lastInList;
 
-        var actual = state_running().findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
+        var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
 
         expect(actual).toEqual(expected);
     });
