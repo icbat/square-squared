@@ -28,11 +28,11 @@ var state_waiting = function(game) {
         },
 
         makeArrow: function() {
-          return new Phaser.Polygon(
-              new Phaser.Point(0, constants.groundHeight),
-              new Phaser.Point(constants.runnerSize / 2, constants.groundHeight),
-              new Phaser.Point(constants.runnerSize / 4, constants.groundHeight - constants.runnerSize / 2)
-          );
+            return new Phaser.Polygon(
+                new Phaser.Point(0, constants.groundHeight),
+                new Phaser.Point(constants.runnerSize / 2, constants.groundHeight),
+                new Phaser.Point(constants.runnerSize / 4, constants.groundHeight - constants.runnerSize / 2)
+            );
         },
 
         render: function() {
@@ -62,12 +62,16 @@ var state_waiting = function(game) {
                 this.graphics.beginFill(colorPalette.background);
                 this.graphics.drawShape(this.targetInnerBlank);
                 this.graphics.endFill();
+            } else {
+                var charge = chargeLevel(percentOf(this.dragY, game.world.height));
+                if (charge === 3) {
+                    this.highArrow.draw(this.graphics);
+                } else if (charge === 2) {
+                    this.medArrow.draw(this.graphics);
+                } else {
+                    this.lowArrow.draw(this.graphics);
+                }
             }
-            // else {
-                this.lowArrow.draw(this.graphics);
-                this.medArrow.draw(this.graphics);
-                this.highArrow.draw(this.graphics);
-            // }
 
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
