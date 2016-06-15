@@ -85,9 +85,8 @@ var state_running = function(game) {
         onUp: function(pointer, mouseEvent) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
             if (mouseEvent.identifier === 0) {
-                var percent = percentOf(this.dragY, game.world.height);
-                var charge = chargeLevel(percent);
-                objects.runner.jump(charge, this.dragY, percent);
+                var charge = chargeLevel(percentOf(this.dragY, game.world.height));
+                objects.runner.jump(charge);
                 this.firstTouchY = -1;
                 this.dragY = -1;
             }
