@@ -30,9 +30,11 @@ var runner = function(polygon, color) {
     };
 
     runner.jump = function(chargeLevel, dragY, percentOfScreenDragged) {
-        var chargeEffect = constants.chargeEffects[chargeLevel];
-        this.vspeed = constants.jumpStrength * chargeEffect;
-        this.onJump.dispatch(chargeLevel, chargeEffect, this.vspeed);
+        if (this.onGround()) {
+            var chargeEffect = constants.chargeEffects[chargeLevel];
+            this.vspeed = constants.jumpStrength * chargeEffect;
+            this.onJump.dispatch(chargeLevel, chargeEffect, this.vspeed);
+        }
     };
 
     runner.findLowerLeftPoint = function() {

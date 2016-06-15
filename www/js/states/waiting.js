@@ -53,11 +53,9 @@ var state_waiting = function(game) {
                 var percent = percentOf(this.dragY, game.world.height);
                 var charge = chargeLevel(percent);
 
-                if (objects.runner.onGround()) {
-                    objects.runner.jump(charge, this.dragY, percent);
-                    if (charge === 3) {
-                        game.state.start('running');
-                    }
+                objects.runner.jump(charge, this.dragY, percent);
+                if (charge === 3) {
+                    game.state.start('running');
                 }
                 this.firstTouchY = -1;
                 this.dragY = -1;
