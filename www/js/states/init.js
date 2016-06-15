@@ -94,7 +94,7 @@ var state_init = function(game) {
                         new Phaser.Point(constants.runnerSize / 2, constants.groundHeight)
                     );
                 },
-                minimumSpaceBehind: 255,
+                minimumSpaceBehind: 300,
                 color: colorPalette.obstacleBig
             };
 
