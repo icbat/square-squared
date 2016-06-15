@@ -12,10 +12,6 @@ var runner = function(polygon, color) {
         this.setHeight(constants.chargeHeights[chargeLevel]);
     };
 
-    runner.onGround = function() {
-        return this.findLowerLeftPoint().y > constants.groundHeight - 1;
-    };
-
     runner.jump = function(chargeLevel) {
         if (this.onGround()) {
             var chargeEffect = constants.chargeEffects[chargeLevel];

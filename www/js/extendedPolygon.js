@@ -220,15 +220,20 @@ function ExtendedPolygon(polygonToExtend, color) {
         return false;
     };
 
-    this.applyGravity = function() {
-        this.moveByY(this.vspeed);
-        var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
-        this.vspeed -= gravityStep;
+    this.onLand = new Phaser.Signal();
 
-        // On hitting ground
-        if (this.findLowerLeftPoint().y >= constants.groundHeight) {
-            this.vspeed = 0;
-            this.setLowerLeftTo(this.findLeftmostPoint(), constants.groundHeight);
+    this.applyGravity = function() {
+        if (this.vspeed !== 0 || !this.onGround()) {
+            this.moveByY(this.vspeed);
+            var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
+            this.vspeed -= gravityStep;
+
+            // On hitting ground
+            if (this.findLowerLeftPoint().y >= constants.groundHeight) {
+                this.onLand.dispatch(this.vspeed);
+                this.vspeed = 0;
+                this.setLowerLeftTo(this.findLeftmostPoint(), constants.groundHeight);
+            }
         }
     };
 
@@ -237,6 +242,10 @@ function ExtendedPolygon(polygonToExtend, color) {
             x: this.findLeftmostPoint(),
             y: this.findLowestPoint()
         };
+    };
+
+    this.onGround = function() {
+        return this.findLowerLeftPoint().y > constants.groundHeight - 1;
     };
 
     this.vspeed = 0;
