@@ -1,7 +1,6 @@
 var runner = function(polygon, color) {
     var runner = new ExtendedPolygon(polygon, color);
 
-
     runner.onJump = new Phaser.Signal();
 
     runner.updateBeforeDraw = function(chargeLevel) {

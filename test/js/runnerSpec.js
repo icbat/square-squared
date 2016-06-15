@@ -139,12 +139,12 @@ describe("The runner", function() {
             });
         });
         it("the height should correspond to the charge height variable", function() {
-          var chargeLevel;
-          for (chargeLevel = 0; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-              testObject.updateBeforeDraw(chargeLevel);
+            var chargeLevel;
+            for (chargeLevel = 0; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
+                testObject.updateBeforeDraw(chargeLevel);
 
-              expect(testObject.findHeight()).toEqual(constants.chargeHeights[chargeLevel]);
-          }
+                expect(testObject.findHeight()).toEqual(constants.chargeHeights[chargeLevel]);
+            }
         });
 
 
