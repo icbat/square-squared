@@ -8,21 +8,23 @@ var state_waiting = function(game) {
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
 
-            var startArrowPoly = new Phaser.Polygon(
+            var arrowPoly = new Phaser.Polygon(
                 new Phaser.Point(0, constants.groundHeight),
                 new Phaser.Point(constants.runnerSize / 2, constants.groundHeight),
                 new Phaser.Point(constants.runnerSize / 4, constants.groundHeight - constants.runnerSize / 2)
             );
 
-            this.startArrow = new ExtendedPolygon(startArrowPoly, colorPalette.obstacleLow);
-            this.startArrow.setLowerLeftTo(constants.runnerSize, constants.groundHeight - constants.runnerSize);
+            this.startArrow = new ExtendedPolygon(arrowPoly, colorPalette.obstacleLow);
+            this.startArrow.setLowerLeftTo(constants.runnerSize, constants.groundHeight - constants.runnerSize * 2);
 
-            this.targetBack = new Phaser.Circle(70, 77, constants.runnerSize);
-            this.targetOuterBlank = new Phaser.Circle(70, 77, constants.runnerSize - 10);
-            this.targetMiddleRed = new Phaser.Circle(70, 77, constants.runnerSize - 20);
-            this.targetMiddleBlank = new Phaser.Circle(70, 77, constants.runnerSize - 30);
-            this.targetInnerRed = new Phaser.Circle(70, 77, constants.runnerSize - 40);
-            this.targetInnerBlank = new Phaser.Circle(70, 77, constants.runnerSize - 50);
+            var targetCenterX = constants.runnerSize + constants.runnerSize / 4;
+            var targetCenterY = constants.groundHeight - constants.runnerSize;
+            this.targetBack = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize);
+            this.targetOuterBlank = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 10);
+            this.targetMiddleRed = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 20);
+            this.targetMiddleBlank = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 30);
+            this.targetInnerRed = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 40);
+            this.targetInnerBlank = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 50);
 
         },
 
