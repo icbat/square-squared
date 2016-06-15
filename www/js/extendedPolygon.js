@@ -219,4 +219,25 @@ function ExtendedPolygon(polygonToExtend, color) {
         }
         return false;
     };
+
+    this.applyGravity = function() {
+        this.moveByY(this.vspeed);
+        var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
+        this.vspeed -= gravityStep;
+
+        // On hitting ground
+        if (this.findLowerLeftPoint().y >= constants.groundHeight) {
+            this.vspeed = 0;
+            this.setLowerLeftTo(this.findLeftmostPoint(), constants.groundHeight);
+        }
+    };
+
+    this.findLowerLeftPoint = function() {
+        return {
+            x: this.findLeftmostPoint(),
+            y: this.findLowestPoint()
+        };
+    };
+
+    this.vspeed = 0;
 }
