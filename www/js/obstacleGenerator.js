@@ -30,3 +30,9 @@ var obstacleGenerator = {
         return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.name);
     }
 };
+
+function Obstacle(thingToExtend, minimumSpaceBehind, name) {
+    thingToExtend.minimumSpaceBehind = minimumSpaceBehind;
+    thingToExtend.name = name;
+    return thingToExtend;
+}
