@@ -21,6 +21,7 @@ var constants = {
     jumpStrength: -15,
     chargeLevels: [0, 1, 10, 25],
     chargeEffects: [0, 0.5, 0.75, 1],
+    chargeHeights: [64, 54, 49, 47],
     chargeColors: [colorPalette.ground, colorPalette.obstacleLow, colorPalette.obstacleMedium, colorPalette.obstacleBig]
 };
 

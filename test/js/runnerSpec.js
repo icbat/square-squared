@@ -117,25 +117,36 @@ describe("The runner", function() {
     });
 
     describe("updateForDraw", function() {
-        it("should set to charge level color  if not jumping and charge not 0", function() {
-            expect(testObject.color).toEqual(colorPalette.runner);
-            expect(testObject.onGround()).toBe(true);
-            var chargeLevel;
-            for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                testObject.updateBeforeDraw(chargeLevel);
+        describe("the color ", function() {
+            it("should be set to charge level color  if not jumping and charge not 0", function() {
+                expect(testObject.color).toEqual(colorPalette.runner);
+                expect(testObject.onGround()).toBe(true);
+                var chargeLevel;
+                for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
+                    testObject.updateBeforeDraw(chargeLevel);
 
-                expect(testObject.color).toEqual(constants.chargeColors[chargeLevel]);
-            }
+                    expect(testObject.color).toEqual(constants.chargeColors[chargeLevel]);
+                }
+            });
+
+            it("should be reset to runner base color if not jumping and no charge", function() {
+                expect(testObject.color).toEqual(colorPalette.runner);
+                expect(testObject.onGround()).toBe(true);
+
+                testObject.updateBeforeDraw(0);
+
+                expect(testObject.color).toEqual(colorPalette.runner);
+            });
+        });
+        it("the height should correspond to the charge height variable", function() {
+          var chargeLevel;
+          for (chargeLevel = 0; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
+              testObject.updateBeforeDraw(chargeLevel);
+
+              expect(testObject.findHeight()).toEqual(constants.chargeHeights[chargeLevel]);
+          }
         });
 
-        it("should reset to runner base color if not jumping and no charge", function() {
-            expect(testObject.color).toEqual(colorPalette.runner);
-            expect(testObject.onGround()).toBe(true);
-
-            testObject.updateBeforeDraw(0);
-
-            expect(testObject.color).toEqual(colorPalette.runner);
-        });
 
     });
 

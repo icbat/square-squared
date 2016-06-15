@@ -21,6 +21,7 @@ var runner = function(polygon, color) {
         } else {
             this.color = colorPalette.runner;
         }
+        this.setHeight(constants.chargeHeights[chargeLevel]);
     };
 
     runner.onGround = function() {
