@@ -2,6 +2,8 @@ function ExtendedPolygon(polygonToExtend, color) {
     this.color = color;
     this.polygon = polygonToExtend;
 
+
+
     this.movePolygonBy = function(amountX) {
         var points = this.polygon.toNumberArray();
         var index;
@@ -41,6 +43,7 @@ function ExtendedPolygon(polygonToExtend, color) {
         }
         this.fromPoints(points);
         this.moveToY(lowestY - newHeight);
+        this.height = newHeight;
     };
 
     this.findHeight = function() {
@@ -249,4 +252,5 @@ function ExtendedPolygon(polygonToExtend, color) {
     };
 
     this.vspeed = 0;
+    this.height = this.findHeight();
 }

@@ -16,8 +16,6 @@ describe("An extended polgyon", function() {
     var polygon;
     var testObject;
 
-
-
     describe("moveToY", function() {
         beforeEach(function() {
             polygon = new Phaser.Polygon(
@@ -157,6 +155,16 @@ describe("An extended polgyon", function() {
                 testObject.setHeight(expected);
 
                 expect(testObject.findHeight()).toEqual(expected);
+            });
+
+            it("sets the state variable so we don't have to keep inspecting", function() {
+                expect(testObject.findHeight()).toEqual(sideLength);
+
+                var expected = sideLength + 17;
+                testObject.setHeight(expected);
+
+                expect(testObject.findHeight()).toEqual(expected);
+                expect(testObject.height).toEqual(expected);
             });
 
             it("doesn't move the bottom pieces", function() {

@@ -9,7 +9,10 @@ var runner = function(polygon, color) {
         } else {
             this.color = colorPalette.runner;
         }
-        this.setHeight(constants.chargeHeights[chargeLevel]);
+        var targetHeight = constants.chargeHeights[chargeLevel];
+        if (targetHeight !== runner.height) {
+            this.setHeight(targetHeight);
+        }
     };
 
     runner.jump = function(chargeLevel) {
