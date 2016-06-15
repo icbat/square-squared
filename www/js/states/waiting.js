@@ -3,16 +3,26 @@ var state_waiting = function(game) {
         create: function(game) {
             this.firstTouchY = -1;
             this.dragY = -1;
+            this.graphics = game.add.graphics(0, 0);
 
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
 
-            this.graphics = game.add.graphics(0, 0);
+            var startArrowPoly = new Phaser.Polygon(
+                new Phaser.Point(0, constants.groundHeight),
+                new Phaser.Point(constants.runnerSize / 2, constants.groundHeight),
+                new Phaser.Point(constants.runnerSize / 4, constants.groundHeight - constants.runnerSize / 2)
+            );
 
+            this.startArrow = new ExtendedPolygon(startArrowPoly, colorPalette.obstacleLow);
+            this.startArrow.setLowerLeftTo(constants.runnerSize, constants.groundHeight - constants.runnerSize);
         },
 
         render: function() {
             this.graphics.clear();
+
+            this.startArrow.draw(this.graphics);
+
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
