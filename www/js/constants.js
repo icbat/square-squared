@@ -19,6 +19,7 @@ var constants = {
     gravityStepDown: -0.08,
     hspeed: -2.5,
     jumpStrength: -15,
+    motionTweenCoefficient: 0.3,
     chargeLevels: [0, 1, 10, 25],
     chargeEffects: [0, 0.5, 0.75, 1],
     chargeHeights: [64, 54, 49, 47],

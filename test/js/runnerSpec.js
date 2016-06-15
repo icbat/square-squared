@@ -117,6 +117,14 @@ describe("The runner", function() {
     });
 
     describe("updateForDraw", function() {
+        var coefficient;
+        beforeAll(function() {
+            coefficient = constants.motionTweenCoefficient;
+            constants.motionTweenCoefficient = 1;
+        });
+        afterAll(function() {
+            constants.motionTweenCoefficient = coefficient;
+        });
         describe("the color ", function() {
             it("should be set to charge level color  if not jumping and charge not 0", function() {
                 expect(testObject.color).toEqual(colorPalette.runner);

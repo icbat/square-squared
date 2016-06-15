@@ -10,8 +10,9 @@ var runner = function(polygon, color) {
             this.color = colorPalette.runner;
         }
         var targetHeight = constants.chargeHeights[chargeLevel];
-        if (targetHeight !== runner.height) {
-            this.setHeight(targetHeight);
+        if (targetHeight !== this.height) {
+            var newHeight = this.height + (targetHeight - this.height) * constants.motionTweenCoefficient;
+            this.setHeight(newHeight);
         }
     };
 
