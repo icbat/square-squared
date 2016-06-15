@@ -54,18 +54,19 @@ var state_running = function(game) {
 
         addObstacleToBack: function() {
             var obstacle = objects.makeRandomObstacle();
-            objects.obstacles.push(obstacle);
             var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
+            objects.obstacles.push(obstacle);
             var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math);
             lastGeneratedObstacle.generatedAt = newX;
-            lastGeneratedObstacle.lastMinimum =  lastObstacle.minimumSpaceBehind;
-            lastGeneratedObstacle.lastName =  lastObstacle.name;
+            lastGeneratedObstacle.lastMinimum =  lastObstacle ? lastObstacle.minimumSpaceBehind : 0;
+            lastGeneratedObstacle.lastName =  lastObstacle ? lastObstacle.name : null;
             obstacle.moveToX(newX);
             obstacle.hasScored = false;
         },
 
         findBack: function(lastInList, screenEdge, difficultyModifier, math) {
-            var newX = screenEdge + lastInList.minimumSpaceBehind;
+            var minBuffer = lastInList ? lastInList.minimumSpaceBehind : 0;
+            var newX = screenEdge + minBuffer;
             newX += difficultyModifier;
             newX += math.random() * constants.runnerSize;
             if (math.random() > 0.7) {

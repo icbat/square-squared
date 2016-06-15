@@ -68,4 +68,19 @@ describe("Obstacle Generation", function() {
         expect(actual).toEqual(expected);
     });
 
+
+
+    it("should not explode with no last obstacle", function() {
+        var random = 0;
+        var edgeOfScreen = 555;
+        var expected = edgeOfScreen;
+        var lastInList;
+
+        var actual = state_running().findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
+
+        expect(actual).toEqual(expected);
+    });
+
+
+
 });
