@@ -14,7 +14,7 @@ var state_running = function(game) {
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, objects.runner.findHighestPoint() + (constants.runnerSize / 2), "0", textStyle);
+            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), game.score, textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             objects.obstacles = [];
