@@ -33,8 +33,10 @@ var setupDebugging = function() {
 
 var drawDebugText = function(shouldDraw) {
     if (shouldDraw) {
+        game.time.advancedTiming = true;
         var row = 1;
         var rowHeight = 16;
+        game.debug.text("FPS " + game.time.fps + " (" + game.time.fpsMax + ")", 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("world " + game.world.height + "h x " + game.world.width + "w", 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("player height: " + (constants.groundHeight - objects.runner.findLowestPoint()), 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("player vspeed: " + objects.runner.vspeed, 0, row++ * rowHeight, colorPalette.debugColor);
@@ -50,5 +52,7 @@ var drawDebugText = function(shouldDraw) {
         game.debug.text("Charge Coefficient " + lastJump.jumpCoefficient, 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("JumpStrength " + lastJump.initalSpeed, 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.pointer(game.input.activePointer, false, 'rgba(0,255,0,0.5)', 'rgba(255,0,0,0.5)', colorPalette.debugColor);
+    } else {
+      game.time.advancedTiming = false;
     }
 };
