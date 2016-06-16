@@ -26,7 +26,7 @@ var state_dying = function(game) {
         },
         update: function() {
             if (game.time.time > this.timeToLeave) {
-                game.state.start('waiting');
+                game.stateTransition.to('waiting');
             }
         }
     };

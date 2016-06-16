@@ -111,7 +111,7 @@ var state_waiting = function(game) {
 
                 objects.runner.jump(charge);
                 if (charge === 3) {
-                    game.state.start('running');
+                    game.stateTransition.to('running');
                 }
                 this.firstTouchY = -1;
                 this.dragY = -1;

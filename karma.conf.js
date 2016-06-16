@@ -26,7 +26,8 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
       '**/preload.js',
-      '**/phaser-start.js'
+      '**/phaser-start.js',
+      '**/phaser-state-transition-plugin.min.js'
     ],
 
 

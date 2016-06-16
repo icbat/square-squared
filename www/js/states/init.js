@@ -1,6 +1,12 @@
 var state_init = function(game) {
     return {
         preload: function() {
+            game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
+            this.game.stateTransition.configure({
+                // Actually putting 0 makes this plugin think you don't want to set anything
+                duration: 0.000001
+            });
+
             game.stage.backgroundColor = colorPalette.light;
 
             constants.groundHeight = game.world.height - constants.runnerSize;
@@ -109,7 +115,7 @@ var state_init = function(game) {
 
         create: function() {
             setupDebugging();
-            game.state.start('waiting');
+            game.stateTransition.to('waiting');
         }
     };
 };

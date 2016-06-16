@@ -32,7 +32,7 @@ var state_running = function(game) {
 
                 if (objects.runner.intersects(obstacle)) {
                     // Game over
-                    game.state.start('dying');
+                    game.stateTransition.to('dying');
                     return;
                 }
 
