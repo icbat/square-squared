@@ -2,14 +2,6 @@ var state_dying = function(game) {
     return {
         create: function() {
             this.timeToLeave = game.time.time + 750;
-            var textStyle = {
-                fill: colorPalette.text,
-                boundsAlignH: "center",
-                boundsAlignV: "middle"
-            };
-            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), game.score, textStyle);
-            objects.scoreDisplay.anchor.set(0.5);
-            objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             this.graphics = game.add.graphics(0, 0);
         },
         render: function() {
