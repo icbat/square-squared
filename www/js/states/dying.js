@@ -18,6 +18,9 @@ var state_dying = function(game) {
         },
         update: function() {
             if (game.time.time > this.timeToLeave) {
+                if (game.score && game.score > game.highScore) {
+                    game.highScore = game.score;
+                }
                 game.stateTransition.to('waiting');
             }
         }

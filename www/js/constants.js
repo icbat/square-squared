@@ -1,6 +1,7 @@
 var objects = {};
 var colorPalette = {
     debugColor: 'rgb(0,0,0)',
+    black: "#000",
     runner: 0x22cc77,
     light: '#ddd',
     background: '0xdddddd',
