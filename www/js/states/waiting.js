@@ -39,21 +39,26 @@ var state_waiting = function(game) {
             this.graphics.clear();
 
             if (this.firstTouchY < 0) {
-                this.graphics.beginFill(colorPalette.obstacleBig);
-                this.graphics.drawShape(this.targetBack);
-                this.graphics.endFill();
+                var x = 2000;
+                if (game.time.time % x > x * 2 / 3) {
+                    this.graphics.beginFill(colorPalette.obstacleBig);
+                    this.graphics.drawShape(this.targetBack);
+                    this.graphics.endFill();
 
-                this.graphics.beginFill(colorPalette.background);
-                this.graphics.drawShape(this.targetOuterBlank);
-                this.graphics.endFill();
+                    this.graphics.beginFill(colorPalette.background);
+                    this.graphics.drawShape(this.targetOuterBlank);
+                    this.graphics.endFill();
+                }
 
-                this.graphics.beginFill(colorPalette.obstacleBig);
-                this.graphics.drawShape(this.targetMiddleRed);
-                this.graphics.endFill();
+                if (game.time.time % x > x / 3) {
+                    this.graphics.beginFill(colorPalette.obstacleBig);
+                    this.graphics.drawShape(this.targetMiddleRed);
+                    this.graphics.endFill();
 
-                this.graphics.beginFill(colorPalette.background);
-                this.graphics.drawShape(this.targetMiddleBlank);
-                this.graphics.endFill();
+                    this.graphics.beginFill(colorPalette.background);
+                    this.graphics.drawShape(this.targetMiddleBlank);
+                    this.graphics.endFill();
+                }
 
                 this.graphics.beginFill(colorPalette.obstacleBig);
                 this.graphics.drawShape(this.targetInnerRed);
