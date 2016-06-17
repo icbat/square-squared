@@ -111,6 +111,7 @@ var state_init = function(game) {
             };
 
             objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumAcuteTriangle, mediumIsoscelesTriangle, bigSquareLikeRunner, bigWallRectangle];
+            objects.obstacles = [];
         },
 
         create: function() {
