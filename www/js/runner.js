@@ -6,7 +6,7 @@ var runner = function(polygon, color) {
     runner.updateBeforeDraw = function(chargeLevel) {
         if (chargeLevel > 0) {
             this.color = constants.chargeColors[chargeLevel];
-        } else {
+        } else if (this.onGround() && this.vspeed === 0) {
             this.color = colorPalette.runner;
         }
         var targetHeight = constants.chargeHeights[chargeLevel];

@@ -125,7 +125,7 @@ describe("The runner", function() {
         afterAll(function() {
             constants.motionTweenCoefficient = coefficient;
         });
-        describe("the color ", function() {
+        describe("the color", function() {
             it("should be set to charge level color  if not jumping and charge not 0", function() {
                 expect(testObject.color).toEqual(colorPalette.runner);
                 expect(testObject.onGround()).toBe(true);
@@ -144,6 +144,17 @@ describe("The runner", function() {
                 testObject.updateBeforeDraw(0);
 
                 expect(testObject.color).toEqual(colorPalette.runner);
+            });
+
+            it("should NOT be reset to runner base color if jumping and no charge", function() {
+                testObject.color = colorPalette.obstacleBig;
+                testObject.vspeed = -2;
+                testObject.applyGravity();
+                expect(testObject.onGround()).toBe(false);
+
+                testObject.updateBeforeDraw(0);
+
+                expect(testObject.color).toEqual(colorPalette.obstacleBig);
             });
         });
         it("the height should correspond to the charge height variable", function() {
