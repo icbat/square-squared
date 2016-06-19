@@ -35,7 +35,7 @@ function Obstacle(thingToExtend, minimumSpaceBehind, name) {
     thingToExtend.minimumSpaceBehind = minimumSpaceBehind;
     thingToExtend.name = name;
     thingToExtend.runnerLandCallback = function() {
-        thingToExtend.vspeed = -2;
+        thingToExtend.vspeed = -4 * constants.chargeEffects[gameState.lastJump.chargeLevel];
     };
     objects.runner.onLand.add(thingToExtend.runnerLandCallback);
     return thingToExtend;
