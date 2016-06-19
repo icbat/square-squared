@@ -17,6 +17,7 @@ var state_running = function(game) {
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), game.score, textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
+            objects.scoreDisplay.visible = false;
             objects.obstacles = [];
             obstacleGenerator.addObstacleToBack();
         },
@@ -60,6 +61,7 @@ var state_running = function(game) {
 
         scorePoint: function(obstacle) {
             ++game.score;
+            objects.scoreDisplay.visible = true;
             objects.scoreDisplay.text = (game.score);
             obstacle.hasScored = true;
         },
