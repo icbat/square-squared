@@ -1,8 +1,7 @@
 function ExtendedPolygon(polygonToExtend, color) {
     this.color = color;
     this.polygon = polygonToExtend;
-
-
+    this.visible = true;
 
     this.movePolygonBy = function(amountX) {
         var points = this.polygon.toNumberArray();
@@ -203,9 +202,11 @@ function ExtendedPolygon(polygonToExtend, color) {
     };
 
     this.draw = function(graphics) {
-        graphics.beginFill(this.color);
-        graphics.drawShape(this.polygon);
-        graphics.endFill();
+        if (this.visible) {
+            graphics.beginFill(this.color);
+            graphics.drawShape(this.polygon);
+            graphics.endFill();
+        }
     };
 
     this.intersects = function(other) {
