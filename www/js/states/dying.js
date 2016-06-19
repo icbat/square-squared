@@ -21,7 +21,6 @@ var state_dying = function(game) {
         update: function() {
             if (this.colorStep <= 50) {
                 objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, colorPalette.background, 50, this.colorStep++);
-                console.log(this.runnerOriginalColor, colorPalette.background, objects.runner.color);
             }
             if (game.time.time > this.timeToLeave) {
                 if (gameState.score && gameState.score > gameState.highScore) {
