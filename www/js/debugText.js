@@ -29,7 +29,7 @@ var drawDebugText = function(shouldDraw) {
         row++;
         game.debug.text("last distance between: " + (lastGeneratedObstacle.generatedAt - game.world.width), 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("minimum distance behind: " + lastGeneratedObstacle.lastMinimum + "(" + lastGeneratedObstacle.lastName + ")", 0, row++ * rowHeight, colorPalette.debugColor);
-        game.debug.text("distance from score: " + calculateDifficultyModifier(game.score), 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("distance from score: " + calculateDifficultyModifier(gameState.score), 0, row++ * rowHeight, colorPalette.debugColor);
         var obstacles = objects.obstacles ? objects.obstacles.length : 0;
         game.debug.text("obstacles in memory: " + obstacles, 0, row++ * rowHeight, colorPalette.debugColor);
         row++;

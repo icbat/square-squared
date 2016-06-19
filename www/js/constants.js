@@ -19,7 +19,8 @@ var gameState = {
       chargeLevel: 0,
       jumpCoefficient: 0,
       initalSpeed: 0,
-  }
+  },
+  score: 0
 };
 
 var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {

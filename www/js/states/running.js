@@ -1,7 +1,7 @@
 var state_running = function(game) {
     return {
         create: function(game) {
-            game.score = 0;
+            gameState.score = 0;
             this.graphics = game.add.graphics(0, 0);
             this.firstTouchY = -1;
             this.dragY = -1;
@@ -14,7 +14,7 @@ var state_running = function(game) {
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), game.score, textStyle);
+            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), gameState.score, textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
             objects.scoreDisplay.visible = false;
@@ -60,9 +60,9 @@ var state_running = function(game) {
         },
 
         scorePoint: function(obstacle) {
-            ++game.score;
+            ++gameState.score;
             objects.scoreDisplay.visible = true;
-            objects.scoreDisplay.text = (game.score);
+            objects.scoreDisplay.text = (gameState.score);
             obstacle.hasScored = true;
         },
 

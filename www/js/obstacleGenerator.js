@@ -3,7 +3,7 @@ var obstacleGenerator = {
         var obstacle = this.makeRandomObstacle();
         var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
         objects.obstacles.push(obstacle);
-        var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(game.score), Math);
+        var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(gameState.score), Math);
         obstacle.moveToX(newX);
         obstacle.hasScored = false;
         this.onObstacleAdded.dispatch(newX, lastObstacle);
