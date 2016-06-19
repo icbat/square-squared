@@ -31,6 +31,10 @@ var obstacleGenerator = {
     }
 };
 
+var calculateDifficultyModifier = function(currentScore) {
+    return Math.pow(7/10, currentScore) * 200;
+};
+
 function Obstacle(thingToExtend, minimumSpaceBehind, name) {
     thingToExtend.minimumSpaceBehind = minimumSpaceBehind;
     thingToExtend.name = name;
