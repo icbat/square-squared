@@ -116,7 +116,7 @@ var state_init = function(game) {
 
         create: function() {
             setupDebugging();
-            game.highScore = 0;
+            gameState.highScore = 0;
             game.stateTransition.to('waiting');
         }
     };

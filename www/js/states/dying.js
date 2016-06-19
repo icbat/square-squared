@@ -24,8 +24,8 @@ var state_dying = function(game) {
                 console.log(this.runnerOriginalColor, colorPalette.background, objects.runner.color);
             }
             if (game.time.time > this.timeToLeave) {
-                if (gameState.score && gameState.score > game.highScore) {
-                    game.highScore = gameState.score;
+                if (gameState.score && gameState.score > gameState.highScore) {
+                    gameState.highScore = gameState.score;
                 }
                 game.stateTransition.to('waiting');
             }
