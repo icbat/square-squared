@@ -1,21 +1,7 @@
-var lastJump = {
-    chargeLevel: 0,
-    jumpCoefficient: 0,
-    initalSpeed: 0,
-};
-
 var lastGeneratedObstacle = {
     generatedAt: null,
     lastMinimum: null,
     lastName: null
-};
-
-var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
-    lastJump = {
-        chargeLevel: chargeLevel,
-        jumpCoefficient: jumpCoefficient,
-        initalSpeed: initalSpeed
-    };
 };
 
 var onObstacleAddedDebug = function(newX, lastObstacle) {
@@ -48,9 +34,9 @@ var drawDebugText = function(shouldDraw) {
         game.debug.text("obstacles in memory: " + obstacles, 0, row++ * rowHeight, colorPalette.debugColor);
         row++;
         game.debug.text("Last Jump ", 0, row++ * rowHeight, colorPalette.debugColor);
-        game.debug.text("Charge Level " + lastJump.chargeLevel, 0, row++ * rowHeight, colorPalette.debugColor);
-        game.debug.text("Charge Coefficient " + lastJump.jumpCoefficient, 0, row++ * rowHeight, colorPalette.debugColor);
-        game.debug.text("JumpStrength " + lastJump.initalSpeed, 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("Charge Level " + gameState.lastJump.chargeLevel, 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("Charge Coefficient " + gameState.lastJump.jumpCoefficient, 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("JumpStrength " + gameState.lastJump.initalSpeed, 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.pointer(game.input.activePointer, false, 'rgba(0,255,0,0.5)', 'rgba(255,0,0,0.5)', colorPalette.debugColor);
     } else {
       game.time.advancedTiming = false;

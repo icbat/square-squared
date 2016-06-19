@@ -14,6 +14,22 @@ var colorPalette = {
     obstacleLow: 0x8844aa
 };
 
+var gameState = {
+  lastJump: {
+      chargeLevel: 0,
+      jumpCoefficient: 0,
+      initalSpeed: 0,
+  }
+};
+
+var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
+    gameState.lastJump = {
+        chargeLevel: chargeLevel,
+        jumpCoefficient: jumpCoefficient,
+        initalSpeed: initalSpeed
+    };
+};
+
 var constants = {
     debugMode: false,
     runnerSize: 64,
