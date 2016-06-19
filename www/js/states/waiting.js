@@ -26,14 +26,16 @@ var state_waiting = function(game) {
             this.targetInnerRed = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 40);
             this.targetInnerBlank = new Phaser.Circle(targetCenterX, targetCenterY, constants.runnerSize - 50);
 
-            var textStyle = {
-                fill: colorPalette.text,
-                boundsAlignH: "center",
-                boundsAlignV: "middle"
-            };
-            objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "High Score: " + game.highScore, textStyle);
-            objects.highScoreDisplay.anchor.y = 0.5;
-            objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
+            if (game.highScore && game.highScore > 0) {
+                var textStyle = {
+                    fill: colorPalette.text,
+                    boundsAlignH: "center",
+                    boundsAlignV: "middle"
+                };
+                objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "High Score: " + game.highScore, textStyle);
+                objects.highScoreDisplay.anchor.y = 0.5;
+                objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
+            }
         },
 
         makeArrow: function() {
