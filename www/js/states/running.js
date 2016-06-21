@@ -20,6 +20,18 @@ var state_running = function(game) {
             objects.scoreDisplay.visible = false;
             objects.obstacles = [];
             obstacleGenerator.addObstacleToBack();
+
+            var leftTween = game.add.tween(objects.leftJumpLine);
+            leftTween.to({
+                xPos:  game.world.width / -2
+            }, 1000, Phaser.Easing.Bounce.Out);
+            leftTween.start();
+
+            var rightTween = game.add.tween(objects.rightJumpLine);
+            rightTween.to({
+                xPos: game.world.width
+            }, 1000, Phaser.Easing.Bounce.Out);
+            rightTween.start();
         },
 
         update: function(game) {
@@ -53,6 +65,8 @@ var state_running = function(game) {
             var percent = percentOf(this.dragY, game.world.height);
             var charge = chargeLevel(percent);
             objects.runner.updateBeforeDraw(charge);
+            objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
+            objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
         },
 
         runnerHasPassedObstacle: function(obstacle, runner) {

@@ -20,6 +20,33 @@ var state_waiting = function(game) {
                 objects.highScoreDisplay.anchor.y = 0.5;
                 objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
             }
+            // Put the jump line off screen
+            objects.leftJumpLine.xPos = game.world.width / -2;
+            objects.leftJumpLine.moveToX(game.world.width / -2);
+            objects.rightJumpLine.xPos = game.world.width;
+            objects.rightJumpLine.moveToX(game.world.width);
+
+            var leftTween = game.add.tween(objects.leftJumpLine);
+            leftTween.to({
+                xPos: 0
+            }, 1000, Phaser.Easing.Bounce.Out);
+            leftTween.start();
+
+            var rightTween = game.add.tween(objects.rightJumpLine);
+            rightTween.to({
+                xPos: game.world.width / 2
+            }, 1000, Phaser.Easing.Bounce.Out);
+            rightTween.start();
+        },
+
+        update: function() {
+            objects.runner.applyGravity();
+            this.dragY = this.firstTouchY - game.input.activePointer.worldY;
+            var percent = percentOf(this.dragY, game.world.height);
+            var charge = chargeLevel(percent);
+            objects.runner.updateBeforeDraw(charge);
+            objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
+            objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
         },
 
         render: function() {
@@ -29,14 +56,6 @@ var state_waiting = function(game) {
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
-        },
-
-        update: function() {
-            objects.runner.applyGravity();
-            this.dragY = this.firstTouchY - game.input.activePointer.worldY;
-            var percent = percentOf(this.dragY, game.world.height);
-            var charge = chargeLevel(percent);
-            objects.runner.updateBeforeDraw(charge);
         },
 
         onDown: function(pointer, mouseEvent) {

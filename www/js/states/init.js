@@ -123,7 +123,6 @@ var state_init = function(game) {
             );
             objects.leftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
             objects.rightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
-            objects.rightJumpLine.moveToX(game.world.width / 2);
         },
 
         create: function() {
