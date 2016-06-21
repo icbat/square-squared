@@ -19,7 +19,7 @@ describe("Charge levels", function() {
     });
 
     it("should return 0 at 0", function() {
-      expect(chargeLevel(0)).toBe(0);
+      expect(chargeLevel(0)).toBe(1);
     });
 
     it("should return 3 at 100%", function() {
