@@ -29,13 +29,6 @@ var state_waiting = function(game) {
                 new Phaser.Point(0, initY + lineThickness)
             );
             this.atLeastThisTallLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
-            var callback = function() {
-                if (gameState.lastJump.chargeLevel === constants.chargeLevels.length - 1) {
-                    objects.runner.onLand.remove(this);
-                    game.stateTransition.to('running');
-                }
-            };
-            objects.runner.onLand.add(callback, callback);
         },
 
         render: function() {
@@ -74,6 +67,9 @@ var state_waiting = function(game) {
                 objects.runner.jump(charge);
                 this.firstTouchY = -1;
                 this.dragY = -1;
+                if (charge === 3) {
+                  game.stateTransition.to('running');
+                }
             }
         }
     };
