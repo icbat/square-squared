@@ -49,9 +49,6 @@ var state_waiting = function(game) {
             objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
             if (this.dragY > 0) {
                 objects.dragLine.setHeight(this.dragY);
-                objects.dragLine.visible = true;
-            } else {
-              objects.dragLine.visible = false;
             }
             objects.dragLine.color = constants.chargeColors[charge];
         },
@@ -76,6 +73,7 @@ var state_waiting = function(game) {
                         this.firstTouchY = pointer.worldY;
                     }
                     objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
+                    objects.dragLine.visible = true;
                 }
             }
         },

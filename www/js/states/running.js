@@ -70,9 +70,6 @@ var state_running = function(game) {
 
             if (this.dragY > 0) {
                 objects.dragLine.setHeight(this.dragY);
-                objects.dragLine.visible = true;
-            } else {
-              objects.dragLine.visible = false;
             }
             objects.dragLine.color = constants.chargeColors[charge];
         },
@@ -108,6 +105,7 @@ var state_running = function(game) {
                 if (this.firstTouchY === -1) {
                     this.firstTouchY = pointer.worldY;
                     objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
+                    objects.dragLine.visible = true;
                 }
             }
         },
