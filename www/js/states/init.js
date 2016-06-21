@@ -123,6 +123,15 @@ var state_init = function(game) {
             );
             objects.leftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
             objects.rightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+
+            var tallLine = new Phaser.Polygon(
+                new Phaser.Point(0, 0),
+                new Phaser.Point(4, 0),
+                new Phaser.Point(4, 1),
+                new Phaser.Point(0, 1)
+            );
+
+            objects.dragLine = new ExtendedPolygon(tallLine, colorPalette.runner);
         },
 
         create: function() {

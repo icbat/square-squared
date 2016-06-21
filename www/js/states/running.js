@@ -92,6 +92,7 @@ var state_running = function(game) {
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
+            objects.dragLine.draw(this.graphics);
         },
 
         onDown: function(pointer, mouseEvent) {

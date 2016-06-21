@@ -47,6 +47,13 @@ var state_waiting = function(game) {
             objects.runner.updateBeforeDraw(charge);
             objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
             objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
+            if (this.dragY > 0) {
+                objects.dragLine.setHeight(this.dragY);
+                objects.dragLine.visible = true;
+            } else {
+              objects.dragLine.visible = false;
+            }
+            objects.dragLine.color = constants.chargeColors[charge];
         },
 
         render: function() {
@@ -56,6 +63,7 @@ var state_waiting = function(game) {
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
+            objects.dragLine.draw(this.graphics);
         },
 
         onDown: function(pointer, mouseEvent) {
@@ -67,6 +75,7 @@ var state_waiting = function(game) {
                     } else {
                         this.firstTouchY = pointer.worldY;
                     }
+                    objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
                 }
             }
         },
@@ -76,6 +85,7 @@ var state_waiting = function(game) {
             if (mouseEvent.identifier === 0) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
                 objects.runner.jump(charge);
+                objects.dragLine.visible = false;
                 this.firstTouchY = -1;
                 this.dragY = -1;
                 if (charge === 3) {
