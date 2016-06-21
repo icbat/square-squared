@@ -18,10 +18,27 @@ var state_waiting = function(game) {
                 objects.highScoreDisplay.anchor.y = 0.5;
                 objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
             }
+            var initY = constants.groundHeight - 200;
+            var lineThickness = 2;
+            var tinyLine = new Phaser.Polygon(
+                new Phaser.Point(0, initY),
+                new Phaser.Point(game.world.width, initY),
+                new Phaser.Point(game.world.width, initY + lineThickness),
+                new Phaser.Point(0, initY + lineThickness)
+            );
+            this.atLeastThisTallLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            var callback = function() {
+                if (gameState.lastJump.chargeLevel === constants.chargeLevels.length - 1) {
+                    objects.runner.onLand.remove(this);
+                    game.stateTransition.to('running');
+                }
+            };
+            objects.runner.onLand.add(callback, callback);
         },
 
         render: function() {
             this.graphics.clear();
+            this.atLeastThisTallLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
@@ -52,11 +69,7 @@ var state_waiting = function(game) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
             if (mouseEvent.identifier === 0) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
-
                 objects.runner.jump(charge);
-                if (charge === 3) {
-                    game.stateTransition.to('running');
-                }
                 this.firstTouchY = -1;
                 this.dragY = -1;
             }
