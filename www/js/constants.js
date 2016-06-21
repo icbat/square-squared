@@ -15,13 +15,13 @@ var colorPalette = {
 };
 
 var gameState = {
-  lastJump: {
-      chargeLevel: 0,
-      jumpCoefficient: 0,
-      initalSpeed: 0,
-  },
-  score: 0,
-  highScore: 0
+    lastJump: {
+        chargeLevel: 0,
+        jumpCoefficient: 0,
+        initalSpeed: 0,
+    },
+    score: 0,
+    highScore: 0
 };
 
 var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
