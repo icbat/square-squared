@@ -8,7 +8,7 @@ var state_waiting = function(game) {
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
 
-            onJumpDebug(0,0,0);
+            onJumpDebug(0, 0, 0);
 
             if (gameState.highScore && gameState.highScore > 0) {
                 var textStyle = {
@@ -59,7 +59,7 @@ var state_waiting = function(game) {
                 this.firstTouchY = -1;
                 this.dragY = -1;
                 if (charge === 3) {
-                  game.stateTransition.to('running');
+                    game.stateTransition.to('running');
                 }
             }
         }
