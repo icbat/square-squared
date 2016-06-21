@@ -24,7 +24,8 @@ var state_waiting = function(game) {
 
         render: function() {
             this.graphics.clear();
-            objects.atLeastThisTallLine.draw(this.graphics);
+            objects.leftJumpLine.draw(this.graphics);
+            objects.rightJumpLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);

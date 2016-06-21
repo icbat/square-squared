@@ -117,11 +117,13 @@ var state_init = function(game) {
             var lineThickness = 2;
             var tinyLine = new Phaser.Polygon(
                 new Phaser.Point(0, initY),
-                new Phaser.Point(game.world.width, initY),
-                new Phaser.Point(game.world.width, initY + lineThickness),
+                new Phaser.Point(game.world.width / 2, initY),
+                new Phaser.Point(game.world.width / 2, initY + lineThickness),
                 new Phaser.Point(0, initY + lineThickness)
             );
-            objects.atLeastThisTallLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            objects.leftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            objects.rightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            objects.rightJumpLine.moveToX(game.world.width / 2);
         },
 
         create: function() {
