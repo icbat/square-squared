@@ -106,6 +106,7 @@ var state_running = function(game) {
                     this.firstTouchY = pointer.worldY;
                     objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
                     objects.dragLine.visible = true;
+                    objects.dragLine.setHeight(1);
                 }
             }
         },

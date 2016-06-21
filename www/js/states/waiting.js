@@ -74,6 +74,7 @@ var state_waiting = function(game) {
                     }
                     objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
                     objects.dragLine.visible = true;
+                    objects.dragLine.setHeight(1);
                 }
             }
         },
