@@ -1,8 +1,6 @@
 function ExtendedPolygon(polygonToExtend, color) {
     this.color = color;
-    this.polygon = polygonToExtend;
-
-
+    this.polygon = polygonToExtend.clone();
 
     this.movePolygonBy = function(amountX) {
         var points = this.polygon.toNumberArray();
