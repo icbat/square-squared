@@ -30,6 +30,7 @@ function ExtendedPolygon(polygonToExtend, color) {
     };
 
     this.setHeight = function(newHeight) {
+        newHeight = Math.ceil(newHeight);
         var points = this.toPoints();
         var lowestY = this.findLowestPoint();
         var highestY = this.findHighestPoint();
