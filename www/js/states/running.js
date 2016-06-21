@@ -67,6 +67,14 @@ var state_running = function(game) {
             objects.runner.updateBeforeDraw(charge);
             objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
             objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
+
+            if (this.dragY > 0) {
+                objects.dragLine.setHeight(this.dragY);
+                objects.dragLine.visible = true;
+            } else {
+              objects.dragLine.visible = false;
+            }
+            objects.dragLine.color = constants.chargeColors[charge];
         },
 
         runnerHasPassedObstacle: function(obstacle, runner) {
@@ -99,6 +107,7 @@ var state_running = function(game) {
             if (mouseEvent.identifier === 0) {
                 if (this.firstTouchY === -1) {
                     this.firstTouchY = pointer.worldY;
+                    objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
                 }
             }
         },
@@ -110,6 +119,7 @@ var state_running = function(game) {
                 objects.runner.jump(charge);
                 this.firstTouchY = -1;
                 this.dragY = -1;
+                objects.dragLine.visible = false;
             }
         }
     };
