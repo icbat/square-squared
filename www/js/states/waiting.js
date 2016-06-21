@@ -20,20 +20,11 @@ var state_waiting = function(game) {
                 objects.highScoreDisplay.anchor.y = 0.5;
                 objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
             }
-            var initY = constants.groundHeight - 200;
-            var lineThickness = 2;
-            var tinyLine = new Phaser.Polygon(
-                new Phaser.Point(0, initY),
-                new Phaser.Point(game.world.width, initY),
-                new Phaser.Point(game.world.width, initY + lineThickness),
-                new Phaser.Point(0, initY + lineThickness)
-            );
-            this.atLeastThisTallLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
         },
 
         render: function() {
             this.graphics.clear();
-            this.atLeastThisTallLine.draw(this.graphics);
+            objects.atLeastThisTallLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);

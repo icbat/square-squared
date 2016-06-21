@@ -112,6 +112,16 @@ var state_init = function(game) {
 
             objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumAcuteTriangle, mediumIsoscelesTriangle, bigSquareLikeRunner, bigWallRectangle];
             objects.obstacles = [];
+
+            var initY = constants.groundHeight - 200;
+            var lineThickness = 2;
+            var tinyLine = new Phaser.Polygon(
+                new Phaser.Point(0, initY),
+                new Phaser.Point(game.world.width, initY),
+                new Phaser.Point(game.world.width, initY + lineThickness),
+                new Phaser.Point(0, initY + lineThickness)
+            );
+            objects.atLeastThisTallLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
         },
 
         create: function() {
