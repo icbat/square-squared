@@ -3,8 +3,8 @@ var state_running = function(game) {
         create: function(game) {
             gameState.score = 0;
             this.graphics = game.add.graphics(0, 0);
-            this.firstTouchY = -1;
-            this.dragY = -1;
+            this.firstTouchY = null;
+            this.dragY = null;
 
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
@@ -102,7 +102,7 @@ var state_running = function(game) {
 
         onDown: function(pointer, mouseEvent) {
             if (mouseEvent.identifier === 0) {
-                if (this.firstTouchY === -1) {
+                if (this.firstTouchY === null) {
                     this.firstTouchY = pointer.worldY;
                     objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
                     objects.dragLine.visible = true;
@@ -116,8 +116,8 @@ var state_running = function(game) {
             if (mouseEvent.identifier === 0) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
                 objects.runner.jump(charge);
-                this.firstTouchY = -1;
-                this.dragY = -1;
+                this.firstTouchY = null;
+                this.dragY = null;
                 objects.dragLine.visible = false;
             }
         }

@@ -1,8 +1,8 @@
 var state_waiting = function(game) {
     return {
         create: function(game) {
-            this.firstTouchY = -1;
-            this.dragY = -1;
+            this.firstTouchY = null;
+            this.dragY = null;
             this.graphics = game.add.graphics(0, 0);
 
             game.input.onDown.add(this.onDown, this);
@@ -65,7 +65,7 @@ var state_waiting = function(game) {
 
         onDown: function(pointer, mouseEvent) {
             if (mouseEvent.identifier === 0) {
-                if (this.firstTouchY === -1) {
+                if (this.firstTouchY === null) {
                     if (pointer.worldX < constants.runnerSize && pointer.worldY < constants.runnerSize) {
                         constants.debugMode = !constants.debugMode;
                         game.debug.reset();
@@ -85,8 +85,8 @@ var state_waiting = function(game) {
                 var charge = chargeLevel(percentOf(this.dragY, game.world.height));
                 objects.runner.jump(charge);
                 objects.dragLine.visible = false;
-                this.firstTouchY = -1;
-                this.dragY = -1;
+                this.firstTouchY = null;
+                this.dragY = null;
                 if (charge === 3) {
                     game.stateTransition.to('running');
                 }
