@@ -68,7 +68,7 @@ var state_running = function(game) {
 
         render: function() {
             this.graphics.clear();
-
+            objects.atLeastThisTallLine.draw(this.graphics);
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
