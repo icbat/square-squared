@@ -105,16 +105,6 @@ describe("The runner", function() {
             }
 
         });
-
-        it("shouldn't jump at all when the chargeLevel is 0", function() {
-            var initialHeight = constants.groundHeight;
-            testObject.moveToY(initialHeight - constants.runnerSize);
-            testObject.vspeed = 0;
-
-            testObject.jump(0);
-
-            expect(testObject.vspeed).toBe(0);
-        });
     });
 
     describe("updateForDraw", function() {
@@ -132,7 +122,7 @@ describe("The runner", function() {
                 expect(testObject.onGround()).toBe(true);
                 var chargeLevel;
                 for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                    testObject.updateBeforeDraw(chargeLevel);
+                    testObject.updateBeforeDraw(chargeLevel, true);
 
                     expect(testObject.color).toEqual(constants.chargeColors[chargeLevel]);
                 }
@@ -142,7 +132,7 @@ describe("The runner", function() {
                 expect(testObject.color).toEqual(colorPalette.runner);
                 expect(testObject.onGround()).toBe(true);
 
-                testObject.updateBeforeDraw(0);
+                testObject.updateBeforeDraw(0, false);
 
                 expect(testObject.color).toEqual(colorPalette.runner);
             });
@@ -153,7 +143,7 @@ describe("The runner", function() {
                 testObject.applyGravity();
                 expect(testObject.onGround()).toBe(false);
 
-                testObject.updateBeforeDraw(0);
+                testObject.updateBeforeDraw(0, false);
 
                 expect(testObject.color).toEqual(colorPalette.obstacleBig);
             });
@@ -161,7 +151,7 @@ describe("The runner", function() {
         it("the height should correspond to the charge height variable", function() {
             var chargeLevel;
             for (chargeLevel = 0; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                testObject.updateBeforeDraw(chargeLevel);
+                testObject.updateBeforeDraw(chargeLevel, true);
 
                 expect(testObject.findHeight()).toEqual(constants.chargeHeights[chargeLevel]);
             }

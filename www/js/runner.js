@@ -6,15 +6,17 @@ var runner = function(polygon, color) {
         objects.runner.color = colorPalette.runner;
     });
 
-    runner.updateBeforeDraw = function(chargeLevel) {
-        if (chargeLevel > 0) {
+    runner.updateBeforeDraw = function(chargeLevel, touchIsDown) {
+        var targetHeight = constants.runnerSize;
+        if (touchIsDown) {
             this.color = constants.chargeColors[chargeLevel];
+            targetHeight = constants.chargeHeights[chargeLevel];
         }
-        var targetHeight = constants.chargeHeights[chargeLevel];
         if (targetHeight !== this.height) {
             var newHeight = this.height + (targetHeight - this.height) * constants.motionTweenCoefficient;
             this.setHeight(newHeight);
         }
+
     };
 
     runner.jump = function(chargeLevel) {

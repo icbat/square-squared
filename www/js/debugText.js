@@ -24,7 +24,8 @@ var drawDebugText = function(shouldDraw) {
         var rowHeight = 16;
         game.debug.text("FPS " + game.time.fps + " (" + game.time.fpsMax + ")", 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("world " + game.world.height + "h x " + game.world.width + "w", 0, row++ * rowHeight, colorPalette.debugColor);
-        game.debug.text("player height: " + (constants.groundHeight - objects.runner.findLowestPoint()), 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("player off ground: " + (constants.groundHeight - objects.runner.findLowestPoint()), 0, row++ * rowHeight, colorPalette.debugColor);
+        game.debug.text("player height: " + objects.runner.findHeight(), 0, row++ * rowHeight, colorPalette.debugColor);
         game.debug.text("player vspeed: " + objects.runner.vspeed, 0, row++ * rowHeight, colorPalette.debugColor);
         row++;
         game.debug.text("last distance between: " + (lastGeneratedObstacle.generatedAt - game.world.width), 0, row++ * rowHeight, colorPalette.debugColor);
