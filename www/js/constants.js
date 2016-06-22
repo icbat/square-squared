@@ -46,11 +46,8 @@ var constants = {
     chargeColors: [colorPalette.runner, colorPalette.obstacleLow, colorPalette.obstacleMedium, colorPalette.obstacleBig]
 };
 
-var percentOf = function(amount, total) {
-    return Math.floor(amount / total * 100);
-};
-
-var chargeLevel = function(percent) {
+var chargeLevel = function(amount, screenTotal) {
+    var percent = Math.floor(amount / screenTotal * 100);
     var chargeLevel;
     var i;
     for (i = constants.chargeLevels.length; i >= 0; --i) {

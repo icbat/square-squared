@@ -4,6 +4,7 @@ describe("The runner", function() {
     var badHeight = 413;
 
     beforeEach(function() {
+        objects.runner = {};
         // Usually defined in the init state (Because it needs the World to exist first)
         constants.groundHeight = badHeight - constants.runnerSize;
 

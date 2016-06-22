@@ -47,8 +47,7 @@ var state_waiting = function(game) {
         update: function() {
             objects.runner.applyGravity();
             this.dragY = this.firstTouchY - game.input.activePointer.worldY;
-            var percent = percentOf(this.dragY, game.world.height);
-            var charge = chargeLevel(percent);
+            var charge = chargeLevel(this.dragY, game.world.height);
             objects.runner.updateBeforeDraw(charge);
             objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
             objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
@@ -87,7 +86,7 @@ var state_waiting = function(game) {
         onUp: function(pointer, mouseEvent) {
             // pointer.identifier === 0 Prevents 'mouse leaving the game world' from firing this, too
             if (mouseEvent.identifier === 0) {
-                var charge = chargeLevel(percentOf(this.dragY, game.world.height));
+                var charge = chargeLevel(this.dragY, game.world.height);
                 objects.runner.jump(charge);
                 objects.dragLine.visible = false;
                 this.firstTouchY = null;
