@@ -50,10 +50,6 @@ var percentOf = function(amount, total) {
     return Math.floor(amount / total * 100);
 };
 
-var fromPercent = function(percent, total) {
-    return Math.floor(percent / 100 * total);
-};
-
 var chargeLevel = function(percent) {
     var chargeLevel;
     var i;
