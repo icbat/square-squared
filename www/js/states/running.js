@@ -109,7 +109,7 @@ var state_running = function(game) {
             if (mouseEvent.identifier === 0) {
                 if (this.firstTouchY === null) {
                     this.firstTouchY = pointer.worldY;
-                    objects.dragLine.setLowerLeftTo(pointer.worldX, pointer.worldY);
+                    objects.dragLine.setLowerLeftTo(pointer.worldX + constants.runnerSize / 2, pointer.worldY);
                     objects.dragLine.visible = true;
                     objects.dragLine.setHeight(1);
                 }
