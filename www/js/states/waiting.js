@@ -7,6 +7,11 @@ var state_waiting = function(game) {
 
             game.input.onDown.add(this.onDown, this);
             game.input.onUp.add(this.onUp, this);
+            game.input.onUp.add(function() {
+                if (objects.runner.onGround() && objects.runner.vspeed === 0) {
+                    objects.runner.color = colorPalette.runner;
+                }
+            });
 
             onJumpDebug(0, 0, 0);
 

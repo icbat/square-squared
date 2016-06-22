@@ -2,12 +2,13 @@ var runner = function(polygon, color) {
     var runner = new ExtendedPolygon(polygon, color);
 
     runner.onJump = new Phaser.Signal();
+    runner.onLand.add(function() {
+        objects.runner.color = colorPalette.runner;
+    });
 
     runner.updateBeforeDraw = function(chargeLevel) {
         if (chargeLevel > 0) {
             this.color = constants.chargeColors[chargeLevel];
-        } else if (this.onGround() && this.vspeed === 0) {
-            this.color = colorPalette.runner;
         }
         var targetHeight = constants.chargeHeights[chargeLevel];
         if (targetHeight !== this.height) {
