@@ -28,7 +28,7 @@ var state_running = function(game) {
 
             var leftTween = game.add.tween(objects.leftJumpLine);
             leftTween.to({
-                xPos:  game.world.width / -2
+                xPos: game.world.width / -2
             }, 1000, Phaser.Easing.Bounce.Out);
             leftTween.start();
 
