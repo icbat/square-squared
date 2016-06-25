@@ -1,6 +1,8 @@
 var state_init = function(game) {
     return {
         preload: function() {
+            game.load.audio('land', 'assets/sounds/land.ogg');
+
             game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
             this.game.stateTransition.configure({
                 // Actually putting 0 makes this plugin think you don't want to set anything
