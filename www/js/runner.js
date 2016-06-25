@@ -24,6 +24,8 @@ var runner = function(polygon, color) {
             var chargeEffect = constants.chargeEffects[chargeLevel];
             this.vspeed = constants.jumpStrength * chargeEffect;
             this.onJump.dispatch(chargeLevel, chargeEffect, this.vspeed);
+            var jumpSound = game.sound.play('jump', 0.3);
+            jumpSound._sound.playbackRate.value = 2 -  chargeEffect;
         }
     };
 
