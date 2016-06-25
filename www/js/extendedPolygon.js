@@ -227,7 +227,7 @@ function ExtendedPolygon(polygonToExtend, color) {
 
     this.onLand = new Phaser.Signal();
     this.onLand.add(function() {
-        game.sound.play('land');
+        game.sound.play('land', 0.15);
     });
 
     this.applyGravity = function() {
