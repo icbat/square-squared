@@ -1,5 +1,6 @@
 function ExtendedPolygon(polygonToExtend, color) {
     this.color = color;
+    this.alpha = 1;
     this.polygon = polygonToExtend.clone();
     this.visible = true;
 
@@ -204,7 +205,7 @@ function ExtendedPolygon(polygonToExtend, color) {
 
     this.draw = function(graphics) {
         if (this.visible) {
-            graphics.beginFill(this.color);
+            graphics.beginFill(this.color, this.alpha);
             graphics.drawShape(this.polygon);
             graphics.endFill();
         }
