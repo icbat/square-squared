@@ -23,9 +23,8 @@ var state_dying = function(game) {
                 objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, colorPalette.background, 50, this.colorStep++);
             }
             if (game.time.time > this.timeToLeave) {
-                if (gameState.score && gameState.score > gameState.highScore) {
-                    gameState.highScore = gameState.score;
-                }
+                var highScore = localStorage.getItem('squareSquared-highScore');
+                localStorage.setItem('squareSquared-highScore', Math.max(gameState.score, highScore ? highScore : 0));
                 objects.runner.color = colorPalette.runner;
                 game.stateTransition.to('waiting');
             }
