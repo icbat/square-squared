@@ -3,6 +3,7 @@ var state_init = function(game) {
         preload: function() {
             game.load.audio('land', 'assets/sounds/land.ogg');
             game.load.audio('jump', 'assets/sounds/jump.ogg');
+            game.load.audio('lose', 'assets/sounds/lose.ogg');
 
             game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
             this.game.stateTransition.configure({
