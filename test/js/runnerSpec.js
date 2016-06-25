@@ -5,6 +5,11 @@ describe("The runner", function() {
 
     beforeEach(function() {
         objects.runner = {};
+        game = {
+            sound: {
+                play: function() {}
+            }
+        };
         // Usually defined in the init state (Because it needs the World to exist first)
         constants.groundHeight = badHeight - constants.runnerSize;
 
