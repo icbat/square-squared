@@ -88,6 +88,8 @@ var state_running = function(game) {
             objects.scoreDisplay.visible = true;
             objects.scoreDisplay.text = (gameState.score);
             obstacle.hasScored = true;
+            var loseSound = game.sound.play('score', 0.1);
+            loseSound._sound.playbackRate.value = 0.8 + Math.max(0.05 * gameState.score, 2);
         },
 
         render: function() {
