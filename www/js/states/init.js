@@ -1,6 +1,10 @@
 var state_init = function(game) {
     return {
         preload: function() {
+            this.assetsLoaded = false;
+            game.load.onLoadComplete.add(function() {
+                this.assetsLoaded = true;
+            }, this);
             game.load.audio('land', 'assets/sounds/land.ogg');
             game.load.audio('jump', 'assets/sounds/jump.ogg');
             game.load.audio('lose', 'assets/sounds/lose.ogg');
@@ -137,12 +141,14 @@ var state_init = function(game) {
             );
 
             objects.dragLine = new ExtendedPolygon(tallLine, colorPalette.runner);
-        },
-
-        create: function() {
             setupDebugging();
             gameState.highScore = 0;
-            game.stateTransition.to('waiting');
+        },
+
+        update: function() {
+            if (this.assetsLoaded) {
+                game.stateTransition.to('waiting');
+            }
         }
     };
 };
