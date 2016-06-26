@@ -26,7 +26,7 @@ var state_running = function(game) {
         },
 
         update: function(game) {
-            if (this.gameIsLost) {
+            if (gameState.state == states.dying) {
                 if (this.colorStep <= 50) {
                     objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, colorPalette.background, 50, this.colorStep++);
                 }
@@ -132,7 +132,7 @@ var runnerHasPassedObstacle = function(obstacle, runner) {
     return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < runner.findLeftmostPoint() - 1;
 };
 var loseGame = function(context) {
-    context.gameIsLost = true;
+    gameState.state = states.dying;
     context.timeToLeave = game.time.time + constants.timeOnDyingScreen;
     context.colorStep = 0;
     context.runnerOriginalColor = objects.runner.color;

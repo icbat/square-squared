@@ -25,7 +25,8 @@ var gameState = {
 
 var states = {
     waiting: "WAITING",
-    running: "RUNNING"
+    running: "RUNNING",
+    dying: "DYING"
 };
 
 var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
