@@ -21,6 +21,9 @@ var state_running = function(game) {
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), gameState.score, textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
+            objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "", textStyle);
+            objects.highScoreDisplay.anchor.y = 0.5;
+            objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
 
             setupGame();
         },
@@ -162,14 +165,10 @@ var setupGame = function() {
     objects.obstacles = [];
     var highScore = localStorage.getItem('squareSquared-highScore');
     if (highScore && highScore > 0) {
-        var textStyle = {
-            fill: colorPalette.text,
-            boundsAlignH: "center",
-            boundsAlignV: "middle"
-        };
-        objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "High Score: " + highScore, textStyle);
-        objects.highScoreDisplay.anchor.y = 0.5;
-        objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
+        objects.highScoreDisplay.text = "High Score: " + highScore;
+        objects.highScoreDisplay.visible = true;
+    } else {
+        objects.highScoreDisplay.visible = false;
     }
     objects.scoreDisplay.visible = false;
 
