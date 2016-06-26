@@ -134,6 +134,11 @@ var state_init = function(game) {
             );
             objects.leftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
             objects.rightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            // Put the jump line off screen
+            objects.leftJumpLine.xPos = game.world.width / -2;
+            objects.leftJumpLine.moveToX(game.world.width / -2);
+            objects.rightJumpLine.xPos = game.world.width;
+            objects.rightJumpLine.moveToX(game.world.width);
 
             var tallLine = new Phaser.Polygon(
                 new Phaser.Point(0, 0),

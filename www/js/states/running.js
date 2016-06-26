@@ -1,7 +1,6 @@
 var state_running = function(game) {
     return {
         create: function(game) {
-            gameState.score = 0;
             this.graphics = game.add.graphics(0, 0);
             this.firstTouchY = null;
             this.dragY = null;
@@ -26,6 +25,7 @@ var state_running = function(game) {
             objects.obstacles = [];
             obstacleGenerator.addObstacleToBack();
 
+            gameState.score = 0;
             var leftTween = game.add.tween(objects.leftJumpLine);
             leftTween.to({
                 xPos: game.world.width / -2

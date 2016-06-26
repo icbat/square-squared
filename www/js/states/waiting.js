@@ -29,12 +29,6 @@ var state_waiting = function(game) {
             game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleGreen', 'Square', 64);
             game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
 
-            // Put the jump line off screen
-            objects.leftJumpLine.xPos = game.world.width / -2;
-            objects.leftJumpLine.moveToX(game.world.width / -2);
-            objects.rightJumpLine.xPos = game.world.width;
-            objects.rightJumpLine.moveToX(game.world.width);
-
             var leftTween = game.add.tween(objects.leftJumpLine);
             leftTween.to({
                 xPos: 0
@@ -75,13 +69,8 @@ var state_waiting = function(game) {
         onDown: function(pointer, mouseEvent) {
             if (mouseEvent.identifier === 0) {
                 if (this.firstTouchY === null) {
-                    if (pointer.worldX < constants.runnerSize && pointer.worldY < constants.runnerSize) {
-                        constants.debugMode = !constants.debugMode;
-                        game.debug.reset();
-                    } else {
-                        this.firstTouchY = pointer.worldY;
-                    }
-                    objects.dragLine.setLowerLeftTo(pointer.worldX  + constants.runnerSize / 2, pointer.worldY);
+                    this.firstTouchY = pointer.worldY;
+                    objects.dragLine.setLowerLeftTo(pointer.worldX + constants.runnerSize / 2, pointer.worldY);
                     objects.dragLine.visible = true;
                     objects.dragLine.setHeight(1);
                 }
@@ -93,9 +82,9 @@ var state_waiting = function(game) {
             if (mouseEvent.identifier === 0) {
                 var charge = chargeLevel(this.dragY, game.world.height, false);
                 objects.runner.jump(charge);
-                objects.dragLine.visible = false;
                 this.firstTouchY = null;
                 this.dragY = null;
+                objects.dragLine.visible = false;
                 if (charge === constants.chargeLevels.length - 1) {
                     game.stateTransition.to('running');
                 }
