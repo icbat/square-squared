@@ -25,18 +25,7 @@ var state_running = function(game) {
             objects.obstacles = [];
             obstacleGenerator.addObstacleToBack();
 
-            gameState.score = 0;
-            var leftTween = game.add.tween(objects.leftJumpLine);
-            leftTween.to({
-                xPos: game.world.width / -2
-            }, 1000, Phaser.Easing.Bounce.Out);
-            leftTween.start();
-
-            var rightTween = game.add.tween(objects.rightJumpLine);
-            rightTween.to({
-                xPos: game.world.width
-            }, 1000, Phaser.Easing.Bounce.Out);
-            rightTween.start();
+            startGame();
         },
 
         update: function(game) {
@@ -149,4 +138,19 @@ var loseGame = function(context) {
     context.runnerOriginalColor = objects.runner.color;
     var loseSound = game.sound.play('lose', 0.1);
     loseSound._sound.playbackRate.value = 0.5;
+};
+
+var startGame = function() {
+    gameState.score = 0;
+    var leftTween = game.add.tween(objects.leftJumpLine);
+    leftTween.to({
+        xPos: game.world.width / -2
+    }, 1000, Phaser.Easing.Bounce.Out);
+    leftTween.start();
+
+    var rightTween = game.add.tween(objects.rightJumpLine);
+    rightTween.to({
+        xPos: game.world.width
+    }, 1000, Phaser.Easing.Bounce.Out);
+    rightTween.start();
 };
