@@ -54,7 +54,7 @@ var state_running = function(game) {
                     return;
                 }
 
-                if (this.runnerHasPassedObstacle(obstacle, objects.runner)) {
+                if (runnerHasPassedObstacle(obstacle, objects.runner)) {
                     this.scorePoint(obstacle);
                 }
 
@@ -77,10 +77,6 @@ var state_running = function(game) {
                 objects.dragLine.setHeight(this.dragY);
             }
             objects.dragLine.color = constants.chargeColors[charge];
-        },
-
-        runnerHasPassedObstacle: function(obstacle, runner) {
-            return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < runner.findLeftmostPoint() - 1;
         },
 
         scorePoint: function(obstacle) {
@@ -129,4 +125,8 @@ var state_running = function(game) {
             }
         }
     };
+};
+
+var runnerHasPassedObstacle = function(obstacle, runner) {
+    return !obstacle.hasScored && Math.round(obstacle.findRightmostPoint()) < runner.findLeftmostPoint() - 1;
 };

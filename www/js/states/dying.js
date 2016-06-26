@@ -1,13 +1,15 @@
 var state_dying = function(game) {
     return {
         create: function() {
-            this.timeToLeave = game.time.time + 1250;
             this.graphics = game.add.graphics(0, 0);
+
+            this.timeToLeave = game.time.time + constants.timeOnDyingScreen;
             this.colorStep = 0;
             this.runnerOriginalColor = objects.runner.color;
             var loseSound = game.sound.play('lose', 0.1);
             loseSound._sound.playbackRate.value = 0.5;
         },
+
         render: function() {
             this.graphics.clear();
 
@@ -20,6 +22,7 @@ var state_dying = function(game) {
             objects.ground.draw(this.graphics);
             drawDebugText(constants.debugMode);
         },
+        
         update: function() {
             if (this.colorStep <= 50) {
                 objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, colorPalette.background, 50, this.colorStep++);

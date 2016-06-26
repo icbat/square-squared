@@ -39,6 +39,7 @@ var constants = {
     hspeed: -2.5,
     jumpStrength: -15,
     motionTweenCoefficient: 0.3,
+    timeOnDyingScreen: 1250,
     chargeLevels: [0, 10, 20],
     chargeEffects: [0.5, 0.75, 1],
     chargeHeights: [54, 49, 47],
