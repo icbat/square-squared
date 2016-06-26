@@ -21,11 +21,8 @@ var state_running = function(game) {
             objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), gameState.score, textStyle);
             objects.scoreDisplay.anchor.set(0.5);
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
-            objects.scoreDisplay.visible = false;
-            objects.obstacles = [];
-            obstacleGenerator.addObstacleToBack();
 
-            startGame();
+            setupGame();
         },
 
         update: function(game) {
@@ -37,7 +34,7 @@ var state_running = function(game) {
                     var highScore = localStorage.getItem('squareSquared-highScore');
                     localStorage.setItem('squareSquared-highScore', Math.max(gameState.score, highScore ? highScore : 0));
                     objects.runner.color = colorPalette.runner;
-                    game.stateTransition.to('waiting');
+                    setupGame();
                     this.gameIsLost = false;
                 }
             } else {
@@ -60,11 +57,11 @@ var state_running = function(game) {
                     }
 
                 }
-                if (objects.obstacles[0].findRightmostPoint() < 0) {
+                if (objects.obstacles[0] && objects.obstacles[0].findRightmostPoint() < 0) {
                     var removed = objects.obstacles.shift();
                     objects.runner.onLand.remove(removed.runnerLandCallback);
                 }
-                if (objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
+                if (objects.obstacles[objects.obstacles.length - 1] && objects.obstacles[objects.obstacles.length - 1].findRightmostPoint() < game.world.width) {
                     obstacleGenerator.addObstacleToBack();
                 }
                 this.dragY = this.firstTouchY - game.input.activePointer.worldY;
@@ -123,6 +120,9 @@ var state_running = function(game) {
                 this.firstTouchY = null;
                 this.dragY = null;
                 objects.dragLine.visible = false;
+                if (gameState.state == states.waiting && charge === constants.chargeLevels.length - 1) {
+                    startGame();
+                }
             }
         }
     };
@@ -141,6 +141,8 @@ var loseGame = function(context) {
 };
 
 var startGame = function() {
+    gameState.state = states.running;
+    obstacleGenerator.addObstacleToBack();
     gameState.score = 0;
     var leftTween = game.add.tween(objects.leftJumpLine);
     leftTween.to({
@@ -151,6 +153,38 @@ var startGame = function() {
     var rightTween = game.add.tween(objects.rightJumpLine);
     rightTween.to({
         xPos: game.world.width
+    }, 1000, Phaser.Easing.Bounce.Out);
+    rightTween.start();
+};
+
+var setupGame = function() {
+    gameState.state = states.waiting;
+    objects.obstacles = [];
+    var highScore = localStorage.getItem('squareSquared-highScore');
+    if (highScore && highScore > 0) {
+        var textStyle = {
+            fill: colorPalette.text,
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        };
+        objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "High Score: " + highScore, textStyle);
+        objects.highScoreDisplay.anchor.y = 0.5;
+        objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
+    }
+    objects.scoreDisplay.visible = false;
+
+    game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleGreen', 'Square', 64);
+    game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
+
+    var leftTween = game.add.tween(objects.leftJumpLine);
+    leftTween.to({
+        xPos: 0
+    }, 1000, Phaser.Easing.Bounce.Out);
+    leftTween.start();
+
+    var rightTween = game.add.tween(objects.rightJumpLine);
+    rightTween.to({
+        xPos: game.world.width / 2
     }, 1000, Phaser.Easing.Bounce.Out);
     rightTween.start();
 };

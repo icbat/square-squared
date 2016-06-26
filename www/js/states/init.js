@@ -153,7 +153,7 @@ var state_init = function(game) {
 
         update: function() {
             if (this.assetsLoaded) {
-                game.stateTransition.to('waiting');
+                game.stateTransition.to('running');
             }
         }
     };

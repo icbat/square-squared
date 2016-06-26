@@ -23,6 +23,11 @@ var gameState = {
     score: 0
 };
 
+var states = {
+    waiting: "WAITING",
+    running: "RUNNING"
+};
+
 var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
     gameState.lastJump = {
         chargeLevel: chargeLevel,
