@@ -148,7 +148,6 @@ var state_init = function(game) {
             );
 
             objects.dragLine = new ExtendedPolygon(tallLine, colorPalette.runner);
-            setupDebugging();
             gameState.highScore = 0;
         },
 

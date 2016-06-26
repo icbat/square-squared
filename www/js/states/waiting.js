@@ -13,7 +13,6 @@ var state_waiting = function(game) {
                 }
             });
 
-            onJumpDebug(0, 0, 0);
             var highScore = localStorage.getItem('squareSquared-highScore');
             if (highScore && highScore > 0) {
                 var textStyle = {
@@ -62,7 +61,6 @@ var state_waiting = function(game) {
             objects.rightJumpLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
             objects.ground.draw(this.graphics);
-            drawDebugText(constants.debugMode);
             objects.dragLine.draw(this.graphics);
         },
 
