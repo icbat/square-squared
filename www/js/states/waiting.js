@@ -13,32 +13,7 @@ var state_waiting = function(game) {
                 }
             });
 
-            var highScore = localStorage.getItem('squareSquared-highScore');
-            if (highScore && highScore > 0) {
-                var textStyle = {
-                    fill: colorPalette.text,
-                    boundsAlignH: "center",
-                    boundsAlignV: "middle"
-                };
-                objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "High Score: " + highScore, textStyle);
-                objects.highScoreDisplay.anchor.y = 0.5;
-                objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
-            }
-
-            game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleGreen', 'Square', 64);
-            game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
-
-            var leftTween = game.add.tween(objects.leftJumpLine);
-            leftTween.to({
-                xPos: 0
-            }, 1000, Phaser.Easing.Bounce.Out);
-            leftTween.start();
-
-            var rightTween = game.add.tween(objects.rightJumpLine);
-            rightTween.to({
-                xPos: game.world.width / 2
-            }, 1000, Phaser.Easing.Bounce.Out);
-            rightTween.start();
+            setupGame();
         },
 
         update: function() {
@@ -89,4 +64,33 @@ var state_waiting = function(game) {
             }
         }
     };
+};
+
+var setupGame = function() {
+    var highScore = localStorage.getItem('squareSquared-highScore');
+    if (highScore && highScore > 0) {
+        var textStyle = {
+            fill: colorPalette.text,
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        };
+        objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "High Score: " + highScore, textStyle);
+        objects.highScoreDisplay.anchor.y = 0.5;
+        objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
+    }
+
+    game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleGreen', 'Square', 64);
+    game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
+
+    var leftTween = game.add.tween(objects.leftJumpLine);
+    leftTween.to({
+        xPos: 0
+    }, 1000, Phaser.Easing.Bounce.Out);
+    leftTween.start();
+
+    var rightTween = game.add.tween(objects.rightJumpLine);
+    rightTween.to({
+        xPos: game.world.width / 2
+    }, 1000, Phaser.Easing.Bounce.Out);
+    rightTween.start();
 };
