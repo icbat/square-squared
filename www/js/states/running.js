@@ -18,11 +18,13 @@ var state_running = function(game) {
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
-            objects.scoreDisplay = game.add.text(game.world.centerX - constants.runnerSize, constants.groundHeight - (constants.runnerSize / 2), gameState.score, textStyle);
-            objects.scoreDisplay.anchor.set(0.5);
+            objects.scoreDisplay = game.add.text(20, constants.groundHeight + (constants.runnerSize / 2), gameState.score, textStyle);
+            objects.scoreDisplay.anchor.y = 0.5;
+            objects.scoreDisplay.anchor.x = 0;
             objects.scoreDisplay.setShadow(1, 1, colorPalette.textShadow);
-            objects.highScoreDisplay = game.add.text(constants.runnerSize / 2, constants.groundHeight + (constants.runnerSize / 2), "", textStyle);
+            objects.highScoreDisplay = game.add.text(game.world.width - 20, constants.groundHeight + (constants.runnerSize / 2), "", textStyle);
             objects.highScoreDisplay.anchor.y = 0.5;
+            objects.highScoreDisplay.anchor.x = 1;
             objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
 
             setupGame();
