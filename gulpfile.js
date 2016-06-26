@@ -3,7 +3,7 @@ var zip = require('gulp-zip');
 
 var build_directory = 'build';
 
-gulp.task('default', ['copy-bower', 'copy-graphics', 'copy-sounds'], function() {});
+gulp.task('default', ['copy-bower', 'copy-graphics', 'copy-sounds', 'copy-fonts'], function() {});
 
 var bower_components = [
     'bower_components/phaser/build/phaser.min.js',
@@ -26,4 +26,9 @@ gulp.task('copy-graphics', function() {
     return gulp
         .src('assets/browser/favicon.png')
         .pipe(gulp.dest('./www/assets/graphics'));
+});
+gulp.task('copy-fonts', function() {
+    return gulp
+        .src('assets/fonts/*')
+        .pipe(gulp.dest('./www/assets/fonts'));
 });

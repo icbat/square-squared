@@ -25,6 +25,10 @@ var state_waiting = function(game) {
                 objects.highScoreDisplay.anchor.y = 0.5;
                 objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
             }
+
+            game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleGreen', 'Square', 64);
+            game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
+
             // Put the jump line off screen
             objects.leftJumpLine.xPos = game.world.width / -2;
             objects.leftJumpLine.moveToX(game.world.width / -2);
