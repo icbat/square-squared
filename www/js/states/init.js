@@ -12,12 +12,6 @@ var state_init = function(game) {
             game.load.bitmapFont('titleGreen', 'assets/fonts/upheavalPro-green.png', 'assets/fonts/upheavalPro.xml');
             game.load.bitmapFont('titlePurple', 'assets/fonts/upheavalPro-purple.png', 'assets/fonts/upheavalPro.xml');
 
-            game.stateTransition = this.game.plugins.add(Phaser.Plugin.StateTransition);
-            this.game.stateTransition.configure({
-                // Actually putting 0 makes this plugin think you don't want to set anything
-                duration: 0.000001
-            });
-
             game.stage.backgroundColor = colorPalette.light;
 
             constants.groundHeight = game.world.height - constants.runnerSize;
@@ -153,7 +147,7 @@ var state_init = function(game) {
 
         update: function() {
             if (this.assetsLoaded) {
-                game.stateTransition.to('running');
+                game.state.start('running');
             }
         }
     };
