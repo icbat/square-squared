@@ -230,7 +230,7 @@ function ExtendedPolygon(polygonToExtend, color) {
         game.sound.play('land', 0.15);
     });
 
-    this.applyGravity = function() {
+    this.applyGravity = function(delta) {
         if (this.vspeed !== 0 || !this.onGround()) {
             this.moveByY(this.vspeed);
             var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;

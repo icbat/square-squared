@@ -31,6 +31,7 @@ var state_running = function(game) {
         },
 
         update: function(game) {
+            var delta = game.time.physicsElapsed;
             if (gameState.state == states.dying) {
                 if (this.colorStep <= 50) {
                     objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, Phaser.Color.hexToRGB(colorPalette.background), 50, this.colorStep++);
@@ -48,8 +49,8 @@ var state_running = function(game) {
                 var obstacleIndex;
                 for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                     var obstacle = objects.obstacles[obstacleIndex];
-                    obstacle.applyGravity();
-                    obstacle.movePolygonBy(constants.hspeed);
+                    obstacle.applyGravity(delta);
+                    obstacle.movePolygonBy(constants.hspeed * delta);
 
                     if (objects.runner.intersects(obstacle)) {
                         // Game over
@@ -94,12 +95,16 @@ var state_running = function(game) {
 
         render: function() {
             this.graphics.clear();
+            var row = 1;
+            var spacing = 16;
+            game.debug.text(game.time.physicsElapsed, 0, row++ * spacing, "#000");
             objects.leftJumpLine.draw(this.graphics);
             objects.rightJumpLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                 var obstacle = objects.obstacles[obstacleIndex];
+                game.debug.text(obstacle.findLeftmostPoint(), 0, row++ * spacing, "#000");
                 obstacle.draw(this.graphics);
             }
             objects.ground.draw(this.graphics);
