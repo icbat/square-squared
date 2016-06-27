@@ -27,8 +27,9 @@ var state_running = function(game) {
             objects.highScoreDisplay.anchor.x = 1;
             objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
 
-            game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleOrange', 'Square', 64);
-            game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
+            var bottomText = game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleOrange', 'Square', 64);
+            var topText = game.add.bitmapText(Math.min(bottomText.right + 100, game.world.width), 25, 'titlePurple', 'Squared', 64);
+            topText.anchor.x = 1;
 
             setupGame();
         },
