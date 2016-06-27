@@ -27,6 +27,9 @@ var state_running = function(game) {
             objects.highScoreDisplay.anchor.x = 1;
             objects.highScoreDisplay.setShadow(1, 1, colorPalette.black);
 
+            game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleOrange', 'Square', 64);
+            game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
+
             setupGame();
         },
 
@@ -177,9 +180,6 @@ var setupGame = function() {
         objects.highScoreDisplay.visible = false;
     }
     objects.scoreDisplay.visible = false;
-
-    game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleOrange', 'Square', 64);
-    game.add.bitmapText(game.world.centerX - 75, 25, 'titlePurple', 'Squared', 64);
 
     var leftTween = game.add.tween(objects.leftJumpLine);
     leftTween.to({
