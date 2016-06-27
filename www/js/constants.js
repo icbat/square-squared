@@ -29,14 +29,6 @@ var states = {
     dying: "DYING"
 };
 
-var onJumpDebug = function(chargeLevel, jumpCoefficient, initalSpeed) {
-    gameState.lastJump = {
-        chargeLevel: chargeLevel,
-        jumpCoefficient: jumpCoefficient,
-        initalSpeed: initalSpeed
-    };
-};
-
 var constants = {
     debugMode: false,
     runnerSize: 64,
