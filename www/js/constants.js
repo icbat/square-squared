@@ -1,17 +1,13 @@
 var objects = {};
 var colorPalette = {
-    debugColor: 'rgb(0,0,0)',
-    black: "#000",
-    runner: 0x22cc77,
-    light: '#ddd',
-    background: 0xdddddd,
+    runner: "#2c7",
+    background: '#ddd',
     middle: '#888',
-    ground: 0x333333,
-    textShadow: '#333',
+    ground: '#333',
     text: '#39d',
-    obstacleBig: 0xcc3322,
-    obstacleMedium: 0xee7722,
-    obstacleLow: 0x8844aa
+    obstacleBig: "#c32",
+    obstacleMedium: "#e72",
+    obstacleLow: "#84a"
 };
 
 var gameState = {
@@ -41,7 +37,7 @@ var constants = {
     chargeLevels: [0, 10, 20],
     chargeEffects: [0.5, 0.75, 1],
     chargeHeights: [54, 49, 47],
-    chargeColors: [colorPalette.obstacleLow, colorPalette.obstacleMedium, colorPalette.obstacleBig]
+    chargeColors: [Phaser.Color.hexToRGB(colorPalette.obstacleLow), Phaser.Color.hexToRGB(colorPalette.obstacleMedium), Phaser.Color.hexToRGB(colorPalette.obstacleBig)]
 };
 
 var chargeLevel = function(amount, screenTotal) {

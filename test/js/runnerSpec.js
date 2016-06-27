@@ -123,7 +123,7 @@ describe("The runner", function() {
         });
         describe("the color", function() {
             it("should be set to charge level color  if not jumping and charge not 0", function() {
-                expect(testObject.color).toEqual(colorPalette.runner);
+                expect(testObject.color).toEqual(Phaser.Color.hexToRGB(colorPalette.runner));
                 expect(testObject.onGround()).toBe(true);
                 var chargeLevel;
                 for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
@@ -134,12 +134,12 @@ describe("The runner", function() {
             });
 
             it("should be reset to runner base color if not jumping and no charge", function() {
-                expect(testObject.color).toEqual(colorPalette.runner);
+                expect(testObject.color).toEqual(Phaser.Color.hexToRGB(colorPalette.runner));
                 expect(testObject.onGround()).toBe(true);
 
                 testObject.updateBeforeDraw(0, false);
 
-                expect(testObject.color).toEqual(colorPalette.runner);
+                expect(testObject.color).toEqual(Phaser.Color.hexToRGB(colorPalette.runner));
             });
 
             it("should NOT be reset to runner base color if jumping and no charge", function() {

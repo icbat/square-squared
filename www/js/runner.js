@@ -3,7 +3,7 @@ var runner = function(polygon, color) {
 
     runner.onJump = new Phaser.Signal();
     runner.onLand.add(function() {
-        objects.runner.color = colorPalette.runner;
+        objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
     });
 
     runner.updateBeforeDraw = function(chargeLevel, touchIsDown) {

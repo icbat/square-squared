@@ -9,7 +9,7 @@ var state_running = function(game) {
             game.input.onUp.add(this.onUp, this);
             game.input.onUp.add(function() {
                 if (objects.runner.onGround() && objects.runner.vspeed === 0) {
-                    objects.runner.color = colorPalette.runner;
+                    objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
                 }
             });
 
@@ -33,12 +33,12 @@ var state_running = function(game) {
         update: function(game) {
             if (gameState.state == states.dying) {
                 if (this.colorStep <= 50) {
-                    objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, colorPalette.background, 50, this.colorStep++);
+                    objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, Phaser.Color.hexToRGB(colorPalette.background), 50, this.colorStep++);
                 }
                 if (game.time.time > this.timeToLeave) {
                     var highScore = localStorage.getItem('squareSquared-highScore');
                     localStorage.setItem('squareSquared-highScore', Math.max(gameState.score, highScore ? highScore : 0));
-                    objects.runner.color = colorPalette.runner;
+                    objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
                     setupGame();
                     this.gameIsLost = false;
                 }

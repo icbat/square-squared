@@ -1,5 +1,5 @@
 function ExtendedPolygon(polygonToExtend, color) {
-    this.color = color;
+    this.color = Phaser.Color.hexToRGB(color);
     this.polygon = polygonToExtend.clone();
     this.visible = true;
 

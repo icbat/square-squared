@@ -12,7 +12,7 @@ var state_init = function(game) {
             game.load.bitmapFont('titleOrange', 'assets/fonts/upheavalPro-orange.png', 'assets/fonts/upheavalPro.xml');
             game.load.bitmapFont('titlePurple', 'assets/fonts/upheavalPro-purple.png', 'assets/fonts/upheavalPro.xml');
 
-            game.stage.backgroundColor = colorPalette.light;
+            game.stage.backgroundColor = colorPalette.background;
 
             constants.groundHeight = game.world.height - constants.runnerSize;
 

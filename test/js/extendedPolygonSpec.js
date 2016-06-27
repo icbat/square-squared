@@ -24,7 +24,7 @@ describe("An extended polgyon", function() {
                 new Phaser.Point(constants.runnerSize, constants.groundHeight - constants.runnerSize),
                 new Phaser.Point(constants.runnerSize, constants.groundHeight)
             );
-            testObject = new ExtendedPolygon(polygon);
+            testObject = new ExtendedPolygon(polygon, "#fff");
 
         });
         it("should take you to an integer pixel when starting from whole numbers", function() {
@@ -71,7 +71,7 @@ describe("An extended polgyon", function() {
                 new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y - sideLength),
                 new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y)
             );
-            testObject = new ExtendedPolygon(polygon);
+            testObject = new ExtendedPolygon(polygon, "#fff");
 
             expect(testObject.findLowestPoint()).toBe(initialLowerLeft.y);
             expect(testObject.findHighestPoint()).toBe(initialLowerLeft.y - sideLength);
@@ -100,7 +100,7 @@ describe("An extended polgyon", function() {
                 new Phaser.Point(initialLowerLeft.x + sideLength / 4, initialLowerLeft.y),
                 new Phaser.Point(initialLowerLeft.x + sideLength / 8, initialLowerLeft.y - sideLength / 4)
             );
-            testObject = new ExtendedPolygon(polygon);
+            testObject = new ExtendedPolygon(polygon, "#fff");
 
             expect(testObject.findLowestPoint()).toBe(initialLowerLeft.y);
             expect(testObject.findHighestPoint()).toBe(initialLowerLeft.y - sideLength / 4);
@@ -136,7 +136,7 @@ describe("An extended polgyon", function() {
                     new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y - sideLength),
                     new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y)
                 );
-                testObject = new ExtendedPolygon(polygon);
+                testObject = new ExtendedPolygon(polygon, "#fff");
             });
 
             it("should work going down", function() {
