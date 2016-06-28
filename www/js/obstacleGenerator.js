@@ -27,8 +27,12 @@ var obstacleGenerator = {
     onObstacleAdded: new Phaser.Signal(),
 
     makeRandomObstacle: function() {
-        var index = Math.floor(Math.random() * (objects.polygonPrototypes.length));
-        var prototype = objects.polygonPrototypes[index];
+        var prototype;
+        if (objects.obstacles.length === 0) {
+            prototype = game.rnd.pick(objects.polygonPrototypes.slice(0,2));
+        } else {
+            prototype = game.rnd.pick(objects.polygonPrototypes);
+        }
         return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.minimumSpaceBefore, prototype.name);
     }
 };
