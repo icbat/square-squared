@@ -28,7 +28,7 @@ describe("The runner", function() {
             expect(testObject.findLowestPoint()).not.toEqual(constants.groundHeight);
             testObject.vspeed = 0.5;
 
-            testObject.applyGravity();
+            testObject.applyGravity(1 / constants.desiredFPS);
 
             expect(testObject.findLowestPoint()).toEqual(constants.groundHeight);
         });
@@ -38,7 +38,7 @@ describe("The runner", function() {
             expect(testObject.findLowestPoint()).not.toEqual(constants.groundHeight);
             testObject.vspeed = 0.5;
 
-            testObject.applyGravity();
+            testObject.applyGravity(1 / constants.desiredFPS);
 
             expect(testObject.vspeed).toEqual(0);
         });
@@ -48,7 +48,7 @@ describe("The runner", function() {
             expect(testObject.findLowestPoint()).not.toEqual(constants.groundHeight);
             testObject.vspeed = 0.5;
 
-            testObject.applyGravity();
+            testObject.applyGravity(1 / constants.desiredFPS);
 
             expect(testObject.vspeed).toEqual(0);
         });
@@ -58,7 +58,7 @@ describe("The runner", function() {
             var initialSpeed = -0.1;
             testObject.vspeed = initialSpeed;
 
-            testObject.applyGravity();
+            testObject.applyGravity(1 / constants.desiredFPS);
 
             expect(testObject.vspeed).toEqual(initialSpeed - constants.gravityStepUp);
         });
@@ -68,7 +68,7 @@ describe("The runner", function() {
             var initialSpeed = 0.1;
             testObject.vspeed = initialSpeed;
 
-            testObject.applyGravity();
+            testObject.applyGravity(1 / constants.desiredFPS);
 
             expect(testObject.vspeed).toEqual(initialSpeed - constants.gravityStepDown);
         });
@@ -79,7 +79,7 @@ describe("The runner", function() {
             var initialSpeed = 0.1;
             testObject.vspeed = initialSpeed;
 
-            testObject.applyGravity();
+            testObject.applyGravity(1 / constants.desiredFPS);
 
             expect(testObject.findLowestPoint()).toEqual(initialHeight + initialSpeed);
         });
