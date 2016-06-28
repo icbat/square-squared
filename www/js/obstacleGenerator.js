@@ -17,7 +17,6 @@ var obstacleGenerator = {
         newX += difficultyModifier;
         newX += math.random() * constants.runnerSize;
         if (math.random() > 0.7) {
-
             // Randomly add a big-ish gap
             newX += constants.runnerSize * 2;
         }
@@ -35,7 +34,11 @@ var obstacleGenerator = {
 };
 
 var calculateDifficultyModifier = function(currentScore) {
-    return Math.pow(7 / 10, currentScore) * 200;
+    // Smaller number -> slower build up of difficulty
+    var difficultyOverTime = 1 / 2;
+    // Smaller number -> less help
+    var amountOfExtraHelp = 7 / 10;
+    return Math.pow(amountOfExtraHelp, currentScore * difficultyOverTime) * 200;
 };
 
 function Obstacle(thingToExtend, minimumSpaceBehind, minimumSpaceBefore, name) {
