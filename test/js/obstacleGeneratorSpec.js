@@ -68,8 +68,6 @@ describe("Obstacle Generation", function() {
         expect(actual).toEqual(expected);
     });
 
-
-
     it("should not explode with no last obstacle", function() {
         var random = 0;
         var edgeOfScreen = 555;
@@ -77,6 +75,33 @@ describe("Obstacle Generation", function() {
         var lastInList;
 
         var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("should not explode when generated obstacle has no minSpaceBefore", function() {
+        var random = 0;
+        var edgeOfScreen = 555;
+        var expected = edgeOfScreen;
+        var lastInList = {
+            minimumSpaceBehind: 0
+        };
+
+        var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, 0, stubRandom(random));
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("should add space before if it exists", function() {
+        var random = 0;
+        var minSpaceBefore = 44123;
+        var edgeOfScreen = 555;
+        var expected = edgeOfScreen + minSpaceBefore;
+        var lastInList = {
+            minimumSpaceBehind: 0
+        };
+
+        var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, 0, stubRandom(random), minSpaceBefore);
 
         expect(actual).toEqual(expected);
     });

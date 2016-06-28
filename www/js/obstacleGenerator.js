@@ -3,18 +3,21 @@ var obstacleGenerator = {
         var obstacle = this.makeRandomObstacle();
         var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
         objects.obstacles.push(obstacle);
-        var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(gameState.score), Math);
+        var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(gameState.score), Math, obstacle.minimumSpaceBefore);
         obstacle.moveToX(newX);
         obstacle.hasScored = false;
         this.onObstacleAdded.dispatch(newX, lastObstacle);
     },
 
-    findBack: function(lastInList, screenEdge, difficultyModifier, math) {
+    findBack: function(lastInList, screenEdge, difficultyModifier, math, minimumSpaceBefore) {
         var minBuffer = lastInList ? lastInList.minimumSpaceBehind : 0;
         var newX = screenEdge + minBuffer;
+        newX += minimumSpaceBefore ? minimumSpaceBefore : 0;
+
         newX += difficultyModifier;
         newX += math.random() * constants.runnerSize;
         if (math.random() > 0.7) {
+
             // Randomly add a big-ish gap
             newX += constants.runnerSize * 2;
         }
@@ -27,16 +30,17 @@ var obstacleGenerator = {
     makeRandomObstacle: function() {
         var index = Math.floor(Math.random() * (objects.polygonPrototypes.length));
         var prototype = objects.polygonPrototypes[index];
-        return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.name);
+        return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.minimumSpaceBefore, prototype.name);
     }
 };
 
 var calculateDifficultyModifier = function(currentScore) {
-    return Math.pow(7/10, currentScore) * 200;
+    return Math.pow(7 / 10, currentScore) * 200;
 };
 
-function Obstacle(thingToExtend, minimumSpaceBehind, name) {
+function Obstacle(thingToExtend, minimumSpaceBehind, minimumSpaceBefore, name) {
     thingToExtend.minimumSpaceBehind = minimumSpaceBehind;
+    thingToExtend.minimumSpaceBefore = minimumSpaceBefore;
     thingToExtend.name = name;
     thingToExtend.runnerLandCallback = function() {
         thingToExtend.vspeed = -4 + Math.random() * constants.chargeEffects[gameState.lastJump.chargeLevel];

@@ -111,7 +111,8 @@ var state_init = function(game) {
                         new Phaser.Point(constants.runnerSize / 2, constants.groundHeight)
                     );
                 },
-                minimumSpaceBehind: 300,
+                minimumSpaceBehind: 215,
+                minimumSpaceBefore: 75,
                 name: "big wall",
                 color: colorPalette.obstacleBig
             };
