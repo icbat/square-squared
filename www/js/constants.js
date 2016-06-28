@@ -26,11 +26,12 @@ var states = {
 };
 
 var constants = {
+    desiredFPS: 60,
     debugMode: false,
     runnerSize: 64,
     gravityStepUp: -0.5,
     gravityStepDown: -0.08,
-    hspeed: -2.5 * 60,
+    hspeed: -2.5,
     jumpStrength: -15,
     motionTweenCoefficient: 0.3,
     timeOnDyingScreen: 1250,

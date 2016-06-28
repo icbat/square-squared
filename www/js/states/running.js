@@ -48,13 +48,13 @@ var state_running = function(game) {
                     this.gameIsLost = false;
                 }
             } else {
-                objects.runner.applyGravity();
+                objects.runner.applyGravity(delta);
 
                 var obstacleIndex;
                 for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                     var obstacle = objects.obstacles[obstacleIndex];
                     obstacle.applyGravity(delta);
-                    obstacle.movePolygonBy(constants.hspeed * delta);
+                    obstacle.movePolygonBy(constants.hspeed * delta * constants.desiredFPS);
 
                     if (objects.runner.intersects(obstacle)) {
                         // Game over

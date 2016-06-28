@@ -232,7 +232,7 @@ function ExtendedPolygon(polygonToExtend, color) {
 
     this.applyGravity = function(delta) {
         if (this.vspeed !== 0 || !this.onGround()) {
-            this.moveByY(this.vspeed);
+            this.moveByY(this.vspeed * delta * constants.desiredFPS);
             var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
             this.vspeed -= gravityStep;
 
