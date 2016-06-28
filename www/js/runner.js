@@ -29,5 +29,9 @@ var runner = function(polygon, color) {
         }
     };
 
+    runner.determineGravity = function() {
+        return Math.abs(this.vspeed) < constants.gravityHoverThreshold ? constants.gravityHover : constants.gravity;
+    };
+
     return runner;
 };

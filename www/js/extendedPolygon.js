@@ -233,7 +233,7 @@ function ExtendedPolygon(polygonToExtend, color) {
     this.applyGravity = function(delta) {
         if (this.vspeed !== 0 || !this.onGround()) {
             this.moveByY(this.vspeed * delta * constants.desiredFPS);
-            var gravityStep = this.vspeed > 0 ? constants.gravityStepDown : constants.gravityStepUp;
+            var gravityStep = this.determineGravity();
             this.vspeed -= gravityStep;
 
             // On hitting ground
@@ -243,6 +243,10 @@ function ExtendedPolygon(polygonToExtend, color) {
                 this.setLowerLeftTo(this.findLeftmostPoint(), constants.groundHeight);
             }
         }
+    };
+
+    this.determineGravity = function(){
+        return constants.gravity;
     };
 
     this.findLowerLeftPoint = function() {
