@@ -133,7 +133,7 @@ var state_running = function(game) {
                 this.firstTouchY = null;
                 this.dragY = null;
                 objects.dragLine.visible = false;
-                if (gameState.state == states.waiting && charge === constants.chargeLevels.length - 1) {
+                if (gameState.state == states.waiting && charge === constants.chargeLevels.length - 1 && objects.runner.onGround()) {
                     startGame();
                 }
             }
