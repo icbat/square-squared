@@ -156,7 +156,6 @@ var loseGame = function(context) {
 var startGame = function() {
     gameState.state = states.running;
     obstacleGenerator.addObstacleToBack();
-    gameState.score = 0;
     var leftTween = game.add.tween(objects.leftJumpLine);
     leftTween.to({
         xPos: game.world.width / -2
@@ -173,6 +172,7 @@ var startGame = function() {
 var setupGame = function() {
     gameState.state = states.waiting;
     objects.obstacles = [];
+    gameState.score = 0;
     var highScore = localStorage.getItem('squareSquared-highScore');
     if (highScore && highScore > 0) {
         objects.highScoreDisplay.text = "High Score: " + highScore;
