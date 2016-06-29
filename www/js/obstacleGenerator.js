@@ -2,8 +2,8 @@ var obstacleGenerator = {
     addObstacleToBack: function() {
         var obstacle = this.makeRandomObstacle();
         var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
-        objects.obstacles.push(obstacle);
         var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(gameState.score), Math, obstacle.minimumSpaceBefore);
+        objects.obstacles.push(obstacle);
         obstacle.moveToX(newX);
         obstacle.hasScored = false;
         this.onObstacleAdded.dispatch(newX, lastObstacle);
@@ -13,12 +13,14 @@ var obstacleGenerator = {
         var minBuffer = lastInList ? lastInList.minimumSpaceBehind : 0;
         var newX = screenEdge + minBuffer;
         newX += minimumSpaceBefore ? minimumSpaceBefore : 0;
-
         newX += difficultyModifier;
-        newX += math.random() * constants.runnerSize;
-        if (math.random() > 0.7) {
-            // Randomly add a big-ish gap
-            newX += constants.runnerSize * 2;
+
+        if (objects.obstacles.length !== 0) {
+            newX += math.random() * constants.runnerSize;
+            if (math.random() > 0.7) {
+                // Randomly add a big-ish gap
+                newX += constants.runnerSize * 2;
+            }
         }
 
         return newX;
@@ -29,7 +31,7 @@ var obstacleGenerator = {
     makeRandomObstacle: function() {
         var prototype;
         if (objects.obstacles.length === 0) {
-            prototype = game.rnd.pick(objects.polygonPrototypes.slice(0,2));
+            prototype = game.rnd.pick(objects.polygonPrototypes.slice(0, 2));
         } else {
             prototype = game.rnd.pick(objects.polygonPrototypes);
         }

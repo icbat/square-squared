@@ -1,3 +1,6 @@
+var objects = {
+    obstacles: ["anything"]
+};
 describe("Obstacle Generation", function() {
     function stubRandom(x) {
         return {
@@ -6,6 +9,7 @@ describe("Obstacle Generation", function() {
             }
         };
     }
+
 
     it("should put new ones at least their minimum distance behind", function() {
         var expected = 12333;
@@ -106,6 +110,35 @@ describe("Obstacle Generation", function() {
         expect(actual).toEqual(expected);
     });
 
+    it("should add difficultyModifier", function() {
+        var random = 0;
+        var minSpaceBefore = 0;
+        var edgeOfScreen = 555;
+        var difficultyModifier = 3211;
+        var expected = edgeOfScreen + difficultyModifier;
+        var lastInList = {
+            minimumSpaceBehind: 0
+        };
 
+        var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, difficultyModifier, stubRandom(random), minSpaceBefore);
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("should NOT be randomzied on the first obstacle", function() {
+        var random = 1;
+        var minSpaceBefore = 111;
+        var edgeOfScreen = 555;
+        var difficultyModifier = 222;
+        var expected = edgeOfScreen + minSpaceBefore + difficultyModifier;
+        var lastInList = {
+            minimumSpaceBehind: 0
+        };
+        objects.obstacles = [];
+
+        var actual = obstacleGenerator.findBack(lastInList, edgeOfScreen, difficultyModifier, stubRandom(random), minSpaceBefore);
+
+        expect(actual).toEqual(expected);
+    });
 
 });
