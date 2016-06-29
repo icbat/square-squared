@@ -4,6 +4,7 @@ var runner = function(polygon, color) {
     runner.onJump = new Phaser.Signal();
     runner.onLand.add(function() {
         objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
+        game.camera.shake(0.01, 100, true, Phaser.Camera.SHAKE_VERTICAL);
     });
 
     runner.updateBeforeDraw = function(chargeLevel, touchIsDown) {
