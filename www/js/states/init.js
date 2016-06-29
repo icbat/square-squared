@@ -27,10 +27,10 @@ var state_init = function(game) {
             objects.runner.moveToX(game.world.centerX - constants.runnerSize / 2);
 
             var ground = new Phaser.Polygon(
-                new Phaser.Point(0, game.world.height),
+                new Phaser.Point(0, game.world.height + 100),
                 new Phaser.Point(0, game.world.height - constants.runnerSize),
                 new Phaser.Point(game.world.width, game.world.height - constants.runnerSize),
-                new Phaser.Point(game.world.width, game.world.height)
+                new Phaser.Point(game.world.width, game.world.height + 100)
             );
             objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
 
