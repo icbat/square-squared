@@ -32,7 +32,7 @@ var constants = {
     gravity: -0.4,
     gravityHover: -0.015,
     gravityHoverThreshold: 0.2,
-    jumpStrength: -12,
+    jumpStrength: -13,
     hspeed: -2.5,
     motionTweenCoefficient: 0.3,
     timeOnDyingScreen: 1250,
