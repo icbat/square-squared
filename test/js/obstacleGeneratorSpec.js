@@ -1,6 +1,4 @@
-var objects = {
-    obstacles: ["anything"]
-};
+var objects;
 describe("Obstacle Generation", function() {
     function stubRandom(x) {
         return {
@@ -9,6 +7,13 @@ describe("Obstacle Generation", function() {
             }
         };
     }
+
+
+    beforeEach(function() {
+        objects = {
+            obstacles: ["anything"]
+        };
+    });
 
 
     it("should put new ones at least their minimum distance behind", function() {
