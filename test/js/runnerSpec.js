@@ -53,26 +53,6 @@ describe("The runner", function() {
             expect(testObject.vspeed).toEqual(0);
         });
 
-        it("should accelerate with gravityUp when climbing", function() {
-            testObject.moveToY(constants.groundHeight - constants.runnerSize - 1000);
-            var initialSpeed = -0.1;
-            testObject.vspeed = initialSpeed;
-
-            testObject.applyGravity(1 / constants.desiredFPS);
-
-            expect(testObject.vspeed).toEqual(initialSpeed - constants.gravityStepUp);
-        });
-
-        it("should accelerate with gravityDown when falling", function() {
-            testObject.moveToY(constants.groundHeight - constants.runnerSize - 1000);
-            var initialSpeed = 0.1;
-            testObject.vspeed = initialSpeed;
-
-            testObject.applyGravity(1 / constants.desiredFPS);
-
-            expect(testObject.vspeed).toEqual(initialSpeed - constants.gravityStepDown);
-        });
-
         it("should move the runner by their current speed when possible", function() {
             var initialHeight = constants.groundHeight - 1000;
             testObject.moveToY(initialHeight - constants.runnerSize);
