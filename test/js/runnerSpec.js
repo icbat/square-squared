@@ -8,6 +8,9 @@ describe("The runner", function() {
         game = {
             sound: {
                 play: function() {}
+            },
+            camera: {
+                shake: function() {}
             }
         };
         // Usually defined in the init state (Because it needs the World to exist first)
