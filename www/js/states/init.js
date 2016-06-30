@@ -106,7 +106,7 @@ var state_init = function(game) {
                 polygon: function() {
                     return new Phaser.Polygon(
                         new Phaser.Point(0, constants.groundHeight),
-                        new Phaser.Point(0, constants.groundHeight - constants.runnerSize * 2),
+                        new Phaser.Point(0, constants.groundHeight - constants.runnerSize * 2.5),
                         new Phaser.Point(constants.runnerSize / 3, constants.groundHeight - constants.runnerSize * 2.5),
                         new Phaser.Point(constants.runnerSize / 3, constants.groundHeight)
                     );
