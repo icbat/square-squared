@@ -11,6 +11,15 @@ describe("The runner", function() {
             },
             camera: {
                 shake: function() {}
+            },
+            add: {
+                tween: function() {
+                    return {
+                        to: function() {},
+                        yoyo: function() {},
+                        start: function() {}
+                    };
+                }
             }
         };
         // Usually defined in the init state (Because it needs the World to exist first)

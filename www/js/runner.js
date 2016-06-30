@@ -5,6 +5,13 @@ var runner = function(polygon, color) {
     runner.onLand.add(function() {
         objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
         game.camera.shake(0.01 * (gameState.lastJump.chargeLevel + 1), 100, true, Phaser.Camera.SHAKE_VERTICAL);
+
+        objects.runner.landSquishTween = game.add.tween(objects.runner);
+        objects.runner.landSquishTween.to({
+            height: constants.runnerSize * 5/6
+        }, 80, Phaser.Easing.Linear.Out);
+        objects.runner.landSquishTween.yoyo(true);
+        objects.runner.landSquishTween.start();
     });
 
     runner.updateBeforeDraw = function(chargeLevel, touchIsDown) {
