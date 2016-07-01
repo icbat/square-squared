@@ -36,14 +36,14 @@ var constants = {
     hspeed: -2.5,
     motionTweenCoefficient: 0.3,
     timeOnDyingScreen: 1250,
-    chargeLevels: [0, 10, 20],
-    chargeEffects: [0.5, 0.75, 1],
-    chargeHeights: [54, 49, 47],
-    chargeColors: [Phaser.Color.hexToRGB(colorPalette.obstacleLow), Phaser.Color.hexToRGB(colorPalette.obstacleMedium), Phaser.Color.hexToRGB(colorPalette.obstacleBig)]
+    chargeLevels: [-1, 0, 10, 20],
+    chargeEffects: [0, 0.5, 0.75, 1],
+    chargeHeights: [64, 54, 49, 47],
+    chargeColors: [Phaser.Color.hexToRGB(colorPalette.runner), Phaser.Color.hexToRGB(colorPalette.obstacleLow), Phaser.Color.hexToRGB(colorPalette.obstacleMedium), Phaser.Color.hexToRGB(colorPalette.obstacleBig)]
 };
 
 var chargeLevel = function(amount, screenTotal) {
-    var percent = Math.floor(amount / screenTotal * 100);
+    var percent = Math.max(Math.floor(amount / screenTotal * 100), 0);
     var chargeLevel;
     var i;
     for (i = constants.chargeLevels.length; i >= 0; --i) {

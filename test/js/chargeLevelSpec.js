@@ -10,11 +10,11 @@ describe("Charge levels", function() {
     });
 
     it("should return 0 with the lowest level", function() {
-      expect(chargeLevel(constants.chargeLevels[1] - 1, 100)).toBe(0);
+      expect(chargeLevel(constants.chargeLevels[1] - 1, 100)).toBe(1);
     });
 
     it("should return 0 below 0", function() {
-      expect(chargeLevel(-123, 100)).toBe(0);
+      expect(chargeLevel(-123, 100)).toBe(1);
     });
 
     it("should return 3 at greater than 100%", function() {
