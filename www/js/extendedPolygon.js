@@ -3,6 +3,11 @@ function ExtendedPolygon(polygonToExtend, color) {
     this.polygon = polygonToExtend.clone();
     this.visible = true;
 
+    this.onLand = new Phaser.Signal();
+    this.onLand.add(function() {
+        game.sound.play('land', 0.15);
+    });
+
     this.movePolygonBy = function(amountX) {
         var points = this.polygon.toNumberArray();
         var index;
@@ -224,11 +229,6 @@ function ExtendedPolygon(polygonToExtend, color) {
         }
         return false;
     };
-
-    this.onLand = new Phaser.Signal();
-    this.onLand.add(function() {
-        game.sound.play('land', 0.15);
-    });
 
     this.applyGravity = function(delta) {
         if (this.vspeed !== 0 || !this.onGround()) {
