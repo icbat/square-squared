@@ -5,14 +5,6 @@ var state_running = function(game) {
             this.firstTouchY = null;
             this.dragY = null;
 
-            game.input.onDown.add(this.onDown, this);
-            game.input.onUp.add(this.onUp, this);
-            game.input.onUp.add(function() {
-                if (objects.runner.onGround() && objects.runner.vspeed === 0) {
-                    objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
-                }
-            });
-
             var textStyle = {
                 fill: colorPalette.text,
                 boundsAlignH: "center",
@@ -31,7 +23,7 @@ var state_running = function(game) {
             var topText = game.add.bitmapText(Math.min(bottomText.right + 100, game.world.width), 25, 'titlePurple', 'Squared', 64);
             topText.anchor.x = 1;
 
-            setupGame();
+            setupGame(this);
         },
 
         update: function(game) {
@@ -44,7 +36,7 @@ var state_running = function(game) {
                     var highScore = localStorage.getItem('squareSquared-highScore');
                     localStorage.setItem('squareSquared-highScore', Math.max(gameState.score, highScore ? highScore : 0));
                     objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
-                    setupGame();
+                    setupGame(this);
                     this.gameIsLost = false;
                 }
             } else {
@@ -141,6 +133,8 @@ var loseGame = function(context) {
     context.runnerOriginalColor = objects.runner.color;
     var loseSound = game.sound.play('lose', 0.1);
     loseSound._sound.playbackRate.value = 0.5;
+    game.input.onDown.removeAll();
+    game.input.onUp.removeAll();
 };
 
 var startGame = function() {
@@ -159,7 +153,7 @@ var startGame = function() {
     rightTween.start();
 };
 
-var setupGame = function() {
+var setupGame = function(context) {
     gameState.state = states.waiting;
     objects.obstacles = [];
     gameState.score = 0;
@@ -183,4 +177,12 @@ var setupGame = function() {
         xPos: game.world.width / 2
     }, 1000, Phaser.Easing.Bounce.Out);
     rightTween.start();
+
+    game.input.onDown.add(context.onDown, context);
+    game.input.onUp.add(context.onUp, context);
+    game.input.onUp.add(function() {
+        if (objects.runner.onGround() && objects.runner.vspeed === 0) {
+            objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
+        }
+    });
 };
