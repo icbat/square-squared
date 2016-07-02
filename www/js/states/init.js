@@ -143,7 +143,6 @@ var state_init = function(game) {
                 new Phaser.Point(0, 1)
             );
 
-            objects.dragLine = new ExtendedPolygon(tallLine, colorPalette.runner);
             gameState.highScore = 0;
         },
 

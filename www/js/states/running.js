@@ -80,11 +80,6 @@ var state_running = function(game) {
                 objects.runner.updateBeforeDraw(charge, touchIsDown);
                 objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
                 objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
-
-                if (this.dragY > 0) {
-                    objects.dragLine.setHeight(this.dragY);
-                }
-                objects.dragLine.color = constants.chargeColors[charge];
             }
         },
 
@@ -111,16 +106,12 @@ var state_running = function(game) {
                 obstacle.draw(this.graphics);
             }
             objects.ground.draw(this.graphics);
-            objects.dragLine.draw(this.graphics);
         },
 
         onDown: function(pointer, mouseEvent) {
             if (mouseEvent.identifier === 0) {
                 if (this.firstTouchY === null) {
                     this.firstTouchY = pointer.worldY;
-                    objects.dragLine.setLowerLeftTo(pointer.worldX + constants.runnerSize / 2, pointer.worldY);
-                    objects.dragLine.visible = true;
-                    objects.dragLine.setHeight(1);
                 }
             }
         },
@@ -132,7 +123,6 @@ var state_running = function(game) {
                 objects.runner.jump(charge);
                 this.firstTouchY = null;
                 this.dragY = null;
-                objects.dragLine.visible = false;
                 if (gameState.state == states.waiting && charge === constants.chargeLevels.length - 1 && objects.runner.onGround()) {
                     startGame();
                 }
