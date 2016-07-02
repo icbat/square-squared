@@ -117,11 +117,11 @@ describe("The runner", function() {
             it("should be set to charge level color  if not jumping and charge not 0", function() {
                 expect(testObject.color).toEqual(Phaser.Color.hexToRGB(colorPalette.runner));
                 expect(testObject.onGround()).toBe(true);
-                var chargeLevel;
-                for (chargeLevel = 1; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                    testObject.updateBeforeDraw(chargeLevel, true);
+                var charge;
+                for (charge = 1; charge < constants.chargeLevels.length; ++charge) {
+                    testObject.updateBeforeDraw(charge, true);
 
-                    expect(testObject.color).toEqual(constants.chargeColors[chargeLevel]);
+                    expect(testObject.color).toEqual(constants.chargeColors[charge]);
                 }
             });
 
@@ -146,11 +146,11 @@ describe("The runner", function() {
             });
         });
         it("the height should correspond to the charge height variable", function() {
-            var chargeLevel;
-            for (chargeLevel = 0; chargeLevel < constants.chargeLevels.length; ++chargeLevel) {
-                testObject.updateBeforeDraw(chargeLevel, true);
+            var charge;
+            for (charge = 0; charge < constants.chargeLevels.length; ++charge) {
+                testObject.updateBeforeDraw(charge, true);
 
-                expect(testObject.findHeight()).toEqual(constants.chargeHeights[chargeLevel]);
+                expect(testObject.findHeight()).toEqual(constants.chargeHeights[charge]);
             }
         });
 

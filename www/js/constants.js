@@ -12,7 +12,7 @@ var colorPalette = {
 
 var gameState = {
     lastJump: {
-        chargeLevel: 0,
+        charge: 0,
         jumpCoefficient: 0,
         initalSpeed: 0,
     },
@@ -44,7 +44,6 @@ var constants = {
 
 var chargeLevel = function(amount, screenTotal) {
     var percent = Math.max(Math.floor(amount / screenTotal * 100), 0);
-    var chargeLevel;
     var i;
     for (i = constants.chargeLevels.length; i >= 0; --i) {
         if (percent >= constants.chargeLevels[i]) {

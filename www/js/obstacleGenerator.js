@@ -52,7 +52,7 @@ function Obstacle(thingToExtend, minimumSpaceBehind, minimumSpaceBefore, name) {
     thingToExtend.minimumSpaceBefore = minimumSpaceBefore;
     thingToExtend.name = name;
     thingToExtend.runnerLandCallback = function() {
-        thingToExtend.vspeed = -4 + Math.random() * constants.chargeEffects[gameState.lastJump.chargeLevel];
+        thingToExtend.vspeed = -4 + Math.random() * constants.chargeEffects[gameState.lastJump.charge];
     };
     objects.runner.onLand.add(thingToExtend.runnerLandCallback);
     return thingToExtend;
