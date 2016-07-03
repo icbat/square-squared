@@ -10,15 +10,15 @@ var state_running = function(game) {
             game.physics.startSystem(Phaser.Physics.ARCADE);
             var emitter = game.add.emitter(game.world.centerX, constants.groundHeight + 10, 20);
             emitter.makeParticles('dirtParticle');
-            emitter.gravity = 800;
-            emitter.setYSpeed(-150, -300);
-            emitter.setXSpeed(-400, 400);
-            emitter.minParticleScale = 5;
-            emitter.maxParticleScale = 10;
+            emitter.gravity = 1000;
+            emitter.setYSpeed(-150, -200);
+            emitter.setXSpeed(-200, 200);
+            emitter.minParticleScale = 2;
+            emitter.maxParticleScale = 5;
             emitter.alpha = 0.5;
             emitter.bounce.setTo(0.5, 0.5);
             objects.runner.onLand.add(function() {
-                emitter.start(true, 1000, null, 10);
+                emitter.start(true, 1000, null, 5);
             });
 
             var textStyle = {
