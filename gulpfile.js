@@ -23,7 +23,7 @@ gulp.task('copy-sounds', function() {
 
 gulp.task('copy-graphics', function() {
     return gulp
-        .src('assets/browser/favicon.png')
+        .src(['assets/browser/favicon.png', 'assets/graphics/*'])
         .pipe(gulp.dest('./www/assets/graphics'));
 });
 gulp.task('copy-fonts', function() {

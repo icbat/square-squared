@@ -5,6 +5,22 @@ var state_running = function(game) {
             this.firstTouchY = null;
             this.dragY = null;
 
+            // This bit is here because the image needs to be loaded first
+            // The physics engine is a requirement for gravity to take effect on the particles =(
+            game.physics.startSystem(Phaser.Physics.ARCADE);
+            var emitter = game.add.emitter(game.world.centerX, constants.groundHeight + 10, 20);
+            emitter.makeParticles('dirtParticle');
+            emitter.gravity = 800;
+            emitter.setYSpeed(-150, -300);
+            emitter.setXSpeed(-400, 400);
+            emitter.minParticleScale = 5;
+            emitter.maxParticleScale = 10;
+            emitter.alpha = 0.5;
+            emitter.bounce.setTo(0.5, 0.5);
+            objects.runner.onLand.add(function() {
+                emitter.start(true, 1000, null, 10);
+            });
+
             var textStyle = {
                 fill: colorPalette.text,
                 boundsAlignH: "center",
@@ -88,7 +104,7 @@ var state_running = function(game) {
             this.graphics.clear();
             var row = 1;
             var spacing = 16;
-            game.debug.text("FPS " + game.time.fps + " update time ("+ game.time.physicsElapsed+")", 0, row++ * spacing, "#000");
+            game.debug.text("FPS " + game.time.fps + " update time (" + game.time.physicsElapsed + ")", 0, row++ * spacing, "#000");
             objects.leftJumpLine.draw(this.graphics);
             objects.rightJumpLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
