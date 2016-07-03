@@ -103,7 +103,6 @@ var state_running = function(game) {
             this.graphics.clear();
             var row = 1;
             var spacing = 16;
-            game.debug.text("FPS " + game.time.fps + " update time (" + game.time.physicsElapsed + ")", 0, row++ * spacing, "#000");
             objects.leftJumpLine.draw(this.graphics);
             objects.rightJumpLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
