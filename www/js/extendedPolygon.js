@@ -230,9 +230,9 @@ function ExtendedPolygon(polygonToExtend, color) {
         return false;
     };
 
-    this.applyGravity = function(delta) {
+    this.applyGravity = function() {
         if (this.vspeed !== 0 || !this.onGround()) {
-            this.moveByY(this.vspeed * delta * constants.desiredFPS);
+            this.moveByY(this.vspeed);
             var gravityStep = this.determineGravity();
             this.vspeed -= gravityStep;
 

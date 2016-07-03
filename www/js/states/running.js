@@ -43,7 +43,6 @@ var state_running = function(game) {
         },
 
         update: function(game) {
-            var delta = game.time.physicsElapsed;
             if (gameState.state == states.dying) {
                 if (this.colorStep <= 50) {
                     objects.runner.color = Phaser.Color.interpolateColor(this.runnerOriginalColor, Phaser.Color.hexToRGB(colorPalette.background), 50, this.colorStep++);
@@ -56,13 +55,13 @@ var state_running = function(game) {
                     this.gameIsLost = false;
                 }
             } else {
-                objects.runner.applyGravity(delta);
+                objects.runner.applyGravity();
 
                 var obstacleIndex;
                 for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {
                     var obstacle = objects.obstacles[obstacleIndex];
-                    obstacle.applyGravity(delta);
-                    obstacle.movePolygonBy(constants.hspeed * delta * constants.desiredFPS);
+                    obstacle.applyGravity();
+                    obstacle.movePolygonBy(constants.hspeed);
 
                     if (objects.runner.intersects(obstacle)) {
                         // Game over
