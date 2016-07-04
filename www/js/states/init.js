@@ -1,7 +1,6 @@
 var state_init = function(game) {
     return {
         preload: function() {
-            game.time.advancedTiming = true;
             this.assetsLoaded = false;
             game.load.onLoadComplete.add(function() {
                 this.assetsLoaded = true;
