@@ -40,6 +40,32 @@ var state_running = function(game) {
             topText.anchor.x = 1;
 
             setupGame(this);
+
+            var lowLeftTweenIn = game.add.tween(objects.lowLeftJumpLine);
+            lowLeftTweenIn.to({
+                xPos: 0
+            }, 1000, Phaser.Easing.Bounce.Out);
+            lowLeftTweenIn.start();
+
+            var lowRightTweenIn = game.add.tween(objects.lowRightJumpLine);
+            lowRightTweenIn.to({
+                xPos: game.world.width / 2
+            }, 1000, Phaser.Easing.Bounce.Out);
+            lowRightTweenIn.start();
+
+            game.input.onUp.addOnce(function() {
+                var lowLeftTweenOut = game.add.tween(objects.leftJumpLine);
+                lowLeftTweenOut.to({
+                    xPos: game.world.width / -2
+                }, 1000, Phaser.Easing.Bounce.Out);
+                lowLeftTweenOut.start();
+
+                var lowRightTweenOut = game.add.tween(objects.rightJumpLine);
+                lowRightTweenOut.to({
+                    xPos: game.world.width
+                }, 1000, Phaser.Easing.Bounce.Out);
+                lowRightTweenOut.start();
+            });
         },
 
         update: function(game) {
@@ -87,6 +113,8 @@ var state_running = function(game) {
                 objects.runner.updateBeforeDraw(charge, touchIsDown);
                 objects.leftJumpLine.moveToX(objects.leftJumpLine.xPos);
                 objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
+                objects.lowLeftJumpLine.moveToX(objects.leftJumpLine.xPos);
+                objects.lowRightJumpLine.moveToX(objects.rightJumpLine.xPos);
             }
         },
 
@@ -105,6 +133,8 @@ var state_running = function(game) {
             var spacing = 16;
             objects.leftJumpLine.draw(this.graphics);
             objects.rightJumpLine.draw(this.graphics);
+            objects.lowLeftJumpLine.draw(this.graphics);
+            objects.lowRightJumpLine.draw(this.graphics);
             objects.runner.draw(this.graphics);
             var obstacleIndex;
             for (obstacleIndex = 0; obstacleIndex < objects.obstacles.length; ++obstacleIndex) {

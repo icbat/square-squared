@@ -178,11 +178,22 @@ var state_init = function(game) {
             }];
             objects.leftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
             objects.rightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            objects.lowRightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            objects.lowLeftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
             // Put the jump line off screen
             objects.leftJumpLine.xPos = game.world.width / -2;
             objects.leftJumpLine.moveToX(game.world.width / -2);
             objects.rightJumpLine.xPos = game.world.width;
             objects.rightJumpLine.moveToX(game.world.width);
+
+            // Put the jump line off screen
+            objects.lowLeftJumpLine.xPos = game.world.width / -2;
+            objects.lowRightJumpLine.xPos = game.world.width;
+            objects.lowLeftJumpLine.moveToX(game.world.width / -2);
+            objects.lowRightJumpLine.moveToX(game.world.width);
+            objects.lowLeftJumpLine.moveToY(constants.groundHeight - 115);
+            objects.lowRightJumpLine.moveToY(constants.groundHeight - 115);
+
 
             gameState.highScore = 0;
         },
