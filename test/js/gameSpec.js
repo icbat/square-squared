@@ -1,5 +1,8 @@
 var objects;
 var game;
+var context = {
+    onDown: {}
+};
 
 describe("Setup Game", function() {
     beforeEach(function() {
@@ -16,7 +19,15 @@ describe("Setup Game", function() {
                     };
                 }
             },
-            world: {}
+            world: {},
+            input: {
+                onDown: {
+                    add: function() {}
+                },
+                onUp: {
+                    add: function() {}
+                }
+            }
         };
     });
 
@@ -24,7 +35,7 @@ describe("Setup Game", function() {
         gameState.score = 1;
         expect(gameState.score).toBe(1);
 
-        setupGame();
+        setupGame(context);
 
         expect(gameState.score).toBe(0);
     });
@@ -33,7 +44,7 @@ describe("Setup Game", function() {
         objects.obstacles = [1, 2, 3];
         expect(objects.obstacles.length).toBe(3);
 
-        setupGame();
+        setupGame(context);
 
         expect(objects.obstacles.length).toBe(0);
     });
