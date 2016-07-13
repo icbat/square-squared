@@ -1,6 +1,6 @@
 function ExtendedPolygon(polygonToExtend, color) {
     this.color = Phaser.Color.hexToRGB(color);
-    this.polygon = polygonToExtend.clone();
+    this.polygon = new Phaser.Polygon(polygonToExtend);
     this.visible = true;
 
     this.onLand = new Phaser.Signal();

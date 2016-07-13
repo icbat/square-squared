@@ -30,7 +30,7 @@ var state_init = function(game) {
                 "x": constants.runnerSize,
                 "y": 0
             }];
-            objects.runner = runner(new Phaser.Polygon(runnerPolygon), colorPalette.runner, constants.groundHeight);
+            objects.runner = runner(runnerPolygon, colorPalette.runner, constants.groundHeight);
             objects.runner.moveToX(game.world.width / 5);
             objects.runner.moveToY(constants.groundHeight - constants.runnerSize);
 
@@ -47,7 +47,7 @@ var state_init = function(game) {
                 "x": game.world.width,
                 "y": 100
             }];
-            objects.ground = new ExtendedPolygon(new Phaser.Polygon(ground), colorPalette.ground);
+            objects.ground = new ExtendedPolygon(ground, colorPalette.ground);
             objects.ground.moveToY(constants.groundHeight);
 
             var lowIsoscelesTriangle = {
@@ -176,8 +176,8 @@ var state_init = function(game) {
                 "x": 0,
                 "y": initY + lineThickness
             }];
-            objects.leftJumpLine = new ExtendedPolygon(new Phaser.Polygon(tinyLine), colorPalette.ground);
-            objects.rightJumpLine = new ExtendedPolygon(new Phaser.Polygon(tinyLine), colorPalette.ground);
+            objects.leftJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
+            objects.rightJumpLine = new ExtendedPolygon(tinyLine, colorPalette.ground);
             // Put the jump line off screen
             objects.leftJumpLine.xPos = game.world.width / -2;
             objects.leftJumpLine.moveToX(game.world.width / -2);

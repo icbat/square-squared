@@ -18,12 +18,19 @@ describe("An extended polgyon", function() {
 
     describe("moveToY", function() {
         beforeEach(function() {
-            polygon = new Phaser.Polygon(
-                new Phaser.Point(0, constants.groundHeight),
-                new Phaser.Point(0, constants.groundHeight - constants.runnerSize),
-                new Phaser.Point(constants.runnerSize, constants.groundHeight - constants.runnerSize),
-                new Phaser.Point(constants.runnerSize, constants.groundHeight)
-            );
+            polygon = [{
+                "x": 0,
+                "y": constants.groundHeight
+            }, {
+                "x": 0,
+                "y": constants.groundHeight - constants.runnerSize
+            }, {
+                "x": constants.runnerSize,
+                "y": constants.groundHeight - constants.runnerSize
+            }, {
+                "x": constants.runnerSize,
+                "y": constants.groundHeight
+            }];
             testObject = new ExtendedPolygon(polygon, "#fff");
 
         });
@@ -65,12 +72,19 @@ describe("An extended polgyon", function() {
                 y: constants.groundHeight
             };
             var sideLength = constants.runnerSize;
-            polygon = new Phaser.Polygon(
-                new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y),
-                new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y - sideLength),
-                new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y - sideLength),
-                new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y)
-            );
+            polygon = [{
+                "x": initialLowerLeft.x,
+                "y": initialLowerLeft.y
+            }, {
+                "x": initialLowerLeft.x,
+                "y": initialLowerLeft.y - sideLength
+            }, {
+                "x": initialLowerLeft.x + sideLength,
+                "y": initialLowerLeft.y - sideLength
+            }, {
+                "x": initialLowerLeft.x + sideLength,
+                "y": initialLowerLeft.y
+            }];
             testObject = new ExtendedPolygon(polygon, "#fff");
 
             expect(testObject.findLowestPoint()).toBe(initialLowerLeft.y);
@@ -95,11 +109,16 @@ describe("An extended polgyon", function() {
                 y: constants.groundHeight
             };
             var sideLength = constants.runnerSize;
-            polygon = new Phaser.Polygon(
-                new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y),
-                new Phaser.Point(initialLowerLeft.x + sideLength / 4, initialLowerLeft.y),
-                new Phaser.Point(initialLowerLeft.x + sideLength / 8, initialLowerLeft.y - sideLength / 4)
-            );
+            polygon = [{
+                "x": initialLowerLeft.x,
+                "y": initialLowerLeft.y
+            }, {
+                "x": initialLowerLeft.x + sideLength / 4,
+                "y": initialLowerLeft.y
+            }, {
+                "x": initialLowerLeft.x + sideLength / 8,
+                "y": initialLowerLeft.y - sideLength / 4
+            }];
             testObject = new ExtendedPolygon(polygon, "#fff");
 
             expect(testObject.findLowestPoint()).toBe(initialLowerLeft.y);
@@ -130,12 +149,19 @@ describe("An extended polgyon", function() {
                     y: constants.groundHeight
 
                 };
-                polygon = new Phaser.Polygon(
-                    new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y),
-                    new Phaser.Point(initialLowerLeft.x, initialLowerLeft.y - sideLength),
-                    new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y - sideLength),
-                    new Phaser.Point(initialLowerLeft.x + sideLength, initialLowerLeft.y)
-                );
+                polygon = [{
+                    "x": initialLowerLeft.x,
+                    "y": initialLowerLeft.y
+                }, {
+                    "x": initialLowerLeft.x,
+                    "y": initialLowerLeft.y - sideLength
+                }, {
+                    "x": initialLowerLeft.x + sideLength,
+                    "y": initialLowerLeft.y - sideLength
+                }, {
+                    "x": initialLowerLeft.x + sideLength,
+                    "y": initialLowerLeft.y
+                }];
                 testObject = new ExtendedPolygon(polygon, "#fff");
             });
 

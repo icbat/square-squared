@@ -25,13 +25,20 @@ describe("The runner", function() {
         // Usually defined in the init state (Because it needs the World to exist first)
         constants.groundHeight = badHeight - constants.runnerSize;
 
-        var runnerPolygon = new Phaser.Polygon(
-            new Phaser.Point(0, constants.groundHeight),
-            new Phaser.Point(0, constants.groundHeight - constants.runnerSize),
-            new Phaser.Point(constants.runnerSize, constants.groundHeight - constants.runnerSize),
-            new Phaser.Point(constants.runnerSize, constants.groundHeight)
-        );
-        testObject = runner(runnerPolygon, colorPalette.runner, constants.groundHeight);
+        var polygonPoints = [{
+            "x": 0,
+            "y": constants.groundHeight
+        }, {
+            "x": 0,
+            "y": constants.groundHeight - constants.runnerSize
+        }, {
+            "x": constants.runnerSize,
+            "y": constants.groundHeight - constants.runnerSize
+        }, {
+            "x": constants.runnerSize,
+            "y": constants.groundHeight
+        }];
+        testObject = runner(polygonPoints, colorPalette.runner, constants.groundHeight);
     });
 
     describe("applyGravity", function() {
