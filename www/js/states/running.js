@@ -16,7 +16,7 @@ var state_running = function(game) {
             emitter.minParticleScale = 2;
             emitter.maxParticleScale = 5;
             emitter.alpha = 0.5;
-            emitter.bounce.setTo(0.5, 0.5);
+
             objects.runner.onLand.add(function() {
                 emitter.start(true, 1000, null, 5);
             });
