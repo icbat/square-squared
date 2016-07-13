@@ -19,34 +19,36 @@ var state_init = function(game) {
 
             var runnerPolygon = [{
                 "x": 0,
-                "y": constants.groundHeight
+                "y": 0
             }, {
                 "x": 0,
-                "y": constants.groundHeight - constants.runnerSize
+                "y": constants.runnerSize
             }, {
                 "x": constants.runnerSize,
-                "y": constants.groundHeight - constants.runnerSize
+                "y": constants.runnerSize
             }, {
                 "x": constants.runnerSize,
-                "y": constants.groundHeight
+                "y": 0
             }];
             objects.runner = runner(new Phaser.Polygon(runnerPolygon), colorPalette.runner, constants.groundHeight);
             objects.runner.moveToX(game.world.width / 5);
+            objects.runner.moveToY(constants.groundHeight - constants.runnerSize);
 
             var ground = [{
                 "x": 0,
-                "y": game.world.height + 100
+                "y": 100
             }, {
                 "x": 0,
-                "y": game.world.height - constants.runnerSize
+                "y": -constants.runnerSize
             }, {
                 "x": game.world.width,
-                "y": game.world.height - constants.runnerSize
+                "y": -constants.runnerSize
             }, {
                 "x": game.world.width,
-                "y": game.world.height + 100
+                "y": 100
             }];
             objects.ground = new ExtendedPolygon(new Phaser.Polygon(ground), colorPalette.ground);
+            objects.ground.moveToY(constants.groundHeight);
 
             var lowIsoscelesTriangle = {
                 polygon: [{
