@@ -8,7 +8,7 @@ var state_running = function(game) {
             // This bit is here because the image needs to be loaded first
             // The physics engine is a requirement for gravity to take effect on the particles =(
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            var emitter = game.add.emitter(game.world.centerX, constants.groundHeight + 10, 20);
+            var emitter = game.add.emitter(objects.runner.findCenterX(), constants.groundHeight + 10, 20);
             emitter.makeParticles('dirtParticle');
             emitter.gravity = 1000;
             emitter.setYSpeed(-150, -200);

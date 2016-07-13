@@ -153,6 +153,10 @@ function ExtendedPolygon(polygonToExtend, color) {
         return maxX;
     };
 
+    this.findCenterX = function(){
+        return (this.findRightmostPoint() + this.findLeftmostPoint()) / 2;
+    };
+
 
     this.findHighestPoint = function() {
         var points = this.polygon.toNumberArray();
