@@ -1,3 +1,4 @@
+var dragEmitter;
 var state_running = function(game) {
     return {
         create: function(game) {
@@ -38,6 +39,15 @@ var state_running = function(game) {
             var bottomText = game.add.bitmapText(Math.max(game.world.centerX - 150, 0), 75, 'titleOrange', 'Square', 64);
             var topText = game.add.bitmapText(Math.min(bottomText.right + 100, game.world.width), 25, 'titlePurple', 'Squared', 64);
             topText.anchor.x = 1;
+
+            dragEmitter = game.add.emitter(0, 0, 1000);
+            dragEmitter.makeParticles('dirtParticle');
+            dragEmitter.gravity = -100;
+            dragEmitter.setYSpeed(-150, -200);
+            dragEmitter.setXSpeed(0, 0);
+            dragEmitter.minParticleScale = 2;
+            dragEmitter.maxParticleScale = 5;
+            dragEmitter.alpha = 0.2;
 
             setupGame(this);
 
@@ -115,6 +125,9 @@ var state_running = function(game) {
                 objects.rightJumpLine.moveToX(objects.rightJumpLine.xPos);
                 objects.lowLeftJumpLine.moveToX(objects.lowLeftJumpLine.xPos);
                 objects.lowRightJumpLine.moveToX(objects.lowRightJumpLine.xPos);
+
+                dragEmitter.x = game.input.activePointer.worldX + Math.random() * 20;
+                dragEmitter.y = game.input.activePointer.worldY;
             }
         },
 
@@ -228,5 +241,12 @@ var setupGame = function(context) {
         if (objects.runner.onGround() && objects.runner.vspeed === 0) {
             objects.runner.color = Phaser.Color.hexToRGB(colorPalette.runner);
         }
+    });
+
+    game.input.onDown.add(function() {
+        dragEmitter.start(false, 0, 100);
+    });
+    game.input.onUp.add(function() {
+        dragEmitter.on = false;
     });
 };
