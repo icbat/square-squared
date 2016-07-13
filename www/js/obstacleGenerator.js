@@ -35,7 +35,7 @@ var obstacleGenerator = {
         } else {
             prototype = game.rnd.pick(objects.polygonPrototypes);
         }
-        return new Obstacle(new ExtendedPolygon(prototype.polygon(), prototype.color), prototype.minimumSpaceBehind, prototype.minimumSpaceBefore, prototype.name);
+        return new Obstacle(new ExtendedPolygon(new Phaser.Polygon(prototype.polygon), prototype.color), prototype.minimumSpaceBehind, prototype.minimumSpaceBefore, prototype.name);
     }
 };
 
