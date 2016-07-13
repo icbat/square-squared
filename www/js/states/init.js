@@ -24,7 +24,7 @@ var state_init = function(game) {
                 new Phaser.Point(constants.runnerSize, constants.groundHeight)
             );
             objects.runner = runner(runnerPolygon, colorPalette.runner, constants.groundHeight);
-            objects.runner.moveToX(game.world.centerX - constants.runnerSize / 2);
+            objects.runner.moveToX(game.world.width / 5);
 
             var ground = new Phaser.Polygon(
                 new Phaser.Point(0, game.world.height + 100),
