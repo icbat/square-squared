@@ -6,6 +6,7 @@ var state_init = function(game) {
                 this.assetsLoaded = true;
             }, this);
             game.load.image('dirtParticle', 'assets/graphics/square-particle.png');
+            game.load.image('arrowParticle', 'assets/graphics/arrow-particle.png');
             game.load.audio('land', 'assets/sounds/land.ogg');
             game.load.audio('jump', 'assets/sounds/jump.ogg');
             game.load.audio('lose', 'assets/sounds/lose.ogg');

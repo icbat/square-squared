@@ -41,13 +41,15 @@ var state_running = function(game) {
             topText.anchor.x = 1;
 
             dragEmitter = game.add.emitter(0, 0, 1000);
-            dragEmitter.makeParticles('dirtParticle');
-            dragEmitter.gravity = -100;
+            dragEmitter.makeParticles('arrowParticle');
+            dragEmitter.gravity = -500;
             dragEmitter.setYSpeed(-150, -200);
             dragEmitter.setXSpeed(0, 0);
-            dragEmitter.minParticleScale = 2;
-            dragEmitter.maxParticleScale = 5;
-            dragEmitter.alpha = 0.2;
+            dragEmitter.minParticleScale = 1;
+            dragEmitter.maxParticleScale = 2;
+            dragEmitter.maxRotation = 0;
+            dragEmitter.minRotation = 0;
+            dragEmitter.alpha = 0.1;
 
             setupGame(this);
 
@@ -128,6 +130,7 @@ var state_running = function(game) {
 
                 dragEmitter.x = game.input.activePointer.worldX + Math.random() * 20;
                 dragEmitter.y = game.input.activePointer.worldY;
+                
             }
         },
 
@@ -244,7 +247,7 @@ var setupGame = function(context) {
     });
 
     game.input.onDown.add(function() {
-        dragEmitter.start(false, 0, 100);
+        dragEmitter.start(false, 0, 250);
     });
     game.input.onUp.add(function() {
         dragEmitter.on = false;
