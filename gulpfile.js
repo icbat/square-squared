@@ -6,7 +6,8 @@ var build_directory = 'build';
 gulp.task('default', ['copy-bower', 'copy-graphics', 'copy-sounds', 'copy-fonts'], function() {});
 
 var bower_components = [
-    'bower_components/phaser/build/phaser.min.js'
+    'bower_components/phaser/build/phaser.min.js',
+    'bower_components/jquery/dist/jquery.min.js'
 ];
 
 gulp.task('copy-bower', function() {

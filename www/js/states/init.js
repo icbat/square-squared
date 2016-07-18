@@ -185,6 +185,8 @@ var state_init = function(game) {
             objects.rightJumpLine.moveToX(game.world.width);
 
             gameState.highScore = 0;
+
+            api.report.launch();
         },
 
         update: function() {
