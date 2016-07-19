@@ -24,5 +24,12 @@ api.report = {
             "uuid": api.uuid
         });
         $.post(api.url + "gameStart", payload, null, "json");
+    },
+    score: function(score) {
+        var payload = JSON.stringify({
+            "uuid": api.uuid,
+            "score": score
+        });
+        $.post(api.url + "score", payload, null, "json");
     }
 };

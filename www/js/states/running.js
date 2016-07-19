@@ -149,6 +149,7 @@ var loseGame = function(context) {
     loseSound._sound.playbackRate.value = 0.5;
     game.input.onDown.removeAll();
     game.input.onUp.removeAll();
+    api.report.score(gameState.score);
 };
 
 var startGame = function() {
