@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.github.icbat.squareSquared" version="6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.github.icbat.squareSquared" version="7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Square Squared</name>
     <description>
         An endless running game where a square hops over other stuff.
@@ -27,4 +27,7 @@
         <icon src="assets/android/xxhdpi.png" density="xxhdpi"/>
         <icon src="assets/android/xxxhdpi.png" density="xxxhdpi"/>
     </platform>
+    <allow-navigation href="https://square-squared-stats.herokuapp.com/launch" />
+    <allow-navigation href="https://square-squared-stats.herokuapp.com/gameStart" />
+    <allow-navigation href="https://square-squared-stats.herokuapp.com/score" />
 </widget>
