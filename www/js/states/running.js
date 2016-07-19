@@ -165,6 +165,7 @@ var startGame = function() {
         xPos: game.world.width
     }, 1000, Phaser.Easing.Bounce.Out);
     rightTween.start();
+    api.report.gameStart();
 };
 
 var setupGame = function(context) {
