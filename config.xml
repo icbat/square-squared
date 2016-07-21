@@ -8,11 +8,11 @@
         Evan "icbat" Cobb
     </author>
     <content src="index.html"/>
-    <preference name="Fullscreen" value="true" />
-    <preference name="Orientation" value="portrait" />
+    <preference name="Fullscreen" value="true"/>
+    <preference name="Orientation" value="portrait"/>
     <platform name="android">
-      <preference name="KeepRunning" value="false"/>
-      <!--
+        <preference name="KeepRunning" value="false"/>
+        <!--
             ldpi    : 36x36 px
             mdpi    : 48x48 px
             hdpi    : 72x72 px
@@ -27,7 +27,7 @@
         <icon src="assets/android/xxhdpi.png" density="xxhdpi"/>
         <icon src="assets/android/xxxhdpi.png" density="xxxhdpi"/>
     </platform>
-    <allow-navigation href="https://square-squared-stats.herokuapp.com/launch" />
-    <allow-navigation href="https://square-squared-stats.herokuapp.com/gameStart" />
-    <allow-navigation href="https://square-squared-stats.herokuapp.com/score" />
+    <allow-navigation href="http://square-squared-stats.herokuapp.com/launch"/>
+    <allow-navigation href="http://square-squared-stats.herokuapp.com/gameStart"/>
+    <allow-navigation href="http://square-squared-stats.herokuapp.com/score"/>
 </widget>

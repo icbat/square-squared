@@ -39,7 +39,3 @@ api.report = {
 $( document ).ajaxError(function(event, request, settings) {
   console.error("Ajax thingy FAILED", event, request, settings);
 });
-
-$( document ).ajaxComplete(function( event,request, settings ) {
-  console.log("Ajax thingy worked", event, request, settings);
-});
