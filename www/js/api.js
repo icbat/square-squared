@@ -13,6 +13,7 @@ var api = {
 };
 
 api.postToApi = function(endpoint, payload) {
+    console.log("Sending packet to " + endpoint);
     $.post(api.url + endpoint, payload, function(response) {
         console.log(response);
     }, "json");
