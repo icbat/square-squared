@@ -12,24 +12,27 @@ var api = {
     uuid: getUUID()
 };
 
+api.postToApi = function(endpoint, payload) {
+    $.post(api.url + endpoint, payload, function(response) {
+        console.log(response);
+    }, "json");
+};
+
 api.report = {
     launch: function() {
-        var payload = JSON.stringify({
+        api.postToApi("launch", JSON.stringify({
             "uuid": api.uuid
-        });
-        $.post(api.url + "launch", payload, null, "json");
+        }));
     },
     gameStart: function() {
-        var payload = JSON.stringify({
+        api.postToApi("gameStart", JSON.stringify({
             "uuid": api.uuid
-        });
-        $.post(api.url + "gameStart", payload, null, "json");
+        }));
     },
     score: function(score) {
-        var payload = JSON.stringify({
+        api.postToApi("score", JSON.stringify({
             "uuid": api.uuid,
             "score": score
-        });
-        $.post(api.url + "score", payload, null, "json");
+        }));
     }
 };
