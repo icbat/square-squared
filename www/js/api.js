@@ -8,7 +8,7 @@ var getUUID = function() {
 };
 
 var api = {
-    url: "http://square-squared-stats.herokuapp.com/",
+    url: "https://square-squared-stats.herokuapp.com/",
     uuid: getUUID()
 };
 

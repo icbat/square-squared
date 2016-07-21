@@ -27,7 +27,7 @@
         <icon src="assets/android/xxhdpi.png" density="xxhdpi"/>
         <icon src="assets/android/xxxhdpi.png" density="xxxhdpi"/>
     </platform>
-    <allow-navigation href="http://square-squared-stats.herokuapp.com/launch"/>
-    <allow-navigation href="http://square-squared-stats.herokuapp.com/gameStart"/>
-    <allow-navigation href="http://square-squared-stats.herokuapp.com/score"/>
+    <allow-navigation href="https://square-squared-stats.herokuapp.com/launch"/>
+    <allow-navigation href="https://square-squared-stats.herokuapp.com/gameStart"/>
+    <allow-navigation href="https://square-squared-stats.herokuapp.com/score"/>
 </widget>
