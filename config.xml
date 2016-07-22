@@ -10,8 +10,9 @@
     <content src="index.html"/>
     <preference name="Fullscreen" value="true"/>
     <preference name="Orientation" value="portrait"/>
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="2000" />
     <preference name="FadeSplashScreenDuration" value="100"/>
+    <preference name="ShowSplashScreenSpinner" value="false"/>
     <platform name="android">
         <preference name="KeepRunning" value="false"/>
         <!--
