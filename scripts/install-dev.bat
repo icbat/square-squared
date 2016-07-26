@@ -1,7 +1,5 @@
-npm install
-bower install
-cordova platform add android
-cordova plugin add cordova-plugin-whitelist
-cordova plugin add cordova-plugin-splashscreen
+call npm install
+call bower install
+rm -rf assets/
 xcopy "C:\Users\cobbe\Google Drive\squareSquared\assets" .\assets\ /e
 gulp
