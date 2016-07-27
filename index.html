@@ -13,8 +13,14 @@
         <h2>Games Played</h2>
         <div class="metric"></div>
     </div>
+    <div id="uniqueInstallsThatHaveBeenStarted">
+        <h2>Installations</h2>
+        Unique installations that have actually been started at least once.
+        <div class="metric"></div>
+    </div>
     <div id="usersHaveStartedGames">
-        <h2>User who have played at least one game</h2>
+        <h2>Players who played</h2>
+        Percentage of unique users who have both launch the app and also managed to figure out how to play.
         <div class="metric"></div>
     </div>
     <div id="deathsPerObstacle"></div>
@@ -37,6 +43,14 @@
         method: "GET",
         success: function(response) {
             $('#gamesStarted .metric').text(response.total);
+        }
+    });
+
+    $.ajax(baseUrl + 'launch/distinct', {
+        dataType: "json",
+        method: "GET",
+        success: function(response) {
+            $('#uniqueInstallsThatHaveBeenStarted .metric').text(response.total);
         }
     });
 
