@@ -13,7 +13,10 @@
         <h2>Games Played</h2>
         <div class="metric"></div>
     </div>
-    <div id="usersHaveStartedGames"></div>
+    <div id="usersHaveStartedGames">
+        <h2>User who have played at least one game</h2>
+        <div class="metric"></div>
+    </div>
     <div id="deathsPerObstacle"></div>
     <div id="avgScore"></div>
     <div id="scoreScatterplot"></div>
@@ -34,6 +37,22 @@
         method: "GET",
         success: function(response) {
             $('#gamesStarted .metric').text(response.total);
+        }
+    });
+
+    $.ajax(baseUrl + 'launch/distinct', {
+        dataType: "json",
+        method: "GET",
+        success: function(launchResponse) {
+
+            $.ajax(baseUrl + 'gameStart/distinct', {
+                dataType: "json",
+                method: "GET",
+                success: function(gameStartResponse) {
+                    var percentage = gameStartResponse.total / launchResponse.total * 100;
+                    $('#usersHaveStartedGames .metric').text(percentage + "%");
+                }
+            });
         }
     });
 </script>
