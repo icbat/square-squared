@@ -14,17 +14,19 @@
         <div class="metric"></div>
     </div>
     <div id="uniqueInstallsThatHaveBeenStarted">
-        <h2>Installations</h2>
-        Unique installations that have actually been started at least once.
+        <h2>Installations</h2> Unique installations that have actually been started at least once.
         <div class="metric"></div>
     </div>
     <div id="usersHaveStartedGames">
-        <h2>Players who played</h2>
-        Percentage of unique users who have both launch the app and also managed to figure out how to play.
+        <h2>Players who played</h2> Percentage of unique users who have both launch the app and also managed to figure out how to play.
         <div class="metric"></div>
     </div>
     <div id="deathsPerObstacle"></div>
     <div id="avgScore"></div>
+    <div id="highestScore">
+        <h2>Highest Score</h2>
+        <div class="metric"></div>
+    </div>
     <div id="scoreScatterplot"></div>
 </body>
 
@@ -67,6 +69,19 @@
                     $('#usersHaveStartedGames .metric').text(percentage + "%");
                 }
             });
+        }
+    });
+
+    $.ajax(baseUrl + 'score', {
+        dataType: "json",
+        method: "GET",
+        success: function(response) {
+            var max = 0;
+            for (var i = 0; i < response.data.length; i++)
+            {
+                max = Math.max(response.data[i].score, max);
+            }
+            $('#highestScore .metric').text(max);
         }
     });
 </script>
