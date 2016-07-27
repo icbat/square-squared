@@ -1,11 +1,11 @@
 <html>
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js" integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="launches"></div>
+    <div id="launches"><h2>Launches</h2><div class="metric"></div></div>
     <div id="gamesStarted"></div>
     <div id="usersHaveStartedGames"></div>
     <div id="deathsPerObstacle"></div>
@@ -15,11 +15,14 @@
 
 <script>
     var baseUrl = "http://square-squared-stats.herokuapp.com/";
-    function populateLaunches() {
-        $.get(baseUrl + 'launches/distinct', null, function(data) {
-            console.log(data);
-        });
-    }
+    var lastData;
+    $.ajax(baseUrl + 'launch/distinct', {
+        dataType: "json",
+        method: "GET",
+        success: function(response) {
+            $('#launches .metric').text(response.total);
+        }
+    });
 </script>
 
 </html>
