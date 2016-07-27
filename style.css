@@ -1,0 +1,22 @@
+div.metric {
+    margin: 10px;
+    padding: 10px;
+    /*height:200px;*/
+    max-width: 200px;
+    min-width: 50px;
+    min-height: 40px;
+    word-wrap:break-word;
+}
+
+div.metric h2 {
+    font-size: 14px;
+}
+
+div.metric .explanation {
+    margin-bottom: 5px;
+}
+
+div.metric .data {
+    font-size: 20px;
+    font-weight: bold;
+}

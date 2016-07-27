@@ -1,39 +1,40 @@
 <html>
 
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="launches">
+    <div class="metric" id="launches">
         <h2>App Launches</h2>
-        <div class="metric"></div>
+        <div class="data"></div>
     </div>
-    <div id="gamesStarted">
+    <div class="metric" id="gamesStarted">
         <h2>Games Played</h2>
-        <div class="metric"></div>
+        <div class="data"></div>
     </div>
-    <div id="uniqueInstallsThatHaveBeenStarted">
+    <div class="metric" id="uniqueInstallsThatHaveBeenStarted">
         <h2>Installations</h2>
         <div class="explanation">Unique installations that have actually been started at least once.</div>
-        <div class="metric"></div>
+        <div class="data"></div>
     </div>
-    <div id="usersHaveStartedGames">
+    <div class="metric" id="usersHaveStartedGames">
         <h2>Beat the tutorial</h2>
         <div class="explanation">Percentage of unique users who have both launch the app and also managed to figure out how to play.</div>
-        <div class="metric"></div>
+        <div class="data"></div>
     </div>
-    <div id="deathsPerObstacle"></div>
-    <div id="avgScore">
+    <div class="metric" id="avgScore">
         <h2>Average Score</h2>
         <div class="explanation">(without zero's)</div>
-        <div class="metric"></div>
+        <div class="data"></div>
     </div>
-    <div id="highestScore">
+    <div class="metric" id="highestScore">
         <h2>Highest Score</h2>
-        <div class="metric"></div>
+        <div class="data"></div>
     </div>
-    <div id="scoreScatterplot"></div>
+    <div class="metric" id="deathsPerObstacle"></div>
+    <div class="graph" id="scoreScatterplot"></div>
 </body>
 
 <script>
@@ -42,7 +43,7 @@
         dataType: "json",
         method: "GET",
         success: function(response) {
-            $('#launches .metric').text(response.total);
+            $('#launches .data').text(response.total);
         }
     });
 
@@ -50,7 +51,7 @@
         dataType: "json",
         method: "GET",
         success: function(response) {
-            $('#gamesStarted .metric').text(response.total);
+            $('#gamesStarted .data').text(response.total);
         }
     });
 
@@ -58,7 +59,7 @@
         dataType: "json",
         method: "GET",
         success: function(response) {
-            $('#uniqueInstallsThatHaveBeenStarted .metric').text(response.total);
+            $('#uniqueInstallsThatHaveBeenStarted .data').text(response.total);
         }
     });
 
@@ -72,7 +73,7 @@
                 method: "GET",
                 success: function(gameStartResponse) {
                     var percentage = gameStartResponse.total / launchResponse.total * 100;
-                    $('#usersHaveStartedGames .metric').text(percentage + "%");
+                    $('#usersHaveStartedGames .data').text(percentage + "%");
                 }
             });
         }
@@ -86,7 +87,7 @@
             for (var i = 0; i < response.data.length; i++) {
                 max = Math.max(response.data[i].score, max);
             }
-            $('#highestScore .metric').text(max);
+            $('#highestScore .data').text(max);
         }
     });
 
@@ -102,7 +103,7 @@
                     count++;
                 }
             }
-            $('#avgScore .metric').text(total / count);
+            $('#avgScore .data').text(total / count);
         }
     });
 </script>
