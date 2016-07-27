@@ -5,8 +5,14 @@
 </head>
 
 <body>
-    <div id="launches"><h2>Launches</h2><div class="metric"></div></div>
-    <div id="gamesStarted"></div>
+    <div id="launches">
+        <h2>Launches</h2>
+        <div class="metric"></div>
+    </div>
+    <div id="gamesStarted">
+        <h2>Games Played</h2>
+        <div class="metric"></div>
+    </div>
     <div id="usersHaveStartedGames"></div>
     <div id="deathsPerObstacle"></div>
     <div id="avgScore"></div>
@@ -15,12 +21,19 @@
 
 <script>
     var baseUrl = "http://square-squared-stats.herokuapp.com/";
-    var lastData;
     $.ajax(baseUrl + 'launch/distinct', {
         dataType: "json",
         method: "GET",
         success: function(response) {
             $('#launches .metric').text(response.total);
+        }
+    });
+
+    $.ajax(baseUrl + 'gameStart/distinct', {
+        dataType: "json",
+        method: "GET",
+        success: function(response) {
+            $('#gamesStarted .metric').text(response.total);
         }
     });
 </script>
