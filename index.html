@@ -21,7 +21,7 @@
 
 <script>
     var baseUrl = "http://square-squared-stats.herokuapp.com/";
-    $.ajax(baseUrl + 'launch/distinct', {
+    $.ajax(baseUrl + 'launch', {
         dataType: "json",
         method: "GET",
         success: function(response) {
@@ -29,7 +29,7 @@
         }
     });
 
-    $.ajax(baseUrl + 'gameStart/distinct', {
+    $.ajax(baseUrl + 'gameStart', {
         dataType: "json",
         method: "GET",
         success: function(response) {
