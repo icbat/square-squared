@@ -22,7 +22,9 @@
         <div class="metric"></div>
     </div>
     <div id="deathsPerObstacle"></div>
-    <div id="avgScore"></div>
+    <div id="avgScore">
+        <h2>Average Score</h2>(without zero's)
+        <div class="metric"></div></div>
     <div id="highestScore">
         <h2>Highest Score</h2>
         <div class="metric"></div>
@@ -82,6 +84,23 @@
                 max = Math.max(response.data[i].score, max);
             }
             $('#highestScore .metric').text(max);
+        }
+    });
+
+    $.ajax(baseUrl + 'score', {
+        dataType: "json",
+        method: "GET",
+        success: function(response) {
+            var total = 0;
+            var count = 0;
+            for (var i = 0; i < response.data.length; i++)
+            {
+                if (response.data[i].score > 0) {
+                    total += response.data[i].score;
+                    count++;
+                }
+            }
+            $('#avgScore .metric').text(total / count);
         }
     });
 </script>
