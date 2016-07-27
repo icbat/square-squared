@@ -13,4 +13,13 @@
     <div id="scoreScatterplot"></div>
 </body>
 
+<script>
+    var baseUrl = "http://square-squared-stats.herokuapp.com/";
+    function populateLaunches() {
+        $.get(baseUrl + 'launches/distinct', null, function(data) {
+            console.log(data);
+        });
+    }
+</script>
+
 </html>
