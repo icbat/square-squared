@@ -95,8 +95,12 @@ var state_running = function(game) {
             objects.scoreDisplay.visible = true;
             objects.scoreDisplay.text = (gameState.score);
             obstacle.hasScored = true;
-            var scoreSound = game.sound.play('score', 0.1);
-            scoreSound._sound.playbackRate.value = 1.2 + 0.15 * ((gameState.score - 1) % 5);
+            if (gameState.score % 5 === 0) {
+                game.sound.play('milestone', 0.2);
+            } else {
+                var scoreSound = game.sound.play('score', 0.1);
+                scoreSound._sound.playbackRate.value = 1.2 + 0.15 * ((gameState.score - 1) % 5);
+            }
         },
 
         render: function() {
