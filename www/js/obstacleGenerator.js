@@ -44,7 +44,15 @@ var calculateDifficultyModifier = function(currentScore) {
     var difficultyOverTime = 1 / 2;
     // Smaller number -> less help
     var amountOfExtraHelp = 7 / 10;
-    return Math.pow(amountOfExtraHelp, currentScore * difficultyOverTime) * 200;
+
+    var scoringZone = scoringZone(currentScore);
+
+    var difficultyModifier = Math.pow(amountOfExtraHelp, scoringZone * difficultyOverTime) * 200;
+    return difficultyModifier;
+};
+
+var scoringZone = function(currentScore) {
+    return Math.floor(currentScore / 5);
 };
 
 function Obstacle(thingToExtend, minimumSpaceBehind, minimumSpaceBefore, name) {
