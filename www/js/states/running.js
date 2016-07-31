@@ -96,7 +96,7 @@ var state_running = function(game) {
             objects.scoreDisplay.text = (gameState.score);
             obstacle.hasScored = true;
             var loseSound = game.sound.play('score', 0.1);
-            loseSound._sound.playbackRate.value = 0.8 + Math.max(0.05 * gameState.score, 2);
+            loseSound._sound.playbackRate.value = 1.2 + 0.15 * ((gameState.score - 1) % 5);
         },
 
         render: function() {

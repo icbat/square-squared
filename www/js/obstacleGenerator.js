@@ -39,21 +39,21 @@ var obstacleGenerator = {
     }
 };
 
+var scoringZone = function(currentScore) {
+    return Math.floor(currentScore / 5);
+};
+
 var calculateDifficultyModifier = function(currentScore) {
     // Smaller number -> slower build up of difficulty
     var difficultyOverTime = 1 / 2;
     // Smaller number -> less help
     var amountOfExtraHelp = 7 / 10;
 
-    var scoringZone = scoringZone(currentScore);
-
-    var difficultyModifier = Math.pow(amountOfExtraHelp, scoringZone * difficultyOverTime) * 200;
+    var difficultyModifier = Math.pow(amountOfExtraHelp, scoringZone(currentScore) * difficultyOverTime) * 200;
     return difficultyModifier;
 };
 
-var scoringZone = function(currentScore) {
-    return Math.floor(currentScore / 5);
-};
+
 
 function Obstacle(thingToExtend, minimumSpaceBehind, minimumSpaceBefore, name) {
     thingToExtend.minimumSpaceBehind = minimumSpaceBehind;
