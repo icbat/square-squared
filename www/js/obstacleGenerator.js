@@ -1,9 +1,11 @@
 var obstacleGenerator = {
+    obstacleCount: 0,
     addObstacleToBack: function() {
         var obstacle = this.makeRandomObstacle();
         var lastObstacle = objects.obstacles[objects.obstacles.length - 1];
         var newX = this.findBack(lastObstacle, game.world.width, calculateDifficultyModifier(gameState.score), Math, obstacle.minimumSpaceBefore);
         objects.obstacles.push(obstacle);
+        this.obstacleCount++;
         obstacle.moveToX(newX);
         obstacle.hasScored = false;
         this.onObstacleAdded.dispatch(newX, lastObstacle);
@@ -17,10 +19,12 @@ var obstacleGenerator = {
 
         if (objects.obstacles.length !== 0) {
             newX += math.random() * constants.runnerSize;
-            if (math.random() > 0.7) {
-                // Randomly add a big-ish gap
-                newX += constants.runnerSize * 2;
-            }
+
+        }
+
+        if (this.obstacleCount % 5 === 0 && this.obstacleCount > 0) {
+            // Add a big-ish gap every 5
+            newX += constants.runnerSize * 5;
         }
 
         return newX;

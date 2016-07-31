@@ -176,6 +176,7 @@ var startGame = function() {
 var setupGame = function(context) {
     gameState.state = states.waiting;
     objects.obstacles = [];
+    obstacleGenerator.obstacleCount = 0;
     gameState.score = 0;
     var highScore = localStorage.getItem('squareSquared-highScore');
     if (highScore && highScore > 0) {
