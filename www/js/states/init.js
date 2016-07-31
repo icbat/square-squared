@@ -87,6 +87,21 @@ var state_init = function(game) {
                 color: colorPalette.obstacleLow
             };
 
+            var mediumIsoscelesTriangle = {
+                polygon: [{
+                    "x": 0,
+                    "y": constants.groundHeight
+                }, {
+                    "x": constants.runnerSize,
+                    "y": constants.groundHeight
+                }, {
+                    "x": constants.runnerSize / 2,
+                    "y": constants.groundHeight - constants.runnerSize
+                }],
+                minimumSpaceBehind: 150,
+                name: "med isosceles",
+                color: colorPalette.obstacleMedium
+            };
 
             var mediumAcuteTriangle = {
                 polygon: [{
@@ -101,22 +116,7 @@ var state_init = function(game) {
                 }],
                 minimumSpaceBehind: 150,
                 name: "med acute right",
-                color: colorPalette.obstacleMedium
-            };
-
-            var mediumIsoscelesTriangle = {
-                polygon: [{
-                    "x": 0,
-                    "y": constants.groundHeight
-                }, {
-                    "x": constants.runnerSize,
-                    "y": constants.groundHeight
-                }, {
-                    "x": constants.runnerSize / 2,
-                    "y": constants.groundHeight - constants.runnerSize
-                }],
-                minimumSpaceBehind: 150,
-                name: "med isosceles",
+                earliestSpawn: 10,
                 color: colorPalette.obstacleMedium
             };
 
@@ -136,6 +136,7 @@ var state_init = function(game) {
                 }],
                 minimumSpaceBehind: 220,
                 name: "big square",
+                earliestSpawn: 20,
                 color: colorPalette.obstacleBig
             };
 
@@ -156,10 +157,11 @@ var state_init = function(game) {
                 minimumSpaceBehind: 215,
                 minimumSpaceBefore: 75,
                 name: "big wall",
+                earliestSpawn: 25,
                 color: colorPalette.obstacleBig
             };
 
-            objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumAcuteTriangle, mediumIsoscelesTriangle, bigSquareLikeRunner, bigWallRectangle];
+            objects.polygonPrototypes = [lowRectangle, lowIsoscelesTriangle, mediumIsoscelesTriangle, mediumAcuteTriangle, bigSquareLikeRunner, bigWallRectangle];
             objects.obstacles = [];
 
             var initY = constants.groundHeight - 200;

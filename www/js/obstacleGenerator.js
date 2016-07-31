@@ -34,11 +34,18 @@ var obstacleGenerator = {
 
     makeRandomObstacle: function() {
         var prototype;
-        if (objects.obstacles.length === 0) {
-            prototype = game.rnd.pick(objects.polygonPrototypes.slice(0, 2));
-        } else {
-            prototype = game.rnd.pick(objects.polygonPrototypes);
+        var i;
+        // Find smallest set that can generate
+        // Assumes polygonPrototypes hhas been sorted with higher earliestSpawn later in the list
+        for (i = objects.polygonPrototypes.length; i > 0; --i) {
+            var ithProto = objects.polygonPrototypes[i - 1];
+            console.log(i, ithProto.earliestSpawn);
+            if (ithProto.earliestSpawn <= this.obstacleCount || !ithProto.earliestSpawn) {
+                break;
+            }
         }
+        console.log(i, objects.polygonPrototypes.slice(0, i));
+        prototype = game.rnd.pick(objects.polygonPrototypes.slice(0, i));
         return new Obstacle(new ExtendedPolygon(prototype.polygon, prototype.color), prototype.minimumSpaceBehind, prototype.minimumSpaceBefore, prototype.name);
     }
 };
