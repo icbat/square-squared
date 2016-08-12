@@ -3,6 +3,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
 </head>
 
 <body>
@@ -33,8 +35,10 @@
         <h2>Highest Score</h2>
         <div class="data"></div>
     </div>
+    <div class="graph" id="dailyPlays" width="400" height="400">
+        <canvas id="dailyPlays-graph" ></canvas>
+    </div>
     <div class="metric" id="deathsPerObstacle"></div>
-    <div class="graph" id="scoreScatterplot"></div>
 </body>
 
 <script>
@@ -104,6 +108,29 @@
                 }
             }
             $('#avgScore .data').text(total / count);
+        }
+    });
+
+    $.ajax(baseUrl + 'gameStart/daily_totals', {
+        dataType: "json",
+        method: "GET",
+        success: function(response) {
+            var ctx = $("#dailyPlays-graph");
+            var labels = response.labels.map(function(x) {return moment.unix(x).format("Do MMM YYYY")});
+            var datasets = {
+                labels: labels,
+                datasets: [{
+                    label: "Daily games played",
+                    borderWidth: 1,
+                    data: response.data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)'
+                }],
+            };
+            var myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: datasets,
+            });
         }
     });
 </script>
